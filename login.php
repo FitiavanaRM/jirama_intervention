@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/auth.php';
 
 $email = '';
 $loginError = '';
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $connection = getDatabaseConnection();
             $statement = $connection->prepare(
-                'SELECT id_utilisateur, mot_de_passe
+                'SELECT id_utilisateur, nom, prenom, mot_de_passe
                  FROM utilisateurs
                  WHERE email = :email
                  LIMIT 1'
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user === false || !password_verify($password, $user['mot_de_passe'])) {
                 $loginError = 'Adresse e-mail ou mot de passe incorrect.';
             } else {
+                registerAuthenticatedUser($user);
                 $loginValidated = true;
             }
         } catch (RuntimeException $exception) {
