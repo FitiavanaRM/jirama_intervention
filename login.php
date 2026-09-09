@@ -1,6 +1,41 @@
 <?php
 
 declare(strict_types=1);
+
+require_once __DIR__ . '/config/database.php';
+
+$email = '';
+$loginError = '';
+$loginValidated = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim((string) ($_POST['email'] ?? ''));
+    $password = (string) ($_POST['mot_de_passe'] ?? '');
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
+        $loginError = 'Veuillez renseigner une adresse e-mail et un mot de passe valides.';
+    } else {
+        try {
+            $connection = getDatabaseConnection();
+            $statement = $connection->prepare(
+                'SELECT id_utilisateur, mot_de_passe
+                 FROM utilisateurs
+                 WHERE email = :email
+                 LIMIT 1'
+            );
+            $statement->execute(['email' => $email]);
+            $user = $statement->fetch();
+
+            if ($user === false || !password_verify($password, $user['mot_de_passe'])) {
+                $loginError = 'Adresse e-mail ou mot de passe incorrect.';
+            } else {
+                $loginValidated = true;
+            }
+        } catch (RuntimeException $exception) {
+            $loginError = 'Le service de connexion est temporairement indisponible.';
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,6 +49,14 @@ declare(strict_types=1);
         <h1>Connexion</h1>
         <p>Application de gestion des interventions et dépannages électriques.</p>
 
+        <?php if ($loginError !== ''): ?>
+            <p role="alert"><?= htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
+
+        <?php if ($loginValidated): ?>
+            <p>Vos identifiants ont été vérifiés avec succès.</p>
+        <?php endif; ?>
+
         <form action="login.php" method="post">
             <div>
                 <label for="email">Adresse e-mail</label>
@@ -22,6 +65,7 @@ declare(strict_types=1);
                     name="email"
                     type="email"
                     autocomplete="email"
+                    value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>"
                     required
                 >
             </div>
