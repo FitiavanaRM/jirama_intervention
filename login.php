@@ -19,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $connection = getDatabaseConnection();
             $statement = $connection->prepare(
-                'SELECT id_utilisateur, nom, prenom, mot_de_passe
-                 FROM utilisateurs
-                 WHERE email = :email
+                'SELECT u.id_utilisateur, u.nom, u.prenom, u.mot_de_passe,
+                        r.id_role, r.nom_role
+                 FROM utilisateurs AS u
+                 INNER JOIN roles AS r ON r.id_role = u.id_role
+                 WHERE u.email = :email
                  LIMIT 1'
             );
             $statement->execute(['email' => $email]);

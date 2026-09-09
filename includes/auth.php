@@ -38,4 +38,6 @@ function registerAuthenticatedUser(array $user): void
     $_SESSION['id_utilisateur'] = (int) $user['id_utilisateur'];
     $_SESSION['nom'] = (string) $user['nom'];
     $_SESSION['prenom'] = (string) $user['prenom'];
+    $_SESSION['id_role'] = (int) $user['id_role'];
+    $_SESSION['nom_role'] = (string) $user['nom_role'];
 }
