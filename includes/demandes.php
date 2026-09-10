@@ -25,8 +25,42 @@ function generateDemandeReference(PDO $connection, ?DateTimeInterface $date = nu
          FROM demandes
          WHERE reference LIKE :prefix'
     );
-    
+
     $statement->execute(['prefix' => $prefix . '%']);
     $lastSequence = (int) ($statement->fetchColumn() ?: 0);
     return formatDemandeReference($year, $lastSequence + 1);
+}
+
+// Valide et normalise les données nécessaires à la création d'une demande
+ 
+function validateDemandeData(array $data): array
+{
+    $fields = [
+        'nom_client' => ['Nom du client', 150],
+        'telephone_client' => ['Téléphone du client', 20],
+        'adresse_client' => ['Adresse du client', null],
+        'type_demande' => ['Type de demande', 100],
+        'description_probleme' => ['Description du problème', null],
+    ];
+    $validatedData = [];
+
+    foreach ($fields as $field => [$label, $maximumLength]) {
+        $value = trim((string) ($data[$field] ?? ''));
+
+        if ($value === '') {
+            throw new InvalidArgumentException("{$label} est obligatoire.");
+        }
+
+        if ($maximumLength !== null && strlen($value) > $maximumLength) {
+            throw new InvalidArgumentException("{$label} dépasse la longueur autorisée.");
+        }
+
+        $validatedData[$field] = $value;
+    }
+
+    if (!preg_match('/^[0-9+().\s-]+$/', $validatedData['telephone_client'])) {
+        throw new InvalidArgumentException('Le téléphone du client est invalide.');
+    }
+
+    return $validatedData;
 }
