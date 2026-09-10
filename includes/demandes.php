@@ -67,7 +67,7 @@ function validateDemandeData(array $data): array
 
 // Crée une demande avec son statut initial et sa référence automatique.
 
-function createDemande(PDO $connection, array $data, int $creatorId): int
+function createDemande(PDO $connection, array $data, int $creatorId): array
 {
     if ($creatorId < 1) {
         throw new InvalidArgumentException('L’utilisateur créateur est invalide.');
@@ -115,7 +115,10 @@ function createDemande(PDO $connection, array $data, int $creatorId): int
             $demandeId = (int) $connection->lastInsertId();
             $connection->commit();
 
-            return $demandeId;
+            return [
+                'id_demande' => $demandeId,
+                'reference' => $reference,
+            ];
         } catch (PDOException $exception) {
             if ($connection->inTransaction()) {
                 $connection->rollBack();
