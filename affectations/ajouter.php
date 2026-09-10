@@ -13,3 +13,10 @@ $demandes = [];
 $equipes = [];
 $techniciensParEquipe = [];
 $errorMessage = '';
+
+try {
+    $connection = getDatabaseConnection();
+
+    $demandes = getDemandes($connection);
+    $equipes = getEquipes($connection);
+}
