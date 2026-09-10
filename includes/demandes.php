@@ -169,3 +169,36 @@ function getDemandes(PDO $connection): array
 
     return $statement->fetchAll();
 }
+
+// Retourne une demande précise avec les informations de son créateur.
+
+function getDemandeById(PDO $connection, int $demandeId): ?array
+{
+    if ($demandeId < 1) {
+        return null;
+    }
+
+    $statement = $connection->prepare(
+        'SELECT
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            d.telephone_client,
+            d.adresse_client,
+            d.type_demande,
+            d.description_probleme,
+            d.date_demande,
+            d.statut,
+            u.nom AS createur_nom,
+            u.prenom AS createur_prenom
+        FROM demandes AS d
+        INNER JOIN utilisateurs AS u ON u.id_utilisateur = d.id_utilisateur
+        WHERE d.id_demande = :id_demande
+        LIMIT 1'
+    );
+    $statement->execute(['id_demande' => $demandeId]);
+
+    $demande = $statement->fetch();
+
+    return $demande === false ? null : $demande;
+}
