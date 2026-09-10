@@ -21,7 +21,10 @@ try {
 
     foreach ($equipes as $equipe) {
     $equipeId = (int) $equipe['id_equipe'];
-
     $techniciensParEquipe[$equipeId] = getTechniciensByEquipe($connection, $equipeId);
     }
+}
+catch (RuntimeException $exception) {
+    $errorMessage =
+        'Les données d’affectation ne peuvent pas être chargées pour le moment';
 }
