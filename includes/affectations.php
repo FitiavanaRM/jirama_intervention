@@ -16,4 +16,21 @@ function getEquipes(PDO $connection): array
     return $statement->fetchAll();
 }
 
+// Retourne les techniciens rattachés à une équipe précise.
 
+function getTechniciensByEquipe(PDO $connection, int $equipeId): array
+{
+    if ($equipeId < 1) {
+        return [];
+    }
+
+    $statement = $connection->prepare(
+        'SELECT id_technicien, nom, prenom, telephone, fonction, id_equipe
+         FROM techniciens
+         WHERE id_equipe = :id_equipe
+         ORDER BY nom ASC, prenom ASC, id_technicien ASC'
+    );
+    $statement->execute(['id_equipe' => $equipeId]);
+
+    return $statement->fetchAll();
+}
