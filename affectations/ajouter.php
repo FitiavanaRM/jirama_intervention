@@ -16,7 +16,12 @@ $errorMessage = '';
 
 try {
     $connection = getDatabaseConnection();
-
     $demandes = getDemandes($connection);
     $equipes = getEquipes($connection);
+
+    foreach ($equipes as $equipe) {
+    $equipeId = (int) $equipe['id_equipe'];
+
+    $techniciensParEquipe[$equipeId] = getTechniciensByEquipe($connection, $equipeId);
+    }
 }
