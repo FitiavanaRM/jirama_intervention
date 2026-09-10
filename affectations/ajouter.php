@@ -71,3 +71,21 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
             </select>
         </div>
+        <div>
+    <label for="id_equipe">Équipe</label>
+
+    <select id="id_equipe" name="id_equipe" required>
+        <option value="">Sélectionner une équipe</option>
+
+        <?php foreach ($equipes as $equipe): ?>
+            <option value="<?= (int) $equipe['id_equipe'] ?>">
+                <?= htmlspecialchars(
+                    (string) $equipe['nom_equipe'],
+                    ENT_QUOTES,
+                    'UTF-8'
+                ) ?>
+            </option>
+        <?php endforeach; ?>
+
+    </select>
+</div>
