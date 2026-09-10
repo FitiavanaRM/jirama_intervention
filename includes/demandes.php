@@ -64,3 +64,79 @@ function validateDemandeData(array $data): array
 
     return $validatedData;
 }
+
+// Crée une demande avec son statut initial et sa référence automatique.
+
+function createDemande(PDO $connection, array $data, int $creatorId): int
+{
+    if ($creatorId < 1) {
+        throw new InvalidArgumentException('L’utilisateur créateur est invalide.');
+    }
+
+    $validatedData = validateDemandeData($data);
+    $maximumAttempts = 3;
+
+    for ($attempt = 1; $attempt <= $maximumAttempts; $attempt++) {
+        try {
+            $connection->beginTransaction();
+            $reference = generateDemandeReference($connection);
+            $statement = $connection->prepare(
+                'INSERT INTO demandes (
+                    reference,
+                    nom_client,
+                    telephone_client,
+                    adresse_client,
+                    type_demande,
+                    description_probleme,
+                    statut,
+                    id_utilisateur
+                ) VALUES (
+                    :reference,
+                    :nom_client,
+                    :telephone_client,
+                    :adresse_client,
+                    :type_demande,
+                    :description_probleme,
+                    :statut,
+                    :id_utilisateur
+                )'
+            );
+            $statement->execute([
+                'reference' => $reference,
+                'nom_client' => $validatedData['nom_client'],
+                'telephone_client' => $validatedData['telephone_client'],
+                'adresse_client' => $validatedData['adresse_client'],
+                'type_demande' => $validatedData['type_demande'],
+                'description_probleme' => $validatedData['description_probleme'],
+                'statut' => 'EN_ATTENTE',
+                'id_utilisateur' => $creatorId,
+            ]);
+
+            $demandeId = (int) $connection->lastInsertId();
+            $connection->commit();
+
+            return $demandeId;
+        } catch (PDOException $exception) {
+            if ($connection->inTransaction()) {
+                $connection->rollBack();
+            }
+
+            $isDuplicateReference = $exception->getCode() === '23000'
+                && (int) ($exception->errorInfo[1] ?? 0) === 1062;
+
+            if ($isDuplicateReference && $attempt < $maximumAttempts) {
+                continue;
+            }
+
+            throw $exception;
+        } catch (Throwable $exception) {
+            if ($connection->inTransaction()) {
+                $connection->rollBack();
+            }
+
+            throw $exception;
+        }
+    }
+
+    throw new RuntimeException('Impossible de créer la demande.');
+}
