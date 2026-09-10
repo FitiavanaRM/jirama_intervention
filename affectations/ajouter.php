@@ -28,3 +28,15 @@ catch (RuntimeException $exception) {
     $errorMessage =
         'Les données d’affectation ne peuvent pas être chargées pour le moment';
 }
+
+$pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
+
+define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/sidebar.php';
+
+?>
+
+<main>
+    <h1>Affecter une demande</h1>
