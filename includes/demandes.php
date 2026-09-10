@@ -143,3 +143,29 @@ function createDemande(PDO $connection, array $data, int $creatorId): array
 
     throw new RuntimeException('Impossible de créer la demande.');
 }
+
+// Retourne les demandes avec les informations utiles à leur consultation
+
+function getDemandes(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            d.telephone_client,
+            d.adresse_client,
+            d.type_demande,
+            d.description_probleme,
+            d.date_demande,
+            d.statut,
+            u.nom AS createur_nom,
+            u.prenom AS createur_prenom
+        FROM demandes AS d
+        INNER JOIN utilisateurs AS u ON u.id_utilisateur = d.id_utilisateur
+        ORDER BY d.date_demande DESC, d.id_demande DESC'
+    );
+    $statement->execute();
+
+    return $statement->fetchAll();
+}
