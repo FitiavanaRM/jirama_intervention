@@ -40,3 +40,133 @@ function registerAuthenticatedUser(array $user): void
     $_SESSION['id_role'] = (int) $user['id_role'];
     $_SESSION['nom_role'] = (string) $user['nom_role'];
 }
+
+/**
+ * Retourne les informations non sensibles de l'utilisateur connecté.
+ *
+ * @return array<string, int|string>|null
+ */
+function getCurrentUser(): ?array
+{
+    startSecureSession();
+
+    $requiredKeys = ['id_utilisateur', 'nom', 'prenom', 'id_role', 'nom_role'];
+
+    foreach ($requiredKeys as $key) {
+        if (!isset($_SESSION[$key])) {
+            return null;
+        }
+    }
+
+    return [
+        'id_utilisateur' => (int) $_SESSION['id_utilisateur'],
+        'nom' => (string) $_SESSION['nom'],
+        'prenom' => (string) $_SESSION['prenom'],
+        'id_role' => (int) $_SESSION['id_role'],
+        'nom_role' => (string) $_SESSION['nom_role'],
+    ];
+}
+
+/**
+ * Indique si l'utilisateur connecté possède l'un des rôles demandés.
+ *
+ * @param string|array<int, string> $roles
+ */
+function hasRole(string|array $roles): bool
+{
+    $user = getCurrentUser();
+
+    if ($user === null) {
+        return false;
+    }
+
+    $allowedRoles = is_array($roles) ? $roles : [$roles];
+
+    return in_array($user['nom_role'], $allowedRoles, true);
+}
+
+// Indique si l'utilisateur connecté possède une permission donnée
+
+function hasPermission(string $permission): bool
+{
+    $user = getCurrentUser();
+
+    if ($user === null) {
+        return false;
+    }
+
+    $permissionsByRole = [
+        'Administrateur' => ['*'],
+        "Agent d'accueil" => ['demande.creer', 'demande.consulter', 'demande.rechercher', 'demande.modifier'],
+        "Agent d'écart" => ['demande.consulter', 'demande.suivre', 'affectation.creer', 'equipe.consulter', 'technicien.consulter'],
+        "Chef d'équipe" => ['demande.affectee.consulter', 'intervention.consulter', 'intervention.organiser', 'technicien.superviser', 'intervention.suivre'],
+        'Technicien' => ['intervention.personnelle.consulter', 'intervention.demarrer', 'intervention.terminer', 'intervention.renseigner'],
+        'Chef de division' => ['demande.consulter', 'intervention.consulter', 'historique.consulter', 'statistique.consulter', 'activite.superviser'],
+    ];
+
+    $permissions = $permissionsByRole[$user['nom_role']] ?? [];
+
+    return in_array('*', $permissions, true) || in_array($permission, $permissions, true);
+}
+
+/**
+ * Redirige vers la page de connexion si aucun utilisateur n'est connecté.
+ *
+ * @return array<string, int|string>
+ */
+function requireLogin(): array
+{
+    $user = getCurrentUser();
+
+    if ($user !== null) {
+        return $user;
+    }
+
+    header('Location: ' . getLoginUrl());
+    exit;
+}
+
+// Refuse l'accès à une ressource protégée.
+function denyAccess(): never
+{
+    http_response_code(403);
+    exit('Accès refusé.');
+}
+
+/**
+ * Exige l'un des rôles autorisés avant l'accès à une page ou une action.
+ *
+ * @param string|array<int, string> $roles
+ */
+function requireRole(string|array $roles): void
+{
+    requireLogin();
+
+    if (!hasRole($roles)) {
+        denyAccess();
+    }
+}
+
+// Exige une permission avant l'accès à une page ou une action.
+function requirePermission(string $permission): void
+{
+    requireLogin();
+
+    if (!hasPermission($permission)) {
+        denyAccess();
+    }
+}
+
+// Construit une URL de connexion compatible avec le sous-dossier XAMPP.
+function getLoginUrl(): string
+{
+    $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    $projectDirectory = '/' . basename(dirname(__DIR__));
+    $projectPosition = strpos($scriptName, $projectDirectory);
+
+    if ($projectPosition === false) {
+        return '/login.php';
+    }
+
+    return substr($scriptName, 0, $projectPosition) . $projectDirectory . '/login.php';
+}
