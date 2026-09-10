@@ -40,3 +40,34 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
 <main>
     <h1>Affecter une demande</h1>
+
+    <?php if ($errorMessage !== ''): ?>
+
+    <p role="alert">
+        <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+    </p>
+
+<?php else: ?>
+
+    <form action="ajouter.php" method="post">
+
+        <div>
+            <label for="id_demande">Demande</label>
+
+            <select id="id_demande" name="id_demande" required>
+                <option value="">Sélectionner une demande</option>
+
+                <?php foreach ($demandes as $demande): ?>
+                    <option value="<?= (int) $demande['id_demande'] ?>">
+                        <?= htmlspecialchars(
+                            (string) $demande['reference'] .
+                            ' — ' .
+                            (string) $demande['nom_client'],
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </option>
+                <?php endforeach; ?>
+
+            </select>
+        </div>
