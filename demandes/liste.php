@@ -44,7 +44,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     <th>Type</th> 
                     <th>Date</th> 
                     <th>Statut</th> 
-                    <th>Enregistrée par</th> 
+                    <th>Enregistrée par</th>
+                    <th>Action</th>
                 </tr> 
             </thead> 
             <tbody> 
@@ -62,6 +63,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 'UTF-8' 
                             ) ?> 
                         </td> 
+                        <td>
+                            <a href="details.php?id_demande=<?= (int) $demande['id_demande'] ?>">Détails</a>
+                        </td>
                     </tr> 
                 <?php endforeach; ?> 
             </tbody> 
