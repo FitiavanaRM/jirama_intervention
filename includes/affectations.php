@@ -127,4 +127,16 @@ function checkAffectationCoherence(
     $statement = $connection->prepare(
         'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
     );
+
+    $statement->execute([
+        'id_demande' => $demandeId
+    ]);
+
+    $demande = $statement->fetch();
+
+    if ($demande === false) {
+        throw new InvalidArgumentException(
+            'La demande sélectionnée n’existe pas.'
+        );
+    }
 }
