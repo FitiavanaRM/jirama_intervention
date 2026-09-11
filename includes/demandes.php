@@ -202,3 +202,20 @@ function getDemandeById(PDO $connection, int $demandeId): ?array
 
     return $demande === false ? null : $demande;
 }
+
+// Mise a jour du statut du demande
+function updateDemandeStatut(
+    PDO $connection,
+    int $demandeId,
+    string $nouveauStatut
+): void
+{
+    $statutsValides = [
+        'EN_ATTENTE',
+        'AFFECTEE',
+        'EN_COURS',
+        'RESOLUE',
+        'CLOTUREE',
+        'ANNULEE',
+    ];
+}
