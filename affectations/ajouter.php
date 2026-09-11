@@ -29,6 +29,11 @@ catch (RuntimeException $exception) {
         'Les données d’affectation ne peuvent pas être chargées pour le moment';
 }
 
+// traitement de POST
+$successMessage = (string) ($_SESSION['affectation_success'] ?? '');
+unset($_SESSION['affectation_success']);
+
+
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
