@@ -218,4 +218,8 @@ function updateDemandeStatut(
         'CLOTUREE',
         'ANNULEE',
     ];
+
+    if (!in_array($nouveauStatut, $statutsValides, true)) {
+        throw new InvalidArgumentException('Le statut demandé est invalide');
+    }
 }
