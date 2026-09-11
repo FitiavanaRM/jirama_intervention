@@ -228,5 +228,9 @@ function updateDemandeStatut(
          SET statut = :statut
          WHERE id_demande = :id_demande'
     );
-    
+
+    $statement->execute([
+        'statut' => $nouveauStatut,
+        'id_demande' => $demandeId,
+    ]);
 }
