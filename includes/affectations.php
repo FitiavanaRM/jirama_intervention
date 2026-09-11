@@ -94,4 +94,9 @@ function validateAffectation(array $data) : array
             'La demande, l’équipe et le technicien sont obligatoires.'
         );
     }
+
+    $observation = trim(
+        (string) ($data['observation'] ?? '')
+    );
+
 }
