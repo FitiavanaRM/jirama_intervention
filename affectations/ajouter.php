@@ -35,7 +35,14 @@ unset($_SESSION['affectation_success']);
 
 if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $validatedData = validateAffectationData($_POST);
-    
+
+    checkAffectationCoherence(
+        $connection,
+        $validatedData['id_demande'],
+        $validatedData['id_equipe'],
+        $validatedData['id_technicien']
+    );
+
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
