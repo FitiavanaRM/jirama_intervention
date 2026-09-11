@@ -34,3 +34,35 @@ function getTechniciensByEquipe(PDO $connection, int $equipeId): array
 
     return $statement->fetchAll();
 }
+
+// c est pour inserer une nouvelle affectation en base
+function insertAffectation(
+    PDO $connection,
+    int $demandeId,
+    int $equipeId,
+    int $technicienID,
+    string $observation
+): int
+{
+    $statement = $connection->prepare(
+        'INSERT INTO affectations (
+            id_demande,
+            id_equipe,
+            id_technicien,
+            observation
+        ) VALUES (
+            :id_demande,
+            :id_equipe,
+            :id_technicien,
+            :observation
+        )'
+    );
+    $statement->execute([
+        'id_demande' => $demandeId,
+        'id_equipe' => $equipeId,
+        'id_technicien' => $technicienId,
+        'observation' => $observation !== '' ? $observation : null,
+    ]);
+
+    return (int) $connection->lastInsertId();
+}
