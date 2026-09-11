@@ -75,4 +75,9 @@ function validateAffectation(array $data) : array
         FILTER_VALIDATE_INT
     );
 
+    $idEquipe = filter_var(
+        $data['id_equipe'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+
 }
