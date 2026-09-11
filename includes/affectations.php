@@ -112,3 +112,19 @@ function validateAffectation(array $data) : array
         'observation' => $observation,
     ];
 }
+
+
+// Vérifie que la demande, l'équipe et le technicien existent,
+// et que le technicien appartient bien à l'équipe sélectionnée.
+
+function checkAffectationCoherence(
+    PDO $connection,
+    int $demandeId,
+    int $equipeId,
+    int $technicienId
+): void
+{
+    $statement = $connection->prepare(
+        'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
+    );
+}
