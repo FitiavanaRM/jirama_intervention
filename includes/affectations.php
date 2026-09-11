@@ -140,4 +140,9 @@ function checkAffectationCoherence(
     if ($statement->fetch() === false) {
         throw new InvalidArgumentException('L’équipe sélectionnée n’existe pas');
     }
+
+    // technicien
+    $statement = $connection->prepare('SELECT id_equipe FROM techniciens WHERE id_technicien = :id_technicien LIMIT 1');
+    $statement->execute(['id_technicien' => $technicienId]);
+    $technicien = $statement->fetch();
 }
