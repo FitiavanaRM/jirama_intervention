@@ -66,3 +66,13 @@ function insertAffectation(
 
     return (int) $connection->lastInsertId();
 }
+
+// pour valider l affectation
+function validateAffectation(array $data) : array
+{
+    $idDemande = filter_var(
+        $data['id_demande'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+
+}
