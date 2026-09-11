@@ -51,6 +51,8 @@ if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $validatedData['observation']
     );
 
+    $_SESSION['affectation_success'] = 'Affectation enregistrée avec succès.';
+    
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
