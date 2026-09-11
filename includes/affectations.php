@@ -149,4 +149,8 @@ function checkAffectationCoherence(
     if ($technicien === false) {
         throw new InvalidArgumentException('Le technicien sélectionné n’existe pas.');
     }
+
+    if ((int) $technicien['id_equipe'] !== $equipeId) {
+        throw new InvalidArgumentException('Le technicien sélectionné n’appartient pas à cette équipe.');
+    }
 }
