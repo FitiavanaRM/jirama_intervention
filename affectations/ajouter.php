@@ -34,6 +34,7 @@ $successMessage = (string) ($_SESSION['affectation_success'] ?? '');
 unset($_SESSION['affectation_success']);
 
 if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    $validatedData = validateAffectationData($_POST);
     
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
