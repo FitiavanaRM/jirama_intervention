@@ -33,7 +33,8 @@ catch (RuntimeException $exception) {
 $successMessage = (string) ($_SESSION['affectation_success'] ?? '');
 unset($_SESSION['affectation_success']);
 
-
+if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
