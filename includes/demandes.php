@@ -222,4 +222,11 @@ function updateDemandeStatut(
     if (!in_array($nouveauStatut, $statutsValides, true)) {
         throw new InvalidArgumentException('Le statut demandé est invalide');
     }
+
+    $statement = $connection->prepare(
+        'UPDATE demandes
+         SET statut = :statut
+         WHERE id_demande = :id_demande'
+    );
+    
 }
