@@ -80,4 +80,9 @@ function validateAffectation(array $data) : array
         FILTER_VALIDATE_INT
     );
 
+    $idTechnicien = filter_var(
+        $data['id_technicien'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+
 }
