@@ -105,4 +105,10 @@ function validateAffectation(array $data) : array
         );
     }
 
+    return [
+        'id_demande' => $idDemande,
+        'id_equipe' => $idEquipe,
+        'id_technicien' => $idTechnicien,
+        'observation' => $observation,
+    ];
 }
