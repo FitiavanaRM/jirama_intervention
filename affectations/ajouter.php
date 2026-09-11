@@ -43,6 +43,14 @@ if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $validatedData['id_technicien']
     );
 
+    insertAffectation(
+        $connection,
+        $validatedData['id_demande'],
+        $validatedData['id_equipe'],
+        $validatedData['id_technicien'],
+        $validatedData['observation']
+    );
+
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
