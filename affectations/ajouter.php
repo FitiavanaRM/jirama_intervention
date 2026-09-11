@@ -52,7 +52,8 @@ if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     );
 
     $_SESSION['affectation_success'] = 'Affectation enregistrée avec succès.';
-    
+    header('Location: ajouter.php');
+    exit;
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
