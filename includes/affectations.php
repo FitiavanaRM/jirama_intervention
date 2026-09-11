@@ -11,8 +11,8 @@ function getEquipes(PDO $connection): array
          FROM equipes
          ORDER BY nom_equipe ASC, id_equipe ASC'
     );
-    $statement->execute();
 
+    $statement->execute();
     return $statement->fetchAll();
 }
 
@@ -90,9 +90,7 @@ function validateAffectation(array $data) : array
         $idEquipe === false || $idEquipe < 1 ||
         $idTechnicien === false || $idTechnicien < 1
     ) {
-        throw new InvalidArgumentException(
-            'La demande, l’équipe et le technicien sont obligatoires.'
-        );
+        throw new InvalidArgumentException('La demande, l’équipe et le technicien sont obligatoires.');
     }
 
     $observation = trim(
@@ -100,9 +98,7 @@ function validateAffectation(array $data) : array
     );
 
     if (strlen($observation) > 1000) {
-        throw new InvalidArgumentException(
-            'L’observation dépasse la longueur autorisée.'
-        );
+        throw new InvalidArgumentException('L’observation dépasse la longueur autorisée.');
     }
 
     return [
@@ -139,4 +135,8 @@ function checkAffectationCoherence(
     if ($demande['statut'] !== 'EN_ATTENTE') {
         throw new InvalidArgumentException('Cette demande n’est plus en attente d’affectation.');
     }
+
+    $statement = $connection->prepare('SELECT id_equipe FROM equipes WHERE id_equipe = :id_equipe LIMIT 1');
+
+    $statement->execute(['id_equipe' => $equipeId]);
 }
