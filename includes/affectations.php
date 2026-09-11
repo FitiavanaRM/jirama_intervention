@@ -120,12 +120,9 @@ function checkAffectationCoherence(
     int $technicienId
 ): void
 {
-    $statement = $connection->prepare(
-        'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
-    );
-
+    // demande
+    $statement = $connection->prepare('SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1');
     $statement->execute(['id_demande' => $demandeId]);
-
     $demande = $statement->fetch();
 
     if ($demande === false) {
@@ -136,7 +133,11 @@ function checkAffectationCoherence(
         throw new InvalidArgumentException('Cette demande n’est plus en attente d’affectation.');
     }
 
+    // equipe
     $statement = $connection->prepare('SELECT id_equipe FROM equipes WHERE id_equipe = :id_equipe LIMIT 1');
-
     $statement->execute(['id_equipe' => $equipeId]);
+
+    if ($statement->fetch() === false) {
+        throw new InvalidArgumentException('L’équipe sélectionnée n’existe pas');
+    }
 }
