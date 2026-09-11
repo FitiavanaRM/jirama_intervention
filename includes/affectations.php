@@ -85,4 +85,13 @@ function validateAffectation(array $data) : array
         FILTER_VALIDATE_INT
     );
 
+    if (
+        $idDemande === false || $idDemande < 1 ||
+        $idEquipe === false || $idEquipe < 1 ||
+        $idTechnicien === false || $idTechnicien < 1
+    ) {
+        throw new InvalidArgumentException(
+            'La demande, l’équipe et le technicien sont obligatoires.'
+        );
+    }
 }
