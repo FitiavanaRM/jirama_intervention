@@ -99,4 +99,10 @@ function validateAffectation(array $data) : array
         (string) ($data['observation'] ?? '')
     );
 
+    if (strlen($observation) > 1000) {
+        throw new InvalidArgumentException(
+            'L’observation dépasse la longueur autorisée.'
+        );
+    }
+
 }
