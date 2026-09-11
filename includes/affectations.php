@@ -128,15 +128,15 @@ function checkAffectationCoherence(
         'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
     );
 
-    $statement->execute([
-        'id_demande' => $demandeId
-    ]);
+    $statement->execute(['id_demande' => $demandeId]);
 
     $demande = $statement->fetch();
 
     if ($demande === false) {
-        throw new InvalidArgumentException(
-            'La demande sélectionnée n’existe pas.'
-        );
+        throw new InvalidArgumentException('La demande sélectionnée n’existe pas.');
+    }
+
+    if ($demande['statut'] !== 'EN_ATTENTE') {
+        throw new InvalidArgumentException('Cette demande n’est plus en attente d’affectation.');
     }
 }
