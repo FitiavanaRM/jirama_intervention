@@ -34,26 +34,36 @@ $successMessage = (string) ($_SESSION['affectation_success'] ?? '');
 unset($_SESSION['affectation_success']);
 
 if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
-    $validatedData = validateAffectationData($_POST);
+    try {
+        $validatedData = validateAffectationData($_POST);
 
-    checkAffectationCoherence(
-        $connection,
-        $validatedData['id_demande'],
-        $validatedData['id_equipe'],
-        $validatedData['id_technicien']
-    );
+        checkAffectationCoherence(
+            $connection,
+            $validatedData['id_demande'],
+            $validatedData['id_equipe'],
+            $validatedData['id_technicien']
+        );
 
-    insertAffectation(
-        $connection,
-        $validatedData['id_demande'],
-        $validatedData['id_equipe'],
-        $validatedData['id_technicien'],
-        $validatedData['observation']
-    );
+        insertAffectation(
+            $connection,
+            $validatedData['id_demande'],
+            $validatedData['id_equipe'],
+            $validatedData['id_technicien'],
+            $validatedData['observation']
+        );
 
-    $_SESSION['affectation_success'] = 'Affectation enregistrée avec succès.';
-    header('Location: ajouter.php');
-    exit;
+        $_SESSION['affectation_success'] = 'Affectation enregistrée avec succès';
+        header('Location: ajouter.php');
+        exit;
+    } 
+    catch (InvalidArgumentException $exception) {
+        $errorMessage = $exception->getMessage();
+    } 
+    catch (RuntimeException $exception) {
+        $errorMessage = 'L’affectation n’a pas pu être enregistrée';
+    }
+}
+
 $pageTitle = 'Nouvelle affectation | JIRAMA Intervention';
 
 define('JIRAMA_LAYOUT', true);
