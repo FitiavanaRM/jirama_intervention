@@ -9,6 +9,12 @@ require_once __DIR__ . '/../includes/affectations.php';
 
 requirePermission('affectation.creer');
 
+$currentUser = getCurrentUser();
+
+if ($currentUser === null) {
+    denyAccess();
+}
+
 $demandes = [];
 $equipes = [];
 $techniciensParEquipe = [];
