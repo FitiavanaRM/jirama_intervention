@@ -53,4 +53,21 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 </tr>
             </thead>
             <tbody>
+                 <?php foreach ($affectations as $affectation): ?>
+                    <tr>
+                        <td>
+                            <?= htmlspecialchars(
+                                (string) $affectation['reference'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </td>
+
+                        <td>
+                            <?= htmlspecialchars(
+                                (string) $affectation['nom_client'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </td>
 </main>
