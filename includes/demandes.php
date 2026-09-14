@@ -277,4 +277,12 @@ function insertHistorique(
             :commentaire
         )'
     );
+
+    $statement->execute([
+        'id_demande' => $demandeId,
+        'id_utilisateur' => $utilisateurId,
+        'ancien_statut' => $ancienStatut,
+        'nouveau_statut' => $nouveauStatut,
+        'commentaire' => $commentaire,
+    ]);
 }
