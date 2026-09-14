@@ -243,4 +243,8 @@ function getDemandesEnAttente(PDO $connection): array
                 d.date_demande
         FROM demandes AS d WHERE d.statut = :statut ORDER BY d.date_demande ASC, d.id_demande ASC'
     );
+
+    $statement->execute([
+        'statut' => 'EN_ATTENTE'
+    ]);
 }
