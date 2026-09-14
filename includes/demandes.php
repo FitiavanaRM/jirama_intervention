@@ -33,7 +33,6 @@ function generateDemandeReference(PDO $connection, ?DateTimeInterface $date = nu
 }
 
 // Valide et normalise les données nécessaires à la création d'une demande
- 
 function validateDemandeData(array $data): array
 {
     $fields = [
@@ -67,7 +66,6 @@ function validateDemandeData(array $data): array
 }
 
 // Crée une demande avec son statut initial et sa référence automatique.
-
 function createDemande(PDO $connection, array $data, int $creatorId): array
 {
     if ($creatorId < 1) {
@@ -146,7 +144,6 @@ function createDemande(PDO $connection, array $data, int $creatorId): array
 }
 
 // Retourne les demandes avec les informations utiles à leur consultation
-
 function getDemandes(PDO $connection): array
 {
     $statement = $connection->prepare(
@@ -172,7 +169,6 @@ function getDemandes(PDO $connection): array
 }
 
 // Retourne une demande précise avec les informations de son créateur.
-
 function getDemandeById(PDO $connection, int $demandeId): ?array
 {
     if ($demandeId < 1) {

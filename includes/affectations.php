@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-// Retourne les équipes disponibles pour une affectation.
-
+// Retourne les équipes disponibles pour une affectation
 function getEquipes(PDO $connection): array
 {
     $statement = $connection->prepare(
@@ -16,8 +15,7 @@ function getEquipes(PDO $connection): array
     return $statement->fetchAll();
 }
 
-// Retourne les techniciens rattachés à une équipe précise.
-
+// Retourne les techniciens rattachés à une équipe précise
 function getTechniciensByEquipe(PDO $connection, int $equipeId): array
 {
     if ($equipeId < 1) {
@@ -35,7 +33,7 @@ function getTechniciensByEquipe(PDO $connection, int $equipeId): array
     return $statement->fetchAll();
 }
 
-// c est pour inserer une nouvelle affectation en base
+// c'est pour inserer une nouvelle affectation en base
 function insertAffectation(
     PDO $connection,
     int $demandeId,

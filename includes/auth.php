@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-// Démarre la session avec des paramètres de cookie adaptés à l'application.
-
+// Démarre la session avec des paramètres de cookie adaptés à l'application
 function startSecureSession(): void
 {
     if (session_status() === PHP_SESSION_ACTIVE) {
@@ -24,11 +23,7 @@ function startSecureSession(): void
     }
 }
 
-/**
- * Enregistre les informations non sensibles de l'utilisateur authentifié.
- *
- * @param array<string, mixed> $user
- */
+// Enregistre les informations non sensibles de l'utilisateur authentifié
 function registerAuthenticatedUser(array $user): void
 {
     startSecureSession();
@@ -41,11 +36,7 @@ function registerAuthenticatedUser(array $user): void
     $_SESSION['nom_role'] = (string) $user['nom_role'];
 }
 
-/**
- * Retourne les informations non sensibles de l'utilisateur connecté.
- *
- * @return array<string, int|string>|null
- */
+// Retourne les informations non sensibles de l'utilisateur connecté
 function getCurrentUser(): ?array
 {
     startSecureSession();
@@ -67,11 +58,7 @@ function getCurrentUser(): ?array
     ];
 }
 
-/**
- * Indique si l'utilisateur connecté possède l'un des rôles demandés.
- *
- * @param string|array<int, string> $roles
- */
+// Indique si l'utilisateur connecté possède l'un des rôles demandés
 function hasRole(string|array $roles): bool
 {
     $user = getCurrentUser();
@@ -109,11 +96,7 @@ function hasPermission(string $permission): bool
     return in_array('*', $permissions, true) || in_array($permission, $permissions, true);
 }
 
-/**
- * Redirige vers la page de connexion si aucun utilisateur n'est connecté.
- *
- * @return array<string, int|string>
- */
+// Redirige vers la page de connexion si aucun utilisateur n'est connecté
 function requireLogin(): array
 {
     $user = getCurrentUser();
@@ -133,11 +116,7 @@ function denyAccess(): never
     exit('Accès refusé.');
 }
 
-/**
- * Exige l'un des rôles autorisés avant l'accès à une page ou une action.
- *
- * @param string|array<int, string> $roles
- */
+// Exige l'un des rôles autorisés avant l'accès à une page ou une action
 function requireRole(string|array $roles): void
 {
     requireLogin();
