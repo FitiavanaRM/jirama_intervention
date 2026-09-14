@@ -247,4 +247,6 @@ function getDemandesEnAttente(PDO $connection): array
     $statement->execute([
         'statut' => 'EN_ATTENTE'
     ]);
+
+    return $statement->fetchAll();
 }
