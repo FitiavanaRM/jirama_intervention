@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-// Formate une référence de demande selon le format DEM-AAAA-NNNN.
+require_once __DIR__ . '/../includes/demandes.php';
 
+// Formate une référence de demande selon le format DEM-AAAA-NNNN
 function formatDemandeReference(int $year, int $sequence): string
 {
     if ($year < 2000 || $year > 9999 || $sequence < 1) {

@@ -44,13 +44,28 @@ if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             $validatedData['id_technicien']
         );
 
-        insertAffectation(
-            $connection,
-            $validatedData['id_demande'],
-            $validatedData['id_equipe'],
-            $validatedData['id_technicien'],
-            $validatedData['observation']
-        );
+        $connection->beginTransaction();
+        try {
+            insertAffectation(
+                $connection,
+                $validatedData['id_demande'],
+                $validatedData['id_equipe'],
+                $validatedData['id_technicien'],
+                $validatedData['observation']
+            );
+
+            updateDemandeStatut(
+                $connection,
+                $validatedData['id_demande'],
+                'AFFECTEE'
+            );
+
+            $connection->commit();
+        }
+        catch (Throwable $exception) {
+            $connection->rollBack();
+            throw $exception;
+        }
 
         $_SESSION['affectation_success'] = 'Affectation enregistrée avec succès';
         header('Location: ajouter.php');
