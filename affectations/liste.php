@@ -40,4 +40,17 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php elseif ($affectations === []): ?>
         <p>Aucune affectation n’est enregistrée</p>
 
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Client</th>
+                    <th>Équipe</th>
+                    <th>Technicien</th>
+                    <th>Date d’affectation</th>
+                    <th>Observation</th>
+                </tr>
+            </thead>
+            <tbody>
 </main>
