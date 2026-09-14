@@ -179,4 +179,7 @@ function getAffectations(PDO $connection): array
             ON t.id_technicien = a.id_technicien
         ORDER BY a.date_affectation DESC, a.id_affectation DESC'
     );
+    
+    $statement->execute();
+    return $statement->fetchAll();
 }
