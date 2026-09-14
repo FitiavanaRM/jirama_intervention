@@ -110,4 +110,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
                 <?php endforeach; ?>
             </tbody>
+        </table>
+    <?php endif; ?>
 </main>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
