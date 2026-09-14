@@ -70,4 +70,25 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 'UTF-8'
                             ) ?>
                         </td>
+                        <td>
+                            <?= htmlspecialchars(
+                                (string) $affectation['nom_equipe'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </td>
+
+                        <td>
+                            <?php if ($affectation['id_technicien'] !== null): ?>
+                                <?= htmlspecialchars(
+                                    (string) $affectation['technicien_prenom'] .
+                                    ' ' .
+                                    (string) $affectation['technicien_nom'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            <?php else: ?>
+                                —
+                            <?php endif; ?>
+                        </td>
 </main>
