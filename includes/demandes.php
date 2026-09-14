@@ -262,5 +262,19 @@ function insertHistorique(
     ?string $commentaire = null
 ): void
 {
-
+    $statement = $connection->prepare(
+        'INSERT INTO historiques (
+            id_demande,
+            id_utilisateur,
+            ancien_statut,
+            nouveau_statut,
+            commentaire
+        ) VALUES (
+            :id_demande,
+            :id_utilisateur,
+            :ancien_statut,
+            :nouveau_statut,
+            :commentaire
+        )'
+    );
 }
