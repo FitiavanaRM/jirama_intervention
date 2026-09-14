@@ -60,6 +60,14 @@ if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 'AFFECTEE'
             );
 
+            insertHistorique(
+                $connection,
+                $validatedData['id_demande'],
+                $currentUser['id_utilisateur'],
+                'EN_ATTENTE',
+                'AFFECTEE'
+            );
+
             $connection->commit();
         }
         catch (Throwable $exception) {
