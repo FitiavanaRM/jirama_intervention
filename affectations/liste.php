@@ -32,4 +32,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
 ?>
 <main>
     <h1>Affectations</h1>
+    <?php if ($errorMessage !== ''): ?>
+        <p role="alert">
+            <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>
 </main>
