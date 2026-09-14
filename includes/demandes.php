@@ -231,3 +231,16 @@ function updateDemandeStatut(
         'id_demande' => $demandeId,
     ]);
 }
+
+// retourn uniquement les demandes en attente d'affection
+function getDemandesEnAttente(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT d.id_demande,
+                d.reference,
+                d.nom_client,
+                d.type_demande,
+                d.date_demande
+        FROM demandes AS d WHERE d.statut = :statut ORDER BY d.date_demande ASC, d.id_demande ASC'
+    );
+}
