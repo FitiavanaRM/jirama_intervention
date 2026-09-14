@@ -152,3 +152,10 @@ function checkAffectationCoherence(
         throw new InvalidArgumentException('Le technicien sélectionné n’appartient pas à cette équipe.');
     }
 }
+
+
+// Retourne les affectations avec les informations utiles à leur consultation
+function getAffectations(PDO $connection): array
+{
+    
+}
