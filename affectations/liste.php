@@ -91,7 +91,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 —
                             <?php endif; ?>
                         </td>
-                        
+
                         <td>
                             <?= htmlspecialchars(
                                 (string) $affectation['date_affectation'],
@@ -99,4 +99,15 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 'UTF-8'
                             ) ?>
                         </td>
+                         <td>
+                            <?= htmlspecialchars(
+                                (string) ($affectation['observation'] ?? ''),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+            </tbody>
 </main>
