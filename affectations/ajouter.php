@@ -16,7 +16,7 @@ $errorMessage = '';
 
 try {
     $connection = getDatabaseConnection();
-    $demandes = getDemandes($connection);
+    $demandes = getDemandesEnAttente($connection);
     $equipes = getEquipes($connection);
 
     foreach ($equipes as $equipe) {
