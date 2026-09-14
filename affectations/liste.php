@@ -15,3 +15,9 @@ requireRole([
 
 $affectations = [];
 $errorMessage = '';
+
+try {
+    $affectations = getAffectations(getDatabaseConnection());
+} catch (RuntimeException $exception) {
+    $errorMessage = 'Les affectations ne peuvent pas être chargées pour le moment';
+}
