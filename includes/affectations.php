@@ -38,7 +38,7 @@ function insertAffectation(
     PDO $connection,
     int $demandeId,
     int $equipeId,
-    int $technicienID,
+    int $technicienId,
     string $observation
 ): int
 {
@@ -66,7 +66,7 @@ function insertAffectation(
 }
 
 // pour valider l affectation
-function validateAffectation(array $data) : array
+function validateAffectationData(array $data) : array
 {
     $idDemande = filter_var(
         $data['id_demande'] ?? null,

@@ -250,3 +250,17 @@ function getDemandesEnAttente(PDO $connection): array
 
     return $statement->fetchAll();
 }
+
+
+// Enregistre un changement de statut dans l'historique de la demande
+function insertHistorique(
+    PDO $connection,
+    int $demandeId,
+    int $utilisateurId,
+    ?string $ancienStatut,
+    string $nouveauStatut,
+    ?string $commentaire = null
+): void
+{
+
+}
