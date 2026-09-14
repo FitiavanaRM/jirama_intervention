@@ -12,3 +12,6 @@ requireRole([
     "Chef d'équipe",
     'Chef de division',
 ]);
+
+$affectations = [];
+$errorMessage = '';
