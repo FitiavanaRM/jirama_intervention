@@ -153,9 +153,30 @@ function checkAffectationCoherence(
     }
 }
 
-
 // Retourne les affectations avec les informations utiles à leur consultation
 function getAffectations(PDO $connection): array
 {
-    
+    $statement = $connection->prepare(
+        'SELECT
+            a.id_affectation,
+            a.date_affectation,
+            a.observation,
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            d.type_demande,
+            e.id_equipe,
+            e.nom_equipe,
+            t.id_technicien,
+            t.nom AS technicien_nom,
+            t.prenom AS technicien_prenom
+        FROM affectations AS a
+        INNER JOIN demandes AS d
+            ON d.id_demande = a.id_demande
+        INNER JOIN equipes AS e
+            ON e.id_equipe = a.id_equipe
+        LEFT JOIN techniciens AS t
+            ON t.id_technicien = a.id_technicien
+        ORDER BY a.date_affectation DESC, a.id_affectation DESC'
+    );
 }
