@@ -105,4 +105,12 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 'UTF-8'
                             ) ?>
                         </td>
+                    </tr>
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+    <?php endif; ?>
 </main>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
