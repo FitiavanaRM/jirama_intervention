@@ -286,12 +286,8 @@ function insertHistorique(
         'commentaire' => $commentaire,
     ]);
 }
-
-function getDemandesAffectees(PDO $connection) : array
-{
     
 // Retourne les demandes affectées, en attente d'organisation de l'intervention.
-
 function getDemandesAffectees(PDO $connection): array
 {
     $statement = $connection->prepare(
