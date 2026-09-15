@@ -319,4 +319,6 @@ function getDemandesAffectees(PDO $connection): array
     $statement->execute([
         'statut' => 'AFFECTEE'
     ]);
+
+    return $statement->fetchAll();
 }
