@@ -181,5 +181,5 @@ function getAffectations(PDO $connection): array
     );
     
     $statement->execute();
-    return $statement->fetchAll();
+    return $statement->fetchAll();!:
 }

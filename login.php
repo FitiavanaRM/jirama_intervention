@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = (string) ($_POST['mot_de_passe'] ?? '');
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === '') {
-        $loginError = 'Veuillez renseigner une adresse e-mail et un mot de passe valides.';
+        $loginError = 'Veuillez entrer une adresse e-mail et un mot de passe valides';
     } else {
         try {
             $connection = getDatabaseConnection();
@@ -30,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $statement->fetch();
 
             if ($user === false || !password_verify($password, $user['mot_de_passe'])) {
-                $loginError = 'Adresse e-mail ou mot de passe incorrect.';
+                $loginError = 'Adresse e-mail ou mot de passe incorrect';
             } else {
                 registerAuthenticatedUser($user);
                 $loginValidated = true;
             }
         } catch (RuntimeException $exception) {
-            $loginError = 'Le service de connexion est temporairement indisponible.';
+            $loginError = 'Le service de connexion est temporairement indisponible';
         }
     }
 }
@@ -51,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <main>
         <h1>Connexion</h1>
-        <p>Application de gestion des interventions et dépannages électriques.</p>
+        <p>Application de gestion des interventions et dépannages électriques</p>
 
         <?php if ($loginError !== ''): ?>
             <p role="alert"><?= htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
 
         <?php if ($loginValidated): ?>
-            <p>Vos identifiants ont été vérifiés avec succès.</p>
+            <p>Vos identifiants ont été vérifiés avec succès</p>
         <?php endif; ?>
 
         <form action="login.php" method="post">
