@@ -64,4 +64,11 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 'UTF-8'
                             ) ?>
                         </td>
+                        <td>
+                            <?= htmlspecialchars(
+                                (string) $demande['nom_client'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </td>
 </main>
