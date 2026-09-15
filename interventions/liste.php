@@ -40,4 +40,19 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
     <?php elseif ($demandes === []): ?>
         <p>Aucune demande affectée en attente d’organisation</p>
+
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Client</th>
+                    <th>Type</th>
+                    <th>Équipe</th>
+                    <th>Technicien</th>
+                    <th>Date d’affectation</th>
+                </tr>
+            </thead>
+
+            <tbody>
 </main>
