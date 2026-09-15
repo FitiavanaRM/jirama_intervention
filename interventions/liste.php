@@ -32,4 +32,12 @@ require_once __DIR__ . '/../includes/sidebar.php';
 ?>
 <main>
     <h1>Demandes affectées à organiser</h1>
+
+    <?php if ($errorMessage !== ''): ?>
+        <p role="alert">
+            <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+
+    <?php elseif ($demandes === []): ?>
+        <p>Aucune demande affectée en attente d’organisation</p>
 </main>
