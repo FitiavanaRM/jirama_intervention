@@ -14,3 +14,10 @@ requireRole([
 
 $demandes = [];
 $errorMessage = '';
+
+try {
+    $demandes = getDemandesAffectees(getDatabaseConnection());
+}
+catch (RuntimeException $exception){
+    $errorMessage = 'Les demandes affectées ne peuvent pas être chargées pour le moment';
+}
