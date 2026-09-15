@@ -315,4 +315,8 @@ function getDemandesAffectees(PDO $connection): array
         WHERE d.statut = :statut
         ORDER BY a.date_affectation ASC, d.id_demande ASC'
     );
+
+    $statement->execute([
+        'statut' => 'AFFECTEE'
+    ]);
 }
