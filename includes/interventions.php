@@ -15,4 +15,6 @@ function insertIntervention(
     $statement->execute([
         'id_demande' => $demandeId,
     ]);
+    
+    return (int) $connection->lastInsertId();
 }
