@@ -85,4 +85,17 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 'UTF-8'
                             ) ?>
                         </td>
+                        <td>
+                            <?php if ($demande['technicien_nom'] !== null): ?>
+                                <?= htmlspecialchars(
+                                    (string) $demande['technicien_prenom'] .
+                                    ' ' .
+                                    (string) $demande['technicien_nom'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            <?php else: ?>
+                                —
+                            <?php endif; ?>
+                        </td>
 </main>
