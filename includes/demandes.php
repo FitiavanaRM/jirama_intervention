@@ -286,3 +286,33 @@ function insertHistorique(
         'commentaire' => $commentaire,
     ]);
 }
+
+function getDemandesAffectees(PDO $connection) : array
+{
+    
+// Retourne les demandes affectées, en attente d'organisation de l'intervention.
+
+function getDemandesAffectees(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            d.type_demande,
+            d.description_probleme,
+            a.date_affectation,
+            e.nom_equipe,
+            t.nom AS technicien_nom,
+            t.prenom AS technicien_prenom
+        FROM demandes AS d
+        INNER JOIN affectations AS a
+            ON a.id_demande = d.id_demande
+        INNER JOIN equipes AS e
+            ON e.id_equipe = a.id_equipe
+        LEFT JOIN techniciens AS t
+            ON t.id_technicien = a.id_technicien
+        WHERE d.statut = :statut
+        ORDER BY a.date_affectation ASC, d.id_demande ASC'
+    );
+}
