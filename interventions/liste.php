@@ -55,4 +55,13 @@ require_once __DIR__ . '/../includes/sidebar.php';
             </thead>
 
             <tbody>
+                 <?php foreach ($demandes as $demande): ?>
+                    <tr>
+                        <td>
+                            <?= htmlspecialchars(
+                                (string) $demande['reference'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </td>
 </main>
