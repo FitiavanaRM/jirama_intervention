@@ -28,3 +28,8 @@ define('JIRAMA_LAYOUT', true);
 
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/sidebar.php';
+
+?>
+<main>
+    <h1>Demandes affectées à organiser</h1>
+</main>
