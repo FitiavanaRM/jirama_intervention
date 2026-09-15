@@ -8,5 +8,7 @@ function insertIntervention(
     int $demandeId
 ): int
 {
-
+    $statement = $connection->prepare(
+        'INSERT INTO interventions (id_demande, date_debut) VALUES (:id_demande,NOW())'
+    );
 }
