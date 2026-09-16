@@ -44,4 +44,9 @@ function validateTechnicienData(array $data): array
     ) {
         throw new InvalidArgumentException('Le téléphone du technicien est invalide');
     }
+
+    $idEquipe = filter_var(
+        $data['id_equipe'] ?? null,
+        FILTER_VALIDATE_INT
+    );
 }
