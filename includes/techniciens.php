@@ -107,4 +107,6 @@ function insertTechnicien(PDO $connection, array $data): int
         'id_equipe' => $data['id_equipe'],
         'id_utilisateur' => $data['id_utilisateur'],
     ]);
+
+    return (int) $connection->lastInsertId();
 }
