@@ -27,6 +27,11 @@ unset($_SESSION['intervention_success']);
 try {
     $connection = getDatabaseConnection();
     $demandes = getDemandesAffectees($connection);
+
+    if (
+        ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && hasPermission('intervention.organiser')
+    ) {
+    }
 }
 catch (RuntimeException $exception){
     $errorMessage = 'Les demandes affectées ne peuvent pas être chargées pour le moment';
