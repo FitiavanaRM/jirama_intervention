@@ -31,4 +31,6 @@ function checkInterventionCoherence(
     $statement->execute([
         'id_demande' => $demandeId
     ]);
+
+    $demande = $statement->fetch();
 }
