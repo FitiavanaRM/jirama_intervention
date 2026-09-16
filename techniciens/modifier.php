@@ -10,7 +10,8 @@ function getUtilisateursTechnicienDisponibles(PDO $connection): array
          FROM utilisateurs AS u"
          INNER JOIN roles AS r
             ON r.id_role = u.id_role
-            
+         WHERE r.nom_role = 'Technicien'
+
     );
 
     $statement->execute();
