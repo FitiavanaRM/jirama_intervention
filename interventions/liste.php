@@ -37,7 +37,15 @@ try {
         );
 
         if ($demandeId === false || $demandeId < 1) {
-            $errorMessage = 'La demande sélectionnée est invalide.';
+            $errorMessage = 'La demande sélectionnée est invalide';
+        }
+        else {
+            try {
+                checkInterventionCoherence($connection, $demandeId);
+            }
+            catch (InvalidArgumentException $exception) {
+                $errorMessage = $exception->getMessage();
+            }
         }
     }
 }
