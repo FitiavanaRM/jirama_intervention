@@ -27,4 +27,8 @@ function checkInterventionCoherence(
     statement = $connection->prepare(
         'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
     );
+
+    $statement->execute([
+        'id_demande' => $demandeId
+    ]);
 }
