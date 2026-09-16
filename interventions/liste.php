@@ -25,7 +25,8 @@ $successMessage = (string) ($_SESSION['intervention_success'] ?? '');
 unset($_SESSION['intervention_success']);
 
 try {
-    $demandes = getDemandesAffectees(getDatabaseConnection());
+    $connection = getDatabaseConnection();
+    $demandes = getDemandesAffectees($connection);
 }
 catch (RuntimeException $exception){
     $errorMessage = 'Les demandes affectées ne peuvent pas être chargées pour le moment';
