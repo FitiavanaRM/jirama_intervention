@@ -18,3 +18,11 @@ function insertIntervention(
     
     return (int) $connection->lastInsertId();
 }
+
+function checkInterventionCoherence(
+    PDO $connection,
+    int $demandeId
+): void
+{
+    
+}
