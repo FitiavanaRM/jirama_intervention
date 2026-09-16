@@ -33,4 +33,11 @@ function checkInterventionCoherence(
     ]);
 
     $demande = $statement->fetch();
+
+    if ($demande === false) {
+        throw new InvalidArgumentException(
+            'La demande sélectionnée n’existe pas.'
+        );
+    }
+
 }
