@@ -67,6 +67,10 @@ try {
                     $connection->rollBack();
                     throw $exception;
                 }
+
+                $_SESSION['intervention_success'] = 'Intervention démarrée avec succès';
+                header('Location: liste.php');
+                exit;
             }
             catch (InvalidArgumentException $exception) {
                 $errorMessage = $exception->getMessage();
