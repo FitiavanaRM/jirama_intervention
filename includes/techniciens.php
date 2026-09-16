@@ -67,4 +67,13 @@ function validateTechnicienData(array $data): array
             throw new InvalidArgumentException('Le compte utilisateur sélectionné est invalide');
         }
     }
+
+    return [
+        'nom' => $nom,
+        'prenom' => $prenom,
+        'telephone' => $telephone !== '' ? $telephone : null,
+        'fonction' => $fonction !== '' ? $fonction : null,
+        'id_equipe' => $idEquipe,
+        'id_utilisateur' => $idUtilisateur,
+    ];
 }
