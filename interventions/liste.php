@@ -21,6 +21,8 @@ if ($currentUser === null) {
 
 $demandes = [];
 $errorMessage = '';
+$successMessage = (string) ($_SESSION['intervention_success'] ?? '');
+unset($_SESSION['intervention_success']);
 
 try {
     $demandes = getDemandesAffectees(getDatabaseConnection());
