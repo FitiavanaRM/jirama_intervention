@@ -42,6 +42,16 @@ try {
         else {
             try {
                 checkInterventionCoherence($connection, $demandeId);
+
+                $connection->beginTransaction();
+                try {
+                    insertIntervention($connection, $demandeId);
+                }
+                catch (Throwable $exception) {
+                    // si un erreur arrive on peut annuler l'opération avec ce fonction 
+                    $connection->rollBack();
+                    throw $exception;
+                }
             }
             catch (InvalidArgumentException $exception) {
                 $errorMessage = $exception->getMessage();
