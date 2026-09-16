@@ -34,4 +34,8 @@ function validateTechnicienData(array $data): array
     if ($nom === '' || $prenom === '') {
         throw new InvalidArgumentException('Le nom et le prénom du technicien sont obligatoires');
     }
+
+    if (strlen($nom) > 100 || strlen($prenom) > 100) {
+        throw new InvalidArgumentException('Le nom ou le prénom dépasse la longueur autorisée');
+    }
 }
