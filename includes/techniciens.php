@@ -77,3 +77,9 @@ function validateTechnicienData(array $data): array
         'id_utilisateur' => $idUtilisateur,
     ];
 }
+
+// Insère un nouveau technicien en base
+function insertTechnicien(PDO $connection, array $data): int
+{
+    
+}
