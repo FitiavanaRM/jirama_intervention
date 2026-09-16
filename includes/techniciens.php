@@ -22,3 +22,8 @@ function getUtilisateursTechnicienDisponibles(PDO $connection): array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+// Valide et normalise les données du formulaire de création d'un technicien
+function validateTechnicienData(array $data): array
+{
+}
