@@ -56,4 +56,11 @@ function validateTechnicienData(array $data): array
 
     $idUtilisateurRaw = trim((string) ($data['id_utilisateur'] ?? ''));
     $idUtilisateur = null;
+
+    if ($idUtilisateurRaw !== '') {
+        $idUtilisateur = filter_var(
+            $idUtilisateurRaw,
+            FILTER_VALIDATE_INT
+        );
+    }
 }
