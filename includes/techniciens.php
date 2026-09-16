@@ -28,4 +28,6 @@ function validateTechnicienData(array $data): array
 {
     $nom = trim((string) ($data['nom'] ?? ''));
     $prenom = trim((string) ($data['prenom'] ?? ''));
+    $telephone = trim((string) ($data['telephone'] ?? ''));
+    $fonction = trim((string) ($data['fonction'] ?? ''));
 }
