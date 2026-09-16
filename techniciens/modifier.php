@@ -5,5 +5,8 @@ declare(strict_types=1);
 // retourne les utilisateurs ayant le role technicien et non encore rattaché au fichier technicien
 function getUtilisateursTechnicienDisponibles(PDO $connection): array
 {
-
+    $statement = $connection->prepare(
+        "SELECT u.id_utilisateur, u.nom, u.prenom
+         FROM utilisateurs AS u"
+    );
 }
