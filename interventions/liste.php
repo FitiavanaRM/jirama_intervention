@@ -15,6 +15,10 @@ requireRole([
 
 $currentUser = getCurrentUser();
 
+if ($currentUser === null) {
+    denyAccess();
+}
+
 $demandes = [];
 $errorMessage = '';
 
