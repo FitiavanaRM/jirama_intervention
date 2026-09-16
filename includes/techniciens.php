@@ -49,4 +49,8 @@ function validateTechnicienData(array $data): array
         $data['id_equipe'] ?? null,
         FILTER_VALIDATE_INT
     );
+
+    if ($idEquipe === false || $idEquipe < 1) {
+        throw new InvalidArgumentException('L’équipe est obligatoire');
+    }
 }
