@@ -46,6 +46,21 @@ try {
                 $connection->beginTransaction();
                 try {
                     insertIntervention($connection, $demandeId);
+                    updateDemandeStatut(
+                        $connection,
+                        $demandeId,
+                        'EN_COURS'
+                    );
+
+                    insertHistorique(
+                        $connection,
+                        $demandeId,
+                        $currentUser['id_utilisateur'],
+                        'AFFECTEE',
+                        'EN_COURS'
+                    );
+
+                    $connection->commit();
                 }
                 catch (Throwable $exception) {
                     // si un erreur arrive on peut annuler l'opération avec ce fonction 
