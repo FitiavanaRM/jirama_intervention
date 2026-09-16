@@ -9,4 +9,6 @@ function getUtilisateursTechnicienDisponibles(PDO $connection): array
         "SELECT u.id_utilisateur, u.nom, u.prenom
          FROM utilisateurs AS u"
     );
+    
+    $statement->execute();
 }
