@@ -11,7 +11,12 @@ function getUtilisateursTechnicienDisponibles(PDO $connection): array
          INNER JOIN roles AS r
             ON r.id_role = u.id_role
          WHERE r.nom_role = 'Technicien'
-
+         AND u.id_utilisateur NOT IN (
+            SELECT id_utilisateur
+            FROM techniciens
+            WHERE id_utilisateur IS NOT NULL
+         )
+)
     );
 
     $statement->execute();
