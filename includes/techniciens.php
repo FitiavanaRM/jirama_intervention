@@ -53,4 +53,7 @@ function validateTechnicienData(array $data): array
     if ($idEquipe === false || $idEquipe < 1) {
         throw new InvalidArgumentException('L’équipe est obligatoire');
     }
+
+    $idUtilisateurRaw = trim((string) ($data['id_utilisateur'] ?? ''));
+    $idUtilisateur = null;
 }
