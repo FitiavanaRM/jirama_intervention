@@ -38,4 +38,10 @@ function validateTechnicienData(array $data): array
     if (strlen($nom) > 100 || strlen($prenom) > 100) {
         throw new InvalidArgumentException('Le nom ou le prénom dépasse la longueur autorisée');
     }
+
+    if (
+        $telephone !== '' && !preg_match('/^[0-9+().\s-]+$/', $telephone)
+    ) {
+        throw new InvalidArgumentException('Le téléphone du technicien est invalide');
+    }
 }
