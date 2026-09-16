@@ -16,7 +16,7 @@ function getUtilisateursTechnicienDisponibles(PDO $connection): array
             FROM techniciens
             WHERE id_utilisateur IS NOT NULL
          )
-)
+         ORDER BY u.nom ASC, u.prenom ASC
     );
 
     $statement->execute();
