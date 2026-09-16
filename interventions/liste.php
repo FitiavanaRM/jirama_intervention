@@ -13,6 +13,8 @@ requireRole([
     'chef de division',
 ]); 
 
+$currentUser = getCurrentUser();
+
 $demandes = [];
 $errorMessage = '';
 
