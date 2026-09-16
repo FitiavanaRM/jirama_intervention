@@ -62,5 +62,9 @@ function validateTechnicienData(array $data): array
             $idUtilisateurRaw,
             FILTER_VALIDATE_INT
         );
+
+        if ($idUtilisateur === false || $idUtilisateur < 1) {
+            throw new InvalidArgumentException('Le compte utilisateur sélectionné est invalide');
+        }
     }
 }
