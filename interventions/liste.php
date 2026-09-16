@@ -111,6 +111,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     <th>Équipe</th>
                     <th>Technicien</th>
                     <th>Date d’affectation</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -164,6 +165,19 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                 ENT_QUOTES,
                                 'UTF-8'
                             ) ?>
+                        </td>
+                        <td>
+                            <?php if (hasPermission('intervention.organiser')): ?>
+                            <form action="liste.php" method="post">
+                                <input
+                                    type="hidden"
+                                    name="id_demande"
+                                    value="<?= (int) $demande['id_demande'] ?>"
+                                >
+
+                                <button type="submit">Démarrer</button>
+                            </form>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
