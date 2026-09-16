@@ -30,4 +30,8 @@ function validateTechnicienData(array $data): array
     $prenom = trim((string) ($data['prenom'] ?? ''));
     $telephone = trim((string) ($data['telephone'] ?? ''));
     $fonction = trim((string) ($data['fonction'] ?? ''));
+
+    if ($nom === '' || $prenom === '') {
+        throw new InvalidArgumentException('Le nom et le prénom du technicien sont obligatoires');
+    }
 }
