@@ -98,4 +98,13 @@ function insertTechnicien(PDO $connection, array $data): int
             :id_utilisateur
         )'
     );
+
+    $statement->execute([
+        'nom' => $data['nom'],
+        'prenom' => $data['prenom'],
+        'telephone' => $data['telephone'],
+        'fonction' => $data['fonction'],
+        'id_equipe' => $data['id_equipe'],
+        'id_utilisateur' => $data['id_utilisateur'],
+    ]);
 }
