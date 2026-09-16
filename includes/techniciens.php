@@ -26,4 +26,5 @@ function getUtilisateursTechnicienDisponibles(PDO $connection): array
 // Valide et normalise les données du formulaire de création d'un technicien
 function validateTechnicienData(array $data): array
 {
+    $nom = trim((string) ($data['nom'] ?? ''));
 }
