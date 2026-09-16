@@ -31,6 +31,14 @@ try {
     if (
         ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && hasPermission('intervention.organiser')
     ) {
+        $demandeId = filter_var(
+            $_POST['id_demande'] ?? null,
+            FILTER_VALIDATE_INT
+        );
+
+        if ($demandeId === false || $demandeId < 1) {
+            $errorMessage = 'La demande sélectionnée est invalide.';
+        }
     }
 }
 catch (RuntimeException $exception){
