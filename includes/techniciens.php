@@ -81,5 +81,21 @@ function validateTechnicienData(array $data): array
 // Insère un nouveau technicien en base
 function insertTechnicien(PDO $connection, array $data): int
 {
-    
+    $statement = $connection->prepare(
+        'INSERT INTO techniciens (
+            nom,
+            prenom,
+            telephone,
+            fonction,
+            id_equipe,
+            id_utilisateur
+        ) VALUES (
+            :nom,
+            :prenom,
+            :telephone,
+            :fonction,
+            :id_equipe,
+            :id_utilisateur
+        )'
+    );
 }
