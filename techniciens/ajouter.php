@@ -51,5 +51,13 @@ try {
         header('Location: ajouter.php');
         exit;
     }
-
+    catch (InvalidArgumentException $exception) {
+        $errorMessage = $exception->getMessage();
+    } 
+    catch (RuntimeException $exception) {
+        $errorMessage = 'Le technicien n’a pas pu être créé';
+    }
+}
+catch (RuntimeException $exception) {
+    $errorMessage = 'Les données ne peuvent pas être chargées pour le moment';
 }
