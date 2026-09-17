@@ -22,3 +22,7 @@ $formData = [
     'id_equipe' => '',
     'id_utilisateur' => '',
 ];
+
+$errorMessage = '';
+$successMessage = (string) ($_SESSION['technicien_success'] ?? '');
+unset($_SESSION['technicien_success']);
