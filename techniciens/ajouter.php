@@ -8,3 +8,8 @@ require_once __DIR__ . '/../includes/affectations.php';
 require_once __DIR__ . '/../includes/techniciens.php';
 
 requirePermission('technicien.superviser');
+
+$currentUser = getCurrentUser();
+if ($currentUser === null) {
+    denyAccess();
+}
