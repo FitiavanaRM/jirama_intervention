@@ -47,6 +47,9 @@ try {
     try {
         $validatedData = validateTechnicienData($_POST);
         insertTechnicien($connection, $validatedData);
+        $_SESSION['technicien_success'] = 'Technicien créé avec succès';
+        header('Location: ajouter.php');
+        exit;
     }
 
 }
