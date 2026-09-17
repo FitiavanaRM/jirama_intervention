@@ -71,4 +71,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
 ?>
     <main>
         <h1>Ajouter un technicien</h1>
+        <?php if ($successMessage !== ''): ?>
+            <p role="status">
+                <?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8') ?>
+            </p>
+        <?php endif; ?>
     </main>
