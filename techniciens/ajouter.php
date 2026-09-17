@@ -61,3 +61,6 @@ try {
 catch (RuntimeException $exception) {
     $errorMessage = 'Les données ne peuvent pas être chargées pour le moment';
 }
+
+$pageTitle = 'Nouveau technicien | JIRAMA Intervention';
+define('JIRAMA_LAYOUT', true);
