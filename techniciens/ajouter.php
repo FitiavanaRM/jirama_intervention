@@ -13,3 +13,12 @@ $currentUser = getCurrentUser();
 if ($currentUser === null) {
     denyAccess();
 }
+
+$formData = [
+    'nom' => '',
+    'prenom' => '',
+    'telephone' => '',
+    'fonction' => '',
+    'id_equipe' => '',
+    'id_utilisateur' => '',
+];
