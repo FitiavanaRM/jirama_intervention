@@ -28,7 +28,7 @@ function getTechniciensByEquipe(PDO $connection, int $equipeId): array
          WHERE id_equipe = :id_equipe
          ORDER BY nom ASC, prenom ASC, id_technicien ASC'
     );
-    $state ment->execute(['id_equipe' => $equipeId]);
+    $statement->execute(['id_equipe' => $equipeId]);
 
     return $statement->fetchAll();
 }
