@@ -46,5 +46,7 @@ try {
 
     try {
         $validatedData = validateTechnicienData($_POST);
+        insertTechnicien($connection, $validatedData);
     }
+
 }
