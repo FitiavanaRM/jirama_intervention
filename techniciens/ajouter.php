@@ -43,4 +43,8 @@ try {
             $formData[$field] = is_string($value) ? $value : '';
         }
     }
+
+    try {
+        $validatedData = validateTechnicienData($_POST);
+    }
 }
