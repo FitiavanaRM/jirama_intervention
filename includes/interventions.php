@@ -78,4 +78,5 @@ function getInterventionsDuTechnicien(
         'statut' => 'EN_COURS',
     ]);
 
+    return $statement->fetchAll();
 }
