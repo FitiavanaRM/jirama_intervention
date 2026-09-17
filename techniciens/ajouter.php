@@ -33,4 +33,5 @@ $connection = getDatabaseConnection();
 
 try {
     $connection = getDatabaseConnection();
+    $equipes = getEquipes($connection);
 }
