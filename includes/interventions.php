@@ -72,4 +72,10 @@ function getInterventionsDuTechnicien(
         AND i.date_fin IS NULL
         ORDER BY i.date_debut ASC, i.id_intervention ASC'
     );
+
+    $statement->execute([
+        'id_utilisateur' => $utilisateurId,
+        'statut' => 'EN_COURS',
+    ]);
+
 }
