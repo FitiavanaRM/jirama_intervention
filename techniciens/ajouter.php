@@ -64,3 +64,6 @@ catch (RuntimeException $exception) {
 
 $pageTitle = 'Nouveau technicien | JIRAMA Intervention';
 define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/sidebar.php';
