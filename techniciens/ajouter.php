@@ -29,4 +29,8 @@ unset($_SESSION['technicien_success']);
 
 $equipes = [];
 $utilisateursDisponibles = [];
+$connection = getDatabaseConnection();
 
+try {
+    $connection = getDatabaseConnection();
+}
