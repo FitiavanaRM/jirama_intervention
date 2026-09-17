@@ -28,7 +28,7 @@ function getTechniciensByEquipe(PDO $connection, int $equipeId): array
          WHERE id_equipe = :id_equipe
          ORDER BY nom ASC, prenom ASC, id_technicien ASC'
     );
-    $statement->execute(['id_equipe' => $equipeId]);
+    $state ment->execute(['id_equipe' => $equipeId]);
 
     return $statement->fetchAll();
 }
@@ -108,8 +108,7 @@ function validateAffectationData(array $data) : array
 }
 
 
-// Vérifie que la demande, l'équipe et le technicien existent,
-// et que le technicien appartient bien à l'équipe sélectionnée.
+// Vérifie que la demande, l'équipe et le technicien existent, et que le technicien appartient bien à l'équipe sélectionnée
 
 function checkAffectationCoherence(
     PDO $connection,
