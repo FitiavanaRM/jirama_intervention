@@ -42,3 +42,13 @@ function checkInterventionCoherence(
         throw new InvalidArgumentException('Cette demande n’est pas en attente d’intervention');
     }
 }
+
+
+// Retourne les interventions en cours du technicien lié au compte utilisateur donné
+function getInterventionsDuTechnicien(
+    PDO $connection,
+    int $utilisateurId
+): array
+{
+    
+}
