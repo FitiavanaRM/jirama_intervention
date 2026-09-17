@@ -26,3 +26,7 @@ $formData = [
 $errorMessage = '';
 $successMessage = (string) ($_SESSION['technicien_success'] ?? '');
 unset($_SESSION['technicien_success']);
+
+$equipes = [];
+$utilisateursDisponibles = [];
+
