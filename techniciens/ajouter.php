@@ -35,5 +35,9 @@ try {
     $connection = getDatabaseConnection();
     $equipes = getEquipes($connection);
 
-    $utilisateursDisponibles = getUtilisateursTechnicienDisponibles($connection); 
+    $utilisateursDisponibles = getUtilisateursTechnicienDisponibles($connection);
+
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+        
+    }
 }
