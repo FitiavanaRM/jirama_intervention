@@ -50,5 +50,26 @@ function getInterventionsDuTechnicien(
     int $utilisateurId
 ): array
 {
-    
+    $statement = $connection->prepare(
+        'SELECT
+            i.id_intervention,
+            i.date_debut,
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            d.adresse_client,
+            d.type_demande,
+            d.description_probleme
+        FROM interventions AS i
+        INNER JOIN demandes AS d
+            ON d.id_demande = i.id_demande
+        INNER JOIN affectations AS a
+            ON a.id_demande = d.id_demande
+        INNER JOIN techniciens AS t
+            ON t.id_technicien = a.id_technicien
+        WHERE t.id_utilisateur = :id_utilisateur
+        AND d.statut = :statut
+        AND i.date_fin IS NULL
+        ORDER BY i.date_debut ASC, i.id_intervention ASC'
+    );
 }
