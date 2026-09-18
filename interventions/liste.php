@@ -21,6 +21,7 @@ if ($currentUser === null) {
 }
 
 $demandes = [];
+$interventionsTechnicien = [];
 $errorMessage = '';
 $successMessage = (string) ($_SESSION['intervention_success'] ?? '');
 unset($_SESSION['intervention_success']);
