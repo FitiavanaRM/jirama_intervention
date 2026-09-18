@@ -127,4 +127,8 @@ function terminerIntervention(
         'observation' => $data['observation'],
         'id_demande' => $demandeId,
     ]);
+
+    if ($statement->rowCount() === 0) {
+        throw new RuntimeException('Aucune intervention en cours trouvée pour cette demande');
+    }
 }
