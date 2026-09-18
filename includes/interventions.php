@@ -88,4 +88,8 @@ function validateInterventionFinData(array $data): array
     $travailEffectue = trim((string) ($data['travail_effectue'] ?? ''));
     $resultat = trim((string) ($data['resultat'] ?? ''));
     $observation = trim((string) ($data['observation'] ?? ''));
+
+    if ($problemeConstate === '' || $travailEffectue === '' || $resultat === '') {
+        throw new InvalidArgumentException('Le problème constaté, le travail effectué et le résultat sont obligatoires');
+    }
 }
