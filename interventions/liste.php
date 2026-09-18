@@ -28,15 +28,6 @@ unset($_SESSION['intervention_success']);
 
 try {
     $connection = getDatabaseConnection();
-    if (hasRole('Technicien')) {
-        $interventionsTechnicien = getInterventionsDuTechnicien(
-            $connection,
-            $currentUser['id_utilisateur']
-        );
-    } else {
-        $demandes = getDemandesAffectees($connection);
-    }
-
     if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && hasPermission('intervention.organiser')) {
         $demandeId = filter_var(
             $_POST['id_demande'] ?? null,
@@ -84,6 +75,15 @@ try {
             }
         }
     }
+
+    if (hasRole('Technicien')) {
+        $interventionsTechnicien = getInterventionsDuTechnicien(
+            $connection,
+            $currentUser['id_utilisateur']
+        );
+    } else {
+        $demandes = getDemandesAffectees($connection);
+    }
 }
 catch (RuntimeException $exception){
     $errorMessage = 'Les demandes affectées ne peuvent pas être chargées pour le moment';
@@ -98,7 +98,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
 ?>
 <main>
-    <h1>Demandes affectées à organiser</h1>
+    <h1><?= hasRole('Technicien') ? 'Mes interventions en cours' : 'Demandes affectées à organiser' ?></h1>
 
     <?php if ($errorMessage !== ''): ?>
         <p role="alert">
