@@ -119,4 +119,12 @@ function terminerIntervention(
         WHERE id_demande = :id_demande
         AND date_fin IS NULL'
     );
+
+    $statement->execute([
+        'probleme_constate' => $data['probleme_constate'],
+        'travail_effectue' => $data['travail_effectue'],
+        'resultat' => $data['resultat'],
+        'observation' => $data['observation'],
+        'id_demande' => $demandeId,
+    ]);
 }
