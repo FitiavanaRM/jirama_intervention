@@ -85,4 +85,5 @@ function getInterventionsDuTechnicien(
 function validateInterventionFinData(array $data): array
 {
     $problemeConstate = trim((string) ($data['probleme_constate'] ?? ''));
+    $travailEffectue = trim((string) ($data['travail_effectue'] ?? ''));
 }
