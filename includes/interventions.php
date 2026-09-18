@@ -108,5 +108,15 @@ function terminerIntervention(
     array $data
 ): void
 {
-
+    $statement = $connection->prepare(
+        'UPDATE interventions
+        SET
+            date_fin = NOW(),
+            probleme_constate = :probleme_constate,
+            travail_effectue = :travail_effectue,
+            resultat = :resultat,
+            observation = :observation
+        WHERE id_demande = :id_demande
+        AND date_fin IS NULL'
+    );
 }
