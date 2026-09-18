@@ -84,5 +84,5 @@ function getInterventionsDuTechnicien(
 // Valide les données de fin d'intervention saisies par le technicien
 function validateInterventionFinData(array $data): array
 {
-    
+    $problemeConstate = trim((string) ($data['probleme_constate'] ?? ''));
 }
