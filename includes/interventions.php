@@ -100,3 +100,13 @@ function validateInterventionFinData(array $data): array
         'observation' => $observation !== '' ? $observation : null,
     ];
 }
+
+// Enregistre les renseignements finaux d'une intervention et sa date de fin
+function terminerIntervention(
+    PDO $connection,
+    int $demandeId,
+    array $data
+): void
+{
+
+}
