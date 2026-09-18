@@ -80,3 +80,9 @@ function getInterventionsDuTechnicien(
 
     return $statement->fetchAll();
 }
+
+// Valide les données de fin d'intervention saisies par le technicien
+function validateInterventionFinData(array $data): array
+{
+    
+}
