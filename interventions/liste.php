@@ -11,6 +11,7 @@ requireRole([
     'Administrateur',
     "Chef d'équipe",
     'chef de division',
+    'Technicien',
 ]); 
 
 $currentUser = getCurrentUser();
