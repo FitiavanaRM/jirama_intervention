@@ -92,4 +92,11 @@ function validateInterventionFinData(array $data): array
     if ($problemeConstate === '' || $travailEffectue === '' || $resultat === '') {
         throw new InvalidArgumentException('Le problème constaté, le travail effectué et le résultat sont obligatoires');
     }
+
+    return [
+        'probleme_constate' => $problemeConstate,
+        'travail_effectue' => $travailEffectue,
+        'resultat' => $resultat,
+        'observation' => $observation !== '' ? $observation : null,
+    ];
 }
