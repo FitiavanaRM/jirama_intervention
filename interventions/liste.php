@@ -100,6 +100,12 @@ require_once __DIR__ . '/../includes/sidebar.php';
 <main>
     <h1><?= hasRole('Technicien') ? 'Mes interventions en cours' : 'Demandes affectées à organiser' ?></h1>
 
+    <?php if ($successMessage !== ''): ?>
+        <p role="status">
+            <?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+    <?php endif; ?>
+    
     <?php if ($errorMessage !== ''): ?>
         <p role="alert">
             <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
