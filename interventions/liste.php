@@ -27,11 +27,16 @@ unset($_SESSION['intervention_success']);
 
 try {
     $connection = getDatabaseConnection();
-    $demandes = getDemandesAffectees($connection);
+    if (hasRole('Technicien')) {
+        $interventionsTechnicien = getInterventionsDuTechnicien(
+            $connection,
+            $currentUser['id_utilisateur']
+        );
+    } else {
+        $demandes = getDemandesAffectees($connection);
+    }
 
-    if (
-        ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && hasPermission('intervention.organiser')
-    ) {
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && hasPermission('intervention.organiser')) {
         $demandeId = filter_var(
             $_POST['id_demande'] ?? null,
             FILTER_VALIDATE_INT
