@@ -10,3 +10,6 @@ require_once __DIR__ . '/../includes/interventions.php';
 requirePermission('intervention.terminer');
 
 $currentUser = getCurrentUser();
+if ($currentUser === null) {
+    denyAccess();
+}
