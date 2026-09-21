@@ -62,6 +62,10 @@ try {
                     'EN_COURS',
                     'RESOLUE'
                 );
+                $connection->commit();
+            } catch (Throwable $exception) {
+                $connection->rollBack();
+                throw $exception;
             }
         }
     }
