@@ -105,5 +105,13 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
     <form action="terminer.php" method="post">
         <input type="hidden" name="id_demande" value="<?= (int) $demandeId ?>">
+        <div>
+            <label for="probleme_constate">Problème constaté</label>
+            <textarea
+                id="probleme_constate"
+                name="probleme_constate"
+                required
+            ><?= htmlspecialchars($formData['probleme_constate'], ENT_QUOTES, 'UTF-8') ?></textarea>
+        </div>
     </form>
 <main>
