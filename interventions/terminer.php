@@ -55,6 +55,13 @@ try {
             try {
                 terminerIntervention($connection, $demandeId, $validatedData);
                 updateDemandeStatut($connection, $demandeId, 'RESOLUE');
+                insertHistorique(
+                    $connection,
+                    $demandeId,
+                    $currentUser['id_utilisateur'],
+                    'EN_COURS',
+                    'RESOLUE'
+                );
             }
         }
     }
