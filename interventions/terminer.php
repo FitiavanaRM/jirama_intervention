@@ -67,10 +67,19 @@ try {
                 $connection->rollBack();
                 throw $exception;
             }
-            
+
             $_SESSION['intervention_success'] = 'Intervention terminée avec succès';
             header('Location: liste.php');
             exit;
         }
+        catch (InvalidArgumentException $exception) {
+            $errorMessage = $exception->getMessage();
+        }
+        catch (RuntimeException $exception) {
+            $errorMessage = 'L’intervention n’a pas pu être terminée';
+        }
     }
+}
+catch (RuntimeException $exception) {
+    $errorMessage = 'Une erreur est survenue, veuillez réessayer!';
 }
