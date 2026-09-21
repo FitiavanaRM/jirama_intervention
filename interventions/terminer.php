@@ -147,3 +147,5 @@ require_once __DIR__ . '/../includes/sidebar.php';
         <button type="submit">Terminer l’intervention</button>
     </form>
 <main>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
