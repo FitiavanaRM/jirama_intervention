@@ -38,3 +38,5 @@ $formData = [
     'resultat' => '',
     'observation' => '',
 ];
+
+$errorMessage = '';
