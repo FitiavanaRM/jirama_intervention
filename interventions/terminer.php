@@ -124,5 +124,15 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 required
             ><?= htmlspecialchars($formData['travail_effectue'], ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
+
+        <!Champ resultat>
+        <div>
+            <label for="resultat">Résultat</label>
+            <textarea
+                id="resultat"
+                name="resultat"
+                required
+            ><?= htmlspecialchars($formData['resultat'], ENT_QUOTES, 'UTF-8') ?></textarea>
+        </div>
     </form>
 <main>
