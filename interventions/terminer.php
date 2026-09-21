@@ -8,3 +8,5 @@ require_once __DIR__ . '/../includes/demandes.php';
 require_once __DIR__ . '/../includes/interventions.php';
 
 requirePermission('intervention.terminer');
+
+$currentUser = getCurrentUser();
