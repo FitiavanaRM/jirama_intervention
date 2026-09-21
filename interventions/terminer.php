@@ -26,3 +26,8 @@ if ($demandeId === false && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         FILTER_VALIDATE_INT
     );
 }
+
+if (!is_int($demandeId) || $demandeId < 1) {
+    http_response_code(404);
+    exit('Demande introuvable');
+}
