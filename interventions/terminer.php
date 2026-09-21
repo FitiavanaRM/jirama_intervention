@@ -6,3 +6,5 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../includes/demandes.php';
 require_once __DIR__ . '/../includes/interventions.php';
+
+requirePermission('intervention.terminer');
