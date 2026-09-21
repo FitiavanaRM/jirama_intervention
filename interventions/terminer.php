@@ -13,3 +13,9 @@ $currentUser = getCurrentUser();
 if ($currentUser === null) {
     denyAccess();
 }
+
+$demandeId = filter_input(
+    INPUT_GET,
+    'id_demande',
+    FILTER_VALIDATE_INT
+);
