@@ -67,6 +67,7 @@ try {
                 $connection->rollBack();
                 throw $exception;
             }
+            $_SESSION['intervention_success'] = 'Intervention terminée avec succès';
         }
     }
 }
