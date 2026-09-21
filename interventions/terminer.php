@@ -10,15 +10,18 @@ require_once __DIR__ . '/../includes/interventions.php';
 requirePermission('intervention.terminer');
 
 $currentUser = getCurrentUser();
+// verification si l'utilisateur est connecté
 if ($currentUser === null) {
     denyAccess();
 }
 
+// récupératio ny id dmd
 $demandeId = filter_input(
     INPUT_GET,
     'id_demande',
     FILTER_VALIDATE_INT
 );
+// récupération ny id avy any amin formulaire
 if ($demandeId === false && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $demandeId = filter_input(
         INPUT_POST,
@@ -41,6 +44,7 @@ $formData = [
 
 $errorMessage = '';
 
+// gestion d'erreur
 try {
     $connection = getDatabaseConnection();
     if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
@@ -98,4 +102,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
             <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
         </p>
     <?php endif; ?>
+
+    <form action="terminer.php" method="post">
+        <input type="hidden" name="id_demande" value="<?= (int) $demandeId ?>">
+    </form>
 <main>
