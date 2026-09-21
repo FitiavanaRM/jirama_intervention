@@ -51,6 +51,10 @@ try {
         try {
             $validatedData = validateInterventionFinData($_POST);
             $connection->beginTransaction();
+
+            try {
+                terminerIntervention($connection, $demandeId, $validatedData);
+            }
         }
     }
 }
