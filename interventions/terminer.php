@@ -134,5 +134,14 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 required
             ><?= htmlspecialchars($formData['resultat'], ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
+
+        <!observation>
+        <div>
+            <label for="observation">Observation (optionnel)</label>
+            <textarea
+                id="observation"
+                name="observation"
+            ><?= htmlspecialchars($formData['observation'], ENT_QUOTES, 'UTF-8') ?></textarea>
+        </div>
     </form>
 <main>
