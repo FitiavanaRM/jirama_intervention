@@ -19,3 +19,10 @@ $demandeId = filter_input(
     'id_demande',
     FILTER_VALIDATE_INT
 );
+if ($demandeId === false && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    $demandeId = filter_input(
+        INPUT_POST,
+        'id_demande',
+        FILTER_VALIDATE_INT
+    );
+}
