@@ -143,5 +143,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 name="observation"
             ><?= htmlspecialchars($formData['observation'], ENT_QUOTES, 'UTF-8') ?></textarea>
         </div>
+
+        <button type="submit">Terminer l’intervention</button>
     </form>
 <main>
