@@ -93,4 +93,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
 ?>
 <main>
     <h1>Terminer l’intervention</h1>
+    <?php if ($errorMessage !== ''): ?>
+        <p role="alert">
+            <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+    <?php endif; ?>
 <main>
