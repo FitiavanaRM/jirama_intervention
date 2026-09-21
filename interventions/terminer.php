@@ -83,3 +83,11 @@ try {
 catch (RuntimeException $exception) {
     $errorMessage = 'Une erreur est survenue, veuillez réessayer!';
 }
+
+$pageTitle = 'Terminer l intervention | JIRAMA Intervention';
+define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/sidebar.php';
+
+?>
