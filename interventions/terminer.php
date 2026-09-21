@@ -54,6 +54,7 @@ try {
 
             try {
                 terminerIntervention($connection, $demandeId, $validatedData);
+                updateDemandeStatut($connection, $demandeId, 'RESOLUE');
             }
         }
     }
