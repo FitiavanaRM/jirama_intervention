@@ -31,3 +31,10 @@ if (!is_int($demandeId) || $demandeId < 1) {
     http_response_code(404);
     exit('Demande introuvable');
 }
+
+$formData = [
+    'probleme_constate' => '',
+    'travail_effectue' => '',
+    'resultat' => '',
+    'observation' => '',
+];
