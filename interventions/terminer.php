@@ -15,16 +15,17 @@ if ($currentUser === null) {
     denyAccess();
 }
 
-// récupératio ny id dmd
-$demandeId = filter_input(
-    INPUT_GET,
-    'id_demande',
-    FILTER_VALIDATE_INT
-);
 // récupération ny id avy any amin formulaire
-if ($demandeId === false && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $demandeId = filter_input(
         INPUT_POST,
+        'id_demande',
+        FILTER_VALIDATE_INT
+    );
+} else {
+    // récupératio ny id dmd
+    $demandeId = filter_input(
+        INPUT_GET,
         'id_demande',
         FILTER_VALIDATE_INT
     );
