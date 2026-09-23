@@ -193,4 +193,5 @@ function getStatistiquesParEquipe(PDO $connection): array
         FROM equipes AS e
         LEFT JOIN affectations AS a
             ON a.id_equipe = e.id_equipe
+        GROUP BY e.id_equipe, e.nom_equipe
 }
