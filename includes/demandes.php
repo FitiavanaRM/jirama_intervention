@@ -343,3 +343,30 @@ function checkClotureCoherence(
         throw new InvalidArgumentException('Cette demande n’est pas encore résolue');
     }
 }
+
+// retourne l'historique complet
+function getHistoriques(PDO $connection) : array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            h.id_historique,
+            h.ancien_statut,
+            h.nouveau_statut,
+            h.date_action,
+            h.commentaire,
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            u.nom AS utilisateur_nom,
+            u.prenom AS utilisateur_prenom
+        FROM historiques AS h
+        INNER JOIN demandes AS d
+            ON d.id_demande = h.id_demande
+        INNER JOIN utilisateurs AS u
+            ON u.id_utilisateur = h.id_utilisateur
+        ORDER BY h.date_action DESC, h.id_historique DESC'
+    );
+
+    $statement->execute();
+    return $statement->fecthAll();
+}
