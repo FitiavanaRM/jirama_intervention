@@ -182,3 +182,9 @@ function getAffectations(PDO $connection): array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+// Retourne le nombre d'affectations traitées par équipe
+function getStatistiquesParEquipe(PDO $connection): array
+{
+    
+}
