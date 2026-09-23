@@ -15,3 +15,6 @@ try {
         getDatabaseConnection()
     );
 }
+catch (RuntimeException $exception) {
+    $errorMessage ='Les statistiques ne peuvent pas être chargées pour le moment';
+}
