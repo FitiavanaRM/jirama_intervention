@@ -318,3 +318,28 @@ function getDemandesAffectees(PDO $connection): array
 
     return $statement->fetchAll();
 }
+
+// Vérifie qu'une demande existe et qu'elle est bien résolue avant clôture
+function checkClotureCoherence(
+    PDO $connection,
+    int $demandeId
+): void
+{
+    $statement = $connection->prepare(
+        'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_demande' => $demandeId
+    ]);
+
+    $demande = $statement->fetch();
+
+    if ($demande === false) {
+        throw new InvalidArgumentException('La demande sélectionnée n’existe pas');
+    }
+
+    if ($demande['statut'] !== 'RESOLUE') {
+        throw new InvalidArgumentException('Cette demande n’est pas encore résolue');
+    }
+}
