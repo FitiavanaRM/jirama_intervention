@@ -370,3 +370,30 @@ function getHistoriques(PDO $connection) : array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+// statistique
+function getStatistiquesParStatut(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT statut, COUNT(*) AS total
+         FROM demandes
+         GROUP BY statut'
+    );
+
+    $statement->execute();
+    $resultats = $statement->fetchAll();
+    $statutsPossibles = [
+        'EN_ATTENTE' => 0,
+        'AFFECTEE' => 0,
+        'EN_COURS' => 0,
+        'RESOLUE' => 0,
+        'CLOTUREE' => 0,
+        'ANNULEE' => 0,
+    ];
+
+    foreach ($resultats as $resultat) {
+        $statutsPossibles[$resultat['statut']] = (int) $resultat['total'];
+    }
+
+    return $statutsPossibles;
+}
