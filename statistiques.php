@@ -9,3 +9,9 @@ require_once __DIR__ . '/includes/demandes.php';
 requirePermission('statistique.consulter');
 $statistiques = [];
 $errorMessage = '';
+
+try {
+    $statistiques = getStatistiquesParStatut(
+        getDatabaseConnection()
+    );
+}
