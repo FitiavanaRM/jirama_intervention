@@ -368,5 +368,5 @@ function getHistoriques(PDO $connection) : array
     );
 
     $statement->execute();
-    return $statement->fecthAll();
+    return $statement->fetchAll();
 }
