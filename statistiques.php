@@ -20,3 +20,7 @@ catch (RuntimeException $exception) {
 }
 
 $pageTitle = 'Statistiques | JIRAMA Intervention';
+define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/includes/sidebar.php';
