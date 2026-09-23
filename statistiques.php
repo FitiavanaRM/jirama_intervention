@@ -58,3 +58,5 @@ require_once __DIR__ . '/includes/sidebar.php';
         </table>
     <?php endif; ?>
 </main>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
