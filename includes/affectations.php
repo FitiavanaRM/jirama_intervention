@@ -196,4 +196,6 @@ function getStatistiquesParEquipe(PDO $connection): array
         GROUP BY e.id_equipe, e.nom_equipe
         ORDER BY e.nom_equipe ASC'
     );
+
+    $statement->execute();
 }
