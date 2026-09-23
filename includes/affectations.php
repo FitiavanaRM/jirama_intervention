@@ -191,4 +191,6 @@ function getStatistiquesParEquipe(PDO $connection): array
             e.nom_equipe,
             COUNT(a.id_affectation) AS total
         FROM equipes AS e
+        LEFT JOIN affectations AS a
+            ON a.id_equipe = e.id_equipe
 }
