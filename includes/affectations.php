@@ -198,4 +198,5 @@ function getStatistiquesParEquipe(PDO $connection): array
     );
 
     $statement->execute();
+    return $statement->fetchAll();
 }
