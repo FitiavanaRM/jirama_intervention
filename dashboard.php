@@ -33,6 +33,10 @@ $roleLinks = [
         'demandes/liste.php' => 'Liste des demandes',
         'affectations/liste.php' => 'Liste des affectations',
     ],
+    "Chef d'équipe" => [
+        'interventions/liste.php' => 'Demandes affectées à organiser',
+        'techniciens/ajouter.php' => 'Ajouter un technicien',
+    ],
 ]
 $pageTitle = 'Tableau de bord | JIRAMA Intervention';
 $roleMessage = $roleMessages[$currentUser['nom_role']] ?? 'Votre rôle ne possède pas encore de présentation dédiée.';
