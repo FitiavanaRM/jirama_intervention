@@ -49,6 +49,7 @@ $roleLinks = [
 
 $pageTitle = 'Tableau de bord | JIRAMA Intervention';
 $roleMessage = $roleMessages[$currentUser['nom_role']] ?? 'Votre rôle ne possède pas encore de présentation dédiée.';
+$liens = $roleLinks[$currentUser['nom_role']] ?? [];
 
 define('JIRAMA_LAYOUT', true);
 
@@ -61,7 +62,22 @@ require_once __DIR__ . '/includes/sidebar.php';
         Bienvenue,
         <?= htmlspecialchars($currentUser['prenom'] . ' ' . $currentUser['nom'], ENT_QUOTES, 'UTF-8') ?>.
     </p>
-    <p><?= htmlspecialchars($roleMessage, ENT_QUOTES, 'UTF-8') ?></p>
-    <p>Les indicateurs chiffrés seront ajoutés au module Statistiques.</p>
+    <p>
+        <?= htmlspecialchars($roleMessage, ENT_QUOTES, 'UTF-8') ?>
+    </p>
+    <p>Les indicateurs chiffrés seront ajoutés au module Statistiques</p>
+
+    <?php if ($liens !== []): ?>
+        <h2>Accès rapides</h2>
+        <ul>
+            <?php foreach ($liens as $url => $libelle): ?>
+                <li>
+                    <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>">
+                        <?= htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8') ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </main>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
