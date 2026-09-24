@@ -24,7 +24,7 @@ $roleLinks = [
         'statistiques.php' => 'Statistiques',
         'techniciens/ajouter.php' => 'Ajouter un technicien',
     ],
-    "Agent d'acceuil" => [
+    "Agent d'accueil" => [
         'demandes/ajouter.php' => 'Nouvelle demande',
         'demandes/liste.php' => 'Liste des demandes',
     ],
@@ -40,7 +40,7 @@ $roleLinks = [
     'Technicien' => [
         'interventions/liste.php' => 'Mes interventions en cours',
     ],
-    'chef de division' => [
+    'Chef de division' => [
         'historiques/liste.php' => 'Historiques',
         'statistiques.php' => 'Statistiques',
         'demandes/liste.php' => 'Liste de demandes',
