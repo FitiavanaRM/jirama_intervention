@@ -15,6 +15,16 @@ $roleMessages = [
     'Chef de division' => 'Vous pouvez superviser l’activité et consulter les informations de suivi.',
 ];
 
+$roleLinks = [
+    'Administrateur' => [
+        'demandes/liste.php' => 'Liste des demandes',
+        'affectations/liste.php' => 'Liste des affectations',
+        'interventions/liste.php' => 'Interventions',
+        'historiques/liste.php' => 'Historiques',
+        'statistiques.php' => 'Statistiques',
+        'techniciens/ajouter.php' => 'Ajouter un technicien',
+    ],
+]
 $pageTitle = 'Tableau de bord | JIRAMA Intervention';
 $roleMessage = $roleMessages[$currentUser['nom_role']] ?? 'Votre rôle ne possède pas encore de présentation dédiée.';
 
