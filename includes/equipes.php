@@ -12,4 +12,8 @@ function validateEquipeData(array $data): array
     if ($nomEquipe === '') {
         throw new InvalidArgumentException('Le nom de l’équipe est obligatoire');
     }
+    
+    if (strlen($nomEquipe) > 150) {
+        throw new InvalidArgumentException('Le nom de l’équipe dépasse la longueur autorisée');
+    }
 }
