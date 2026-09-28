@@ -6,4 +6,5 @@ declare(strict_types=1);
 function validateEquipeData(array $data): array
 {
     $nomEquipe = trim((string) ($data['nom_equipe'] ?? ''));
+    $typeEquipe = trim((string) ($data['type_equipe'] ?? ''));
 }
