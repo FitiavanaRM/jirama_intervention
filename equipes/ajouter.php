@@ -38,3 +38,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $errorMessage = 'L’équipe n’a pas pu être créée';
     }
 }
+
+$pageTitle = 'Nouvelle équipe | JIRAMA Intervention';
+define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/sidebar.php';
+
+?>
+<main>
+    <h1>Ajouter une équipe</h1>
+</main>
