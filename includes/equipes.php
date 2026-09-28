@@ -8,4 +8,8 @@ function validateEquipeData(array $data): array
     $nomEquipe = trim((string) ($data['nom_equipe'] ?? ''));
     $typeEquipe = trim((string) ($data['type_equipe'] ?? ''));
     $description = trim((string) ($data['description'] ?? ''));
+
+    if ($nomEquipe === '') {
+        throw new InvalidArgumentException('Le nom de l’équipe est obligatoire');
+    }
 }
