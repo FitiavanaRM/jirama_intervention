@@ -23,4 +23,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $value = $_POST[$field] ?? '';
         $formData[$field] = is_string($value) ? $value : '';
     }
+
+    try {
+        $validatedData = validateEquipeData($_POST);
+        insertEquipe(getDatabaseConnection(), $validatedData);
+        $_SESSION['equipe_success'] = 'Équipe créée avec succès';
+        header('Location: ajouter.php');
+        exit;
+    } 
+    catch (InvalidArgumentException $exception) {
+        $errorMessage = $exception->getMessage();
+    } 
+    catch (RuntimeException $exception) {
+        $errorMessage = 'L’équipe n’a pas pu être créée';
+    }
 }
