@@ -16,6 +16,13 @@ requireRole([
 $equipes = [];
 $errorMessage = '';
 
+try {
+    $equipes = getEquipesAvecEffectif(getDatabaseConnection());
+} 
+catch (RuntimeException $exception) {
+    $errorMessage ='Les équipes ne peuvent pas être chargées pour le moment';
+}
+
 $pageTitle = 'Équipes | JIRAMA Intervention';
 define('JIRAMA_LAYOUT', true);
 
