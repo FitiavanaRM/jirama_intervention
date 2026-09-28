@@ -61,4 +61,34 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php endif; ?>
 
     <form action="ajouter.php" method="post">
+        <div>
+            <label for="nom_equipe">Nom de l’équipe</label>
+            <input
+                id="nom_equipe"
+                name="nom_equipe"
+                type="text"
+                maxlength="150"
+                value="<?= htmlspecialchars($formData['nom_equipe'], ENT_QUOTES, 'UTF-8') ?>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="type_equipe">Type d’équipe (optionnel)</label>
+            <input
+                id="type_equipe"
+                name="type_equipe"
+                type="text"
+                maxlength="100"
+                value="<?= htmlspecialchars($formData['type_equipe'], ENT_QUOTES, 'UTF-8') ?>"
+            >
+        </div>
+
+        <div>
+            <label for="description">Description (optionnel)</label>
+            <textarea
+                id="description"
+                name="description"
+            ><?= htmlspecialchars($formData['description'], ENT_QUOTES, 'UTF-8') ?></textarea>
+        </div>
 </main>
