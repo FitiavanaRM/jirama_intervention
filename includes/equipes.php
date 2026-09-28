@@ -59,3 +59,28 @@ function insertEquipe(PDO $connection, array $data): int
     }
     return (int) $connection->lastInsertId();
 }
+
+// Retourne les équipes avec le nombre de techniciens de chacune
+function getEquipesAvecEffectif(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            e.id_equipe,
+            e.nom_equipe,
+            e.type_equipe,
+            e.description,
+            COUNT(t.id_technicien) AS nombre_techniciens
+        FROM equipes AS e
+        LEFT JOIN techniciens AS t
+            ON t.id_equipe = e.id_equipe
+        GROUP BY
+            e.id_equipe,
+            e.nom_equipe,
+            e.type_equipe,
+            e.description
+        ORDER BY e.nom_equipe ASC'
+    );
+
+    $statement->execute();
+    return $statement->fetchAll();
+}
