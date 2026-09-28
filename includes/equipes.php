@@ -18,6 +18,8 @@ function validateEquipeData(array $data): array
     }
 
     return [
-            'nom_equipe' => $nomEquipe,
+        'nom_equipe' => $nomEquipe,
+        'type_equipe' => $typeEquipe !== '' ? $typeEquipe : null,
+        'description' => $description !== '' ? $description : null,
     ];
 }
