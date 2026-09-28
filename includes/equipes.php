@@ -23,3 +23,39 @@ function validateEquipeData(array $data): array
         'description' => $description !== '' ? $description : null,
     ];
 }
+
+// Insère une nouvelle équipe en base et retourne son identifiant
+function insertEquipe(PDO $connection, array $data): int
+{
+    $statement = $connection->prepare(
+        'INSERT INTO equipes (
+            nom_equipe,
+            type_equipe,
+            description
+        ) VALUES (
+            :nom_equipe,
+            :type_equipe,
+            :description
+        )'
+    );
+
+    try {
+        $statement->execute([
+            'nom_equipe' => $data['nom_equipe'],
+            'type_equipe' => $data['type_equipe'],
+            'description' => $data['description'],
+        ]);
+    } catch (PDOException $exception) {
+        $isDuplicateName =
+            $exception->getCode() === '23000'
+            &&
+            (int) ($exception->errorInfo[1] ?? 0) === 1062;
+
+        if ($isDuplicateName) {
+            throw new InvalidArgumentException('Une équipe portant ce nom existe déjà');
+        }
+
+        throw $exception;
+    }
+    return (int) $connection->lastInsertId();
+}
