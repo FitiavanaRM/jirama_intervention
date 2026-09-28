@@ -7,4 +7,5 @@ function validateEquipeData(array $data): array
 {
     $nomEquipe = trim((string) ($data['nom_equipe'] ?? ''));
     $typeEquipe = trim((string) ($data['type_equipe'] ?? ''));
+    $description = trim((string) ($data['description'] ?? ''));
 }
