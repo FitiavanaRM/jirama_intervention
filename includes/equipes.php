@@ -18,4 +18,6 @@ function validateEquipeData(array $data): array
     }
 
     return [
+            'nom_equipe' => $nomEquipe,
+    ];
 }
