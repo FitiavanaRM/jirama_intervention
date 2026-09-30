@@ -140,7 +140,6 @@ function updateEquipe(
         if ($isDuplicateName) {
             throw new InvalidArgumentException('Une équipe portant ce nom existe déjà');
         }
-
         throw $exception;
     }
 }
