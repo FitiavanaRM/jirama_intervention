@@ -49,6 +49,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     <th>Type</th>
                     <th>Description</th>
                     <th>Techniciens</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -66,6 +67,11 @@ require_once __DIR__ . '/../includes/sidebar.php';
                         </td>
                         <td>
                             <?= (int) $equipe['nombre_techniciens'] ?>
+                        </td>
+                        <td>
+                            <a href="modifier.php?id_equipe=<?= (int) $equipe['id_equipe'] ?>">
+                                Modifier
+                            </a>
                         </td>
                     </tr>
 
