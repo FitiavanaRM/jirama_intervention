@@ -110,3 +110,27 @@ function insertTechnicien(PDO $connection, array $data): int
 
     return (int) $connection->lastInsertId();
 }
+
+// Retourne tous les techniciens avec leur équipe et leur compte utilisateur lié
+function getTechniciens(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            t.id_technicien,
+            t.nom,
+            t.prenom,
+            t.telephone,
+            t.fonction,
+            e.nom_equipe,
+            u.email AS utilisateur_email
+        FROM techniciens AS t
+        INNER JOIN equipes AS e
+            ON e.id_equipe = t.id_equipe
+        LEFT JOIN utilisateurs AS u
+            ON u.id_utilisateur = t.id_utilisateur
+        ORDER BY t.nom ASC, t.prenom ASC'
+    );
+
+    $statement->execute();
+    return $statement->fetchAll();
+}
