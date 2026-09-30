@@ -106,3 +106,41 @@ function getEquipeById(PDO $connection, int $equipeId): ?array
     $equipe = $statement->fetch();
     return $equipe === false ? null : $equipe;
 }
+
+// Met à jour une équipe existante
+function updateEquipe(
+    PDO $connection,
+    int $equipeId,
+    array $data
+): void
+{
+    $statement = $connection->prepare(
+        'UPDATE equipes
+         SET
+            nom_equipe = :nom_equipe,
+            type_equipe = :type_equipe,
+            description = :description
+         WHERE id_equipe = :id_equipe'
+    );
+
+    try {
+        $statement->execute([
+            'nom_equipe' => $data['nom_equipe'],
+            'type_equipe' => $data['type_equipe'],
+            'description' => $data['description'],
+            'id_equipe' => $equipeId,
+        ]);
+    } 
+    catch (PDOException $exception) {
+        $isDuplicateName =
+            $exception->getCode() === '23000'
+            &&
+            (int) ($exception->errorInfo[1] ?? 0) === 1062;
+
+        if ($isDuplicateName) {
+            throw new InvalidArgumentException('Une équipe portant ce nom existe déjà');
+        }
+
+        throw $exception;
+    }
+}
