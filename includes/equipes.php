@@ -84,3 +84,25 @@ function getEquipesAvecEffectif(PDO $connection): array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+// Retourne une équipe précise
+function getEquipeById(PDO $connection, int $equipeId): ?array
+{
+    if ($equipeId < 1) {
+        return null;
+    }
+
+    $statement = $connection->prepare(
+        'SELECT id_equipe, nom_equipe, type_equipe, description
+         FROM equipes
+         WHERE id_equipe = :id_equipe
+         LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_equipe' => $equipeId
+    ]);
+
+    $equipe = $statement->fetch();
+    return $equipe === false ? null : $equipe;
+}

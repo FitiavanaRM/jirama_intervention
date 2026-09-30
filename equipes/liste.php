@@ -33,13 +33,12 @@ require_once __DIR__ . '/../includes/sidebar.php';
 <main>
     <h1>Équipes</h1>
     <?php if ($errorMessage !== ''): ?>
-
         <p role="alert">
             <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
         </p>
 
     <?php elseif ($equipes === []): ?>
-        <p>Aucune équipe n’est enregistrée.</p>
+        <p>Aucune équipe n’est enregistrée</p>
 
     <?php else: ?>
 
