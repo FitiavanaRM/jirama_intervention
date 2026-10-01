@@ -134,3 +134,32 @@ function getTechniciens(PDO $connection): array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+// Retourne un technicien précis, ou null s'il n'existe pas
+function getTechnicienById(PDO $connection, int $technicienId): ?array
+{
+    if ($technicienId < 1) {
+        return null;
+    }
+
+    $statement = $connection->prepare(
+        'SELECT
+            id_technicien,
+            nom,
+            prenom,
+            telephone,
+            fonction,
+            id_equipe,
+            id_utilisateur
+        FROM techniciens
+        WHERE id_technicien = :id_technicien
+        LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_technicien' => $technicienId
+    ]);
+
+    $technicien = $statement->fetch();
+    return $technicien === false ? null : $technicien;
+}
