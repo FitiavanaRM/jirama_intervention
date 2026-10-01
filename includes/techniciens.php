@@ -193,3 +193,33 @@ function getUtilisateursTechnicienDisponiblesPourModification(
 
     return $statement->fetchAll();
 }
+
+// Met à jour un technicien existant.
+function updateTechnicien(
+    PDO $connection,
+    int $technicienId,
+    array $data
+): void
+{
+    $statement = $connection->prepare(
+        'UPDATE techniciens
+         SET
+            nom = :nom,
+            prenom = :prenom,
+            telephone = :telephone,
+            fonction = :fonction,
+            id_equipe = :id_equipe,
+            id_utilisateur = :id_utilisateur
+         WHERE id_technicien = :id_technicien'
+    );
+
+    $statement->execute([
+        'nom' => $data['nom'],
+        'prenom' => $data['prenom'],
+        'telephone' => $data['telephone'],
+        'fonction' => $data['fonction'],
+        'id_equipe' => $data['id_equipe'],
+        'id_utilisateur' => $data['id_utilisateur'],
+        'id_technicien' => $technicienId,
+    ]);
+}
