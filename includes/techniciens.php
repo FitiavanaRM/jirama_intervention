@@ -163,3 +163,33 @@ function getTechnicienById(PDO $connection, int $technicienId): ?array
     $technicien = $statement->fetch();
     return $technicien === false ? null : $technicien;
 }
+
+// Retourne les utilisateurs Technicien disponibles
+function getUtilisateursTechnicienDisponiblesPourModification(
+    PDO $connection,
+    ?int $idUtilisateurActuel
+): array
+{
+    $statement = $connection->prepare(
+        "SELECT u.id_utilisateur, u.nom, u.prenom
+         FROM utilisateurs AS u
+         INNER JOIN roles AS r
+             ON r.id_role = u.id_role
+         WHERE r.nom_role = 'Technicien'
+         AND (
+             u.id_utilisateur NOT IN (
+                 SELECT id_utilisateur
+                 FROM techniciens
+                 WHERE id_utilisateur IS NOT NULL
+             )
+             OR u.id_utilisateur = :id_utilisateur_actuel
+         )
+         ORDER BY u.nom ASC, u.prenom ASC"
+    );
+
+    $statement->execute([
+        'id_utilisateur_actuel' => $idUtilisateurActuel ?? 0
+    ]);
+
+    return $statement->fetchAll();
+}
