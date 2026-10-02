@@ -34,4 +34,11 @@ try {
         http_response_code(404);
         exit('Technicien introuvable');
     }
+
+    $formData = [
+        'nom' => (string) $technicien['nom'],
+        'prenom' => (string) $technicien['prenom'],
+        'telephone' => (string) ($technicien['telephone'] ?? ''),
+        'fonction' => (string) ($technicien['fonction'] ?? ''),
+    ]
 }
