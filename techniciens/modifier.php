@@ -79,3 +79,9 @@ catch (RuntimeException $exception) {
     http_response_code(500);
     exit('Le technicien ne peut pas être chargé pour le moment');
 }
+
+$pageTitle = 'Modifier un technicien | JIRAMA Intervention';
+define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/sidebar.php';
