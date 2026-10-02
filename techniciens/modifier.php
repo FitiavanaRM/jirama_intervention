@@ -29,8 +29,9 @@ $utilisateursDisponibles = [];
 
 try {
     $connection = getDatabaseConnection();
-
     $technicien = getTechnicienById($connection, $technicienId);
-
-
+    if ($technicien === null) {
+        http_response_code(404);
+        exit('Technicien introuvable');
+    }
 }
