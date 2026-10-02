@@ -85,7 +85,7 @@ function insertUtilisateur(PDO $connection, array $data): int
             :id_role
         )'
     );
-    
+
     try {
         $statement->execute([
             'nom' => $data['nom'],
@@ -95,5 +95,16 @@ function insertUtilisateur(PDO $connection, array $data): int
             'mot_de_passe' => password_hash((string) $data['mot_de_passe'], PASSWORD_DEFAULT),
             'id_role' => $data['id_role'],
         ]);
+    }
+    catch (PDOException $exception) {
+        $isDuplicateEmail =
+            $exception->getCode() === '23000'
+            &&
+            (int) ($exception->errorInfo[1] ?? 0) === 1062;
+
+        if ($isDuplicateEmail) {
+            throw new InvalidArgumentException('Un compte avec cette adresse e-mail existe déjà');
+        }
+        throw $exception;
     }
 }
