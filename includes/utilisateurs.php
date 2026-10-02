@@ -12,3 +12,13 @@ function getRoles(PDO $connection): array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+// valide les données d'un utilisateur
+function validateUtilisateurData(array $data, bool $motDePasseObligatoire = true): array
+{
+    $nom = trim((string) ($data['nom'] ?? ''));
+    $prenom = trim((string) ($data['prenom'] ?? ''));
+    $telephone = trim((string) ($data['telephone'] ?? ''));
+    $email = trim((string) ($data['email'] ?? ''));
+    $motDePasse = (string) ($data['mot_de_passe'] ?? '');
+}
