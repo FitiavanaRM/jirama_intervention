@@ -184,4 +184,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
         <button type="submit">Enregistrer les modifications</button>
     </form>
+    <p>
+        <a href="liste.php">Retour à la liste des techniciens</a>
+    </p>
 </main>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
