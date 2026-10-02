@@ -26,3 +26,11 @@ unset($_SESSION['technicien_success']);
 
 $equipes = [];
 $utilisateursDisponibles = [];
+
+try {
+    $connection = getDatabaseConnection();
+
+    $technicien = getTechnicienById($connection, $technicienId);
+
+
+}
