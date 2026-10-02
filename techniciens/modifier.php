@@ -19,3 +19,10 @@ if (!is_int($technicienId) || $technicienId < 1) {
     http_response_code(404);
     exit('Technicien introuvable.');
 }
+
+$errorMessage = '';
+$successMessage = (string) ($_SESSION['technicien_success'] ?? '');
+unset($_SESSION['technicien_success']);
+
+$equipes = [];
+$utilisateursDisponibles = [];
