@@ -45,4 +45,13 @@ function validateUtilisateurData(array $data, bool $motDePasseObligatoire = true
     if (!$motDePasseObligatoire && $motDePasse !== '' && strlen($motDePasse) < 8) {
         throw new InvalidArgumentException('Le mot de passe doit contenir au moins 8 caractères');
     }
+
+    $idRole = filter_var(
+        $data['id_role'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+
+    if ($idRole === false || $idRole < 1) {
+        throw new InvalidArgumentException('Le rôle est obligatoire');
+    }
 }
