@@ -54,4 +54,13 @@ function validateUtilisateurData(array $data, bool $motDePasseObligatoire = true
     if ($idRole === false || $idRole < 1) {
         throw new InvalidArgumentException('Le rôle est obligatoire');
     }
+    
+    return [
+        'nom' => $nom,
+        'prenom' => $prenom,
+        'telephone' => $telephone !== '' ? $telephone : null,
+        'email' => $email,
+        'mot_de_passe' => $motDePasse !== '' ? $motDePasse : null,
+        'id_role' => $idRole,
+    ];
 }
