@@ -44,5 +44,13 @@ try {
         'id_utilisateur' => $technicien['id_utilisateur'] !== null
             ? (string) $technicien['id_utilisateur']
             : '',
-    ]
+    ];
+
+    $equipes = getEquipes($connection);
+    $utilisateursDisponibles = getUtilisateursTechnicienDisponiblesPourModification(
+        $connection,
+        $technicien['id_utilisateur'] !== null
+            ? (int) $technicien['id_utilisateur']
+            : null
+    );
 }
