@@ -74,5 +74,8 @@ try {
             $errorMessage = 'Le technicien n’a pas pu être modifié';
         }
     }
-
+}
+catch (RuntimeException $exception) {
+    http_response_code(500);
+    exit('Le technicien ne peut pas être chargé pour le moment');
 }
