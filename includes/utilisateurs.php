@@ -85,4 +85,15 @@ function insertUtilisateur(PDO $connection, array $data): int
             :id_role
         )'
     );
+    
+    try {
+        $statement->execute([
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'telephone' => $data['telephone'],
+            'email' => $data['email'],
+            'mot_de_passe' => password_hash((string) $data['mot_de_passe'], PASSWORD_DEFAULT),
+            'id_role' => $data['id_role'],
+        ]);
+    }
 }
