@@ -40,5 +40,9 @@ try {
         'prenom' => (string) $technicien['prenom'],
         'telephone' => (string) ($technicien['telephone'] ?? ''),
         'fonction' => (string) ($technicien['fonction'] ?? ''),
+        'id_equipe' => (string) $technicien['id_equipe'],
+        'id_utilisateur' => $technicien['id_utilisateur'] !== null
+            ? (string) $technicien['id_utilisateur']
+            : '',
     ]
 }
