@@ -14,3 +14,8 @@ $technicienId = filter_input(
     'id_technicien',
     FILTER_VALIDATE_INT
 );
+
+if (!is_int($technicienId) || $technicienId < 1) {
+    http_response_code(404);
+    exit('Technicien introuvable.');
+}
