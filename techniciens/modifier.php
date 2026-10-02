@@ -59,5 +59,20 @@ try {
             $value = $_POST[$field] ?? '';
             $formData[$field] = is_string($value) ? $value : '';
         }
+
+        try {
+            $validatedData = validateTechnicienData($_POST);
+            updateTechnicien($connection, $technicienId, $validatedData);
+            $_SESSION['technicien_success'] = 'Technicien modifié avec succès.';
+            header('Location: modifier.php?id_technicien=' . $technicienId);
+            exit;
+        }
+        catch (InvalidArgumentException $exception) {
+            $errorMessage = $exception->getMessage();
+        }
+        catch (RuntimeException $exception) {
+            $errorMessage = 'Le technicien n’a pas pu être modifié';
+        }
     }
+
 }
