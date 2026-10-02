@@ -103,5 +103,85 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
     <form action="modifier.php" method="post">
         <input type="hidden" name="id_technicien" value="<?= (int) $technicienId ?>">
+        <div>
+            <label for="nom">Nom</label>
+            <input
+                id="nom"
+                name="nom"
+                type="text"
+                maxlength="100"
+                value="<?= htmlspecialchars($formData['nom'], ENT_QUOTES, 'UTF-8') ?>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="prenom">Prénom</label>
+            <input
+                id="prenom"
+                name="prenom"
+                type="text"
+                maxlength="100"
+                value="<?= htmlspecialchars($formData['prenom'], ENT_QUOTES, 'UTF-8') ?>"
+                required
+            >
+        </div>
+        <div>
+            <label for="telephone">Téléphone</label>
+            <input
+                id="telephone"
+                name="telephone"
+                type="tel"
+                maxlength="20"
+                value="<?= htmlspecialchars($formData['telephone'], ENT_QUOTES, 'UTF-8') ?>"
+            >
+        </div>
+
+        <div>
+            <label for="fonction">Fonction</label>
+            <input
+                id="fonction"
+                name="fonction"
+                type="text"
+                maxlength="100"
+                value="<?= htmlspecialchars($formData['fonction'], ENT_QUOTES, 'UTF-8') ?>"
+            >
+        </div>
+
+        <div>
+            <label for="id_equipe">Équipe</label>
+            <select id="id_equipe" name="id_equipe" required>
+                <option value="">Sélectionner une équipe</option>
+                <?php foreach ($equipes as $equipe): ?>
+                    <option
+                        value="<?= (int) $equipe['id_equipe'] ?>"
+                        <?= ((string) $equipe['id_equipe'] === $formData['id_equipe']) ? 'selected' : '' ?>
+                    >
+                        <?= htmlspecialchars((string) $equipe['nom_equipe'], ENT_QUOTES, 'UTF-8') ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div>
+            <label for="id_utilisateur">Compte utilisateur associé (optionnel)</label>
+            <select id="id_utilisateur" name="id_utilisateur">
+                <option value="">Aucun compte</option>
+                <?php foreach ($utilisateursDisponibles as $utilisateur): ?>
+                    <option
+                        value="<?= (int) $utilisateur['id_utilisateur'] ?>"
+                        <?= ((string) $utilisateur['id_utilisateur'] === $formData['id_utilisateur']) ? 'selected' : '' ?>
+                    >
+                        <?= htmlspecialchars(
+                            (string) $utilisateur['prenom'] . ' ' . (string) $utilisateur['nom'],
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <button type="submit">Enregistrer les modifications</button>
     </form>
 </main>
