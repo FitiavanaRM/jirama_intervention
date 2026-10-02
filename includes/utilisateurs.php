@@ -21,4 +21,12 @@ function validateUtilisateurData(array $data, bool $motDePasseObligatoire = true
     $telephone = trim((string) ($data['telephone'] ?? ''));
     $email = trim((string) ($data['email'] ?? ''));
     $motDePasse = (string) ($data['mot_de_passe'] ?? '');
+
+    if ($nom === '' || $prenom === '') {
+        throw new InvalidArgumentException('Le nom et le prénom sont obligatoires');
+    }
+
+    if (strlen($nom) > 100 || strlen($prenom) > 100) {
+        throw new InvalidArgumentException('Le nom ou le prénom dépasse la longueur autorisée');
+    }
 }
