@@ -29,4 +29,12 @@ function validateUtilisateurData(array $data, bool $motDePasseObligatoire = true
     if (strlen($nom) > 100 || strlen($prenom) > 100) {
         throw new InvalidArgumentException('Le nom ou le prénom dépasse la longueur autorisée');
     }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        throw new InvalidArgumentException('L’adresse e-mail est invalide');
+    }
+
+    if ($telephone !== '' && !preg_match('/^[0-9+().\s-]+$/', $telephone)) {
+        throw new InvalidArgumentException('Le téléphone est invalide');
+    }
 }
