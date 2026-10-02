@@ -37,4 +37,12 @@ function validateUtilisateurData(array $data, bool $motDePasseObligatoire = true
     if ($telephone !== '' && !preg_match('/^[0-9+().\s-]+$/', $telephone)) {
         throw new InvalidArgumentException('Le téléphone est invalide');
     }
+
+    if ($motDePasseObligatoire && strlen($motDePasse) < 8) {
+        throw new InvalidArgumentException('Le mot de passe doit contenir au moins 8 caractères');
+    }
+
+    if (!$motDePasseObligatoire && $motDePasse !== '' && strlen($motDePasse) < 8) {
+        throw new InvalidArgumentException('Le mot de passe doit contenir au moins 8 caractères');
+    }
 }
