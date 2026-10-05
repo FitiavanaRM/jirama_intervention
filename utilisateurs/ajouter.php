@@ -47,7 +47,6 @@ try {
         }
     }
 }
-
-catch {
-
+catch (RuntimeException $exception) {
+    $erreurMessage = 'Les données ne peuvent pas être chargées pour le moment';
 }
