@@ -74,4 +74,74 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php endif; ?>
 
     <form action="ajouter.php" method="post">
+        <div>
+            <label for="nom">Nom</label>
+            <input
+                id="nom"
+                name="nom"
+                type="text"
+                maxlength="100"
+                value="<?= htmlspecialchars($formData['nom'], ENT_QUOTES, 'UTF-8') ?>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="prenom">Prénom</label>
+            <input
+                id="prenom"
+                name="prenom"
+                type="text"
+                maxlength="100"
+                value="<?= htmlspecialchars($formData['prenom'], ENT_QUOTES, 'UTF-8') ?>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="telephone">Téléphone (optionnel)</label>
+            <input
+                id="telephone"
+                name="telephone"
+                type="tel"
+                maxlength="20"
+                value="<?= htmlspecialchars($formData['telephone'], ENT_QUOTES, 'UTF-8') ?>"
+            >
+        </div>
+
+        <div>
+            <label for="email">Adresse e-mail</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                maxlength="150"
+                value="<?= htmlspecialchars($formData['email'], ENT_QUOTES, 'UTF-8') ?>"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="mot_de_passe">Mot de passe</label>
+            <input
+                id="mot_de_passe"
+                name="mot_de_passe"
+                type="password"
+                minlength="8"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="id_role">Rôle</label>
+            <select id="id_role" name="id_role" required>
+                <option value="">Sélectionner un rôle</option>
+                <?php foreach ($roles as $role): ?>
+                    <option value="<?= (int) $role['id_role'] ?>">
+                        <?= htmlspecialchars((string) $role['nom_role'], ENT_QUOTES, 'UTF-8') ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </form>
 </main>
