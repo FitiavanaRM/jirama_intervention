@@ -50,3 +50,9 @@ try {
 catch (RuntimeException $exception) {
     $erreurMessage = 'Les données ne peuvent pas être chargées pour le moment';
 }
+
+$pageTitle = 'Nouvel utilisateur | JIRAMA Intervention';
+define('JIRAMA_LAYOUT', true);
+
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/sidebar.php';
