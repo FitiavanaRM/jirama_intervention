@@ -66,3 +66,12 @@ require_once __DIR__ . '/../includes/sidebar.php';
             <?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8') ?>
         </p>
     <?php endif; ?>
+
+    <?php if ($errorMessage !== ''): ?>
+        <p role="alert">
+            <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+    <?php endif; ?>
+
+    <form action="ajouter.php" method="post">
+</main>
