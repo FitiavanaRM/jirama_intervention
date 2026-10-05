@@ -20,3 +20,12 @@ $errrorMessage = '';
 $successMessage = (string) ($_SESSION['utilisateur_success'] ?? '');
 unset($_SESSION['utilisateur_success']);
 $roles = [];
+
+try {
+    $connection = getDatabaseConnection();
+    $roles = getRoles($connection);
+
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+        
+    }
+}
