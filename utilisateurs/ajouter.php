@@ -39,6 +39,12 @@ try {
             header('Location : ajouter.php');
             exit;
         }
+        catch (InvalidArgumentException $exception) {
+            $errorMessage = $exception->getMessage();
+        }
+        catch (RuntimeException $exception) {
+            $errorMessage = 'L utilisateur n a pas pu être créer';
+        }
     }
 }
 
