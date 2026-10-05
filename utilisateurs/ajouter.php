@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/includes/utilisateurs.php';
+require_once __DIR__ . '/../includes/utilisateurs.php';
 
 requireRole(['Administrateur']);
 
@@ -16,7 +16,7 @@ $formData = [
     'id_role' => '',
 ];
 
-$errrorMessage = '';
+$errorMessage = '';
 $successMessage = (string) ($_SESSION['utilisateur_success'] ?? '');
 unset($_SESSION['utilisateur_success']);
 $roles = [];
@@ -33,7 +33,7 @@ try {
         
         try {
             $validatedData = validateUtilisateurData($_POST, true);
-            insertUtilisateur($connection, $ValidatedData);
+            insertUtilisateur($connection, $validatedData);
 
             $_SESSION['utilisateur_success'] = 'Utilisateur crée avec succès';
             header('Location : ajouter.php');
