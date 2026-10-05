@@ -56,3 +56,13 @@ define('JIRAMA_LAYOUT', true);
 
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/sidebar.php';
+
+?>
+<main>
+    <h1>Ajouter un utilisateur</h1>
+
+    <?php if ($successMessage !== ''): ?>
+        <p role="status">
+            <?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>
+    <?php endif; ?>
