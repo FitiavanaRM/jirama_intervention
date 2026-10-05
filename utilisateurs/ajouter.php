@@ -143,5 +143,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 <?php endforeach; ?>
             </select>
         </div>
+
+        <button type="submit">Enregistrer l’utilisateur</button>
     </form>
 </main>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
