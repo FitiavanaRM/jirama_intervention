@@ -30,5 +30,18 @@ try {
             $value = $_POST[$field] ?? '';
             $formData[$field] = is_string($value) ? $value : '';
         }
+        
+        try {
+            $validatedData = validateUtilisateurData($_POST, true);
+            insertUtilisateur($connection, $ValidatedData);
+
+            $_SESSION['utilisateur_success'] = 'Utilisateur crée avec succès';
+            header('Location : ajouter.php');
+            exit;
+        }
     }
+}
+
+catch {
+
 }
