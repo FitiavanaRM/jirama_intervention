@@ -107,4 +107,5 @@ function insertUtilisateur(PDO $connection, array $data): int
         }
         throw $exception;
     }
+    return (int) $connection->lastInsertId();
 }
