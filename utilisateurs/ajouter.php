@@ -15,3 +15,8 @@ $formData = [
     'email' => '',
     'id_role' => '',
 ];
+
+$errrorMessage = '';
+$successMessage = (string) ($_SESSION['utilisateur_success'] ?? '');
+unset($_SESSION['utilisateur_success']);
+$roles = [];
