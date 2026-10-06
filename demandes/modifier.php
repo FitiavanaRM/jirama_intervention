@@ -22,3 +22,12 @@ if (!is_int($demandeId) || $demandeId < 1) {
 $errorMessage = '';
 $successMessage = (string) ($_SESSION['demande_modif_success'] ?? '');
 unset($_SESSION['demande_modif_success']);
+
+try {
+    $connection = getDatabaseConnection();
+    $demande = getDemandeById($connection, $demandeId);
+    if ($demande === null) {
+        http_response_code(404);
+        exit('Demande introuvable.');
+    }
+}
