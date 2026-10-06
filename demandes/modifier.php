@@ -44,5 +44,10 @@ try {
             $value = $_POST[$field] ?? '';
             $formData[$field] = is_string($value) ? $value : '';
         }
+
+        try {
+            $validatedData = validateDemandeData($_POST);
+            updateDemande($connection, $demandeId, $validatedData);
+        }
     }
 }
