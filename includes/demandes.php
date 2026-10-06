@@ -405,5 +405,15 @@ function updateDemande(
     array $data
 ): void
 {
-    
+    $statement = $connection->prepare(
+        'UPDATE demandes
+         SET
+            nom_client = :nom_client,
+            telephone_client = :telephone_client,
+            adresse_client = :adresse_client,
+            type_demande = :type_demande,
+            description_probleme = :description_probleme
+         WHERE id_demande = :id_demande
+         AND statut = :statut_attendu'
+    );
 }
