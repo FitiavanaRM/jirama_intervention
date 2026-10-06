@@ -52,5 +52,15 @@ try {
             header('Location: modifier.php?id_demande=' . $demandeId);
             exit;
         }
+        catch (InvalidArgumentException $exception) {
+            $errorMessage = $exception->getMessage();
+        }
+        catch (RuntimeException $exception) {
+            $errorMessage = 'La demande n’a pas pu être modifiée';
+        }
     }
+}
+catch (RuntimeException $exception) {
+    http_response_code(500);
+    exit('La demande ne peut pas être chargée pour le moment');
 }
