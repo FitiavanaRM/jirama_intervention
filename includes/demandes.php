@@ -426,4 +426,8 @@ function updateDemande(
         'id_demande' => $demandeId,
         'statut_attendu' => 'EN_ATTENTE',
     ]);
+
+    if ($statement->rowCount() === 0) {
+        throw new InvalidArgumentException('Cette demande ne peut plus être modifiée (elle n’est plus en attente)');
+    }
 }
