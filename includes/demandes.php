@@ -416,4 +416,14 @@ function updateDemande(
          WHERE id_demande = :id_demande
          AND statut = :statut_attendu'
     );
+
+    $statement->execute([
+        'nom_client' => $data['nom_client'],
+        'telephone_client' => $data['telephone_client'],
+        'adresse_client' => $data['adresse_client'],
+        'type_demande' => $data['type_demande'],
+        'description_probleme' => $data['description_probleme'],
+        'id_demande' => $demandeId,
+        'statut_attendu' => 'EN_ATTENTE',
+    ]);
 }
