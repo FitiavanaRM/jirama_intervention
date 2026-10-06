@@ -397,3 +397,13 @@ function getStatistiquesParStatut(PDO $connection): array
 
     return $statutsPossibles;
 }
+
+// Met à jour les champs source d'une demande encore en attente
+function updateDemande(
+    PDO $connection,
+    int $demandeId,
+    array $data
+): void
+{
+    
+}
