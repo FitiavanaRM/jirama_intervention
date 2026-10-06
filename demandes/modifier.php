@@ -38,4 +38,11 @@ try {
         'type_demande' => (string) $demande['type_demande'],
         'description_probleme' => (string) $demande['description_probleme'],
     ];
+
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+        foreach ($formData as $field => $defaultValue) {
+            $value = $_POST[$field] ?? '';
+            $formData[$field] = is_string($value) ? $value : '';
+        }
+    }
 }
