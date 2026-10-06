@@ -155,6 +155,14 @@ require_once __DIR__ . '/../includes/sidebar.php';
 		</dd>
 	</dl>
 
+	<?php if ($demande['statut'] === 'EN_ATTENTE' && hasPermission('demande.modifier')): ?>
+        <p>
+            <a href="modifier.php?id_demande=<?= (int) $demande['id_demande'] ?>">
+                Modifier la demande
+            </a>
+        </p>
+    <?php endif; ?>
+
 	<?php if ($demande['statut'] === 'RESOLUE' && hasPermission('demande.cloturer')): ?>
         <form action="details.php" method="post">
             <input type="hidden" name="id_demande" value="<?= (int) $demande['id_demande'] ?>">
