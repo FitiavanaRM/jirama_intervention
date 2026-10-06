@@ -18,3 +18,7 @@ if (!is_int($demandeId) || $demandeId < 1) {
     http_response_code(404);
     exit('Demande introuvable');
 }
+
+$errorMessage = '';
+$successMessage = (string) ($_SESSION['demande_modif_success'] ?? '');
+unset($_SESSION['demande_modif_success']);
