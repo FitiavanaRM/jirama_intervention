@@ -13,3 +13,8 @@ $demandeId = filter_input(
     'id_demande',
     FILTER_VALIDATE_INT
 );
+
+if (!is_int($demandeId) || $demandeId < 1) {
+    http_response_code(404);
+    exit('Demande introuvable');
+}
