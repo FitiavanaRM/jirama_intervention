@@ -131,3 +131,95 @@ function getUtilisateurs(PDO $connection): array
     $statement->execute();
     return $statement->fetchAll();
 }
+
+
+// Retourne un utilisateur précis, ou null s'il n'existe pas
+function getUtilisateurById(PDO $connection, int $utilisateurId): ?array
+{
+    if ($utilisateurId < 1) {
+        return null;
+    }
+
+    $statement = $connection->prepare(
+        'SELECT id_utilisateur, nom, prenom, telephone, email, id_role
+         FROM utilisateurs
+         WHERE id_utilisateur = :id_utilisateur
+         LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_utilisateur' => $utilisateurId
+    ]);
+
+    $utilisateur = $statement->fetch();
+    return $utilisateur === false ? null : $utilisateur;
+}
+
+// Met à jour un utilisateur existant
+function updateUtilisateur(
+    PDO $connection,
+    int $utilisateurId,
+    array $data
+): void
+{
+    if ($data['mot_de_passe'] !== null) {
+
+        $statement = $connection->prepare(
+            'UPDATE utilisateurs
+             SET
+                nom = :nom,
+                prenom = :prenom,
+                telephone = :telephone,
+                email = :email,
+                mot_de_passe = :mot_de_passe,
+                id_role = :id_role
+             WHERE id_utilisateur = :id_utilisateur'
+        );
+
+        $parametres = [
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'telephone' => $data['telephone'],
+            'email' => $data['email'],
+            'mot_de_passe' => password_hash((string) $data['mot_de_passe'], PASSWORD_DEFAULT),
+            'id_role' => $data['id_role'],
+            'id_utilisateur' => $utilisateurId,
+        ];
+
+    } else {
+        $statement = $connection->prepare(
+            'UPDATE utilisateurs
+             SET
+                nom = :nom,
+                prenom = :prenom,
+                telephone = :telephone,
+                email = :email,
+                id_role = :id_role
+             WHERE id_utilisateur = :id_utilisateur'
+        );
+
+        $parametres = [
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
+            'telephone' => $data['telephone'],
+            'email' => $data['email'],
+            'id_role' => $data['id_role'],
+            'id_utilisateur' => $utilisateurId,
+        ];
+    }
+
+    try {
+        $statement->execute($parametres);
+    }
+    catch (PDOException $exception) {
+        $isDuplicateEmail =
+            $exception->getCode() === '23000'
+            &&
+            (int) ($exception->errorInfo[1] ?? 0) === 1062;
+
+        if ($isDuplicateEmail) {
+            throw new InvalidArgumentException('Un compte avec cette adresse e-mail existe déjà');
+        }
+        throw $exception;
+    }
+}
