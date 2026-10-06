@@ -48,6 +48,9 @@ try {
         try {
             $validatedData = validateDemandeData($_POST);
             updateDemande($connection, $demandeId, $validatedData);
+            $_SESSION['demande_modif_success'] = 'Demande modifiée avec succès';
+            header('Location: modifier.php?id_demande=' . $demandeId);
+            exit;
         }
     }
 }
