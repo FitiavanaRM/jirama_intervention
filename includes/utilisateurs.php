@@ -109,3 +109,25 @@ function insertUtilisateur(PDO $connection, array $data): int
     }
     return (int) $connection->lastInsertId();
 }
+
+
+// Retourne tous les utilisateurs avec leur rôle
+function getUtilisateurs(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            u.id_utilisateur,
+            u.nom,
+            u.prenom,
+            u.telephone,
+            u.email,
+            r.nom_role
+        FROM utilisateurs AS u
+        INNER JOIN roles AS r
+            ON r.id_role = u.id_role
+        ORDER BY u.nom ASC, u.prenom ASC'
+    );
+
+    $statement->execute();
+    return $statement->fetchAll();
+}
