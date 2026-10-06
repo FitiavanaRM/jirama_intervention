@@ -30,4 +30,12 @@ try {
         http_response_code(404);
         exit('Demande introuvable.');
     }
+
+    $formData = [
+        'nom_client' => (string) $demande['nom_client'],
+        'telephone_client' => (string) $demande['telephone_client'],
+        'adresse_client' => (string) $demande['adresse_client'],
+        'type_demande' => (string) $demande['type_demande'],
+        'description_probleme' => (string) $demande['description_probleme'],
+    ];
 }
