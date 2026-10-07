@@ -33,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $loginError = 'Adresse e-mail ou mot de passe incorrect';
             } else {
                 registerAuthenticatedUser($user);
-                $loginValidated = true;
+                header('Location: dashboard.php');
+                exit;
             }
         } catch (RuntimeException $exception) {
             $loginError = 'Le service de connexion est temporairement indisponible';
