@@ -132,3 +132,31 @@ function terminerIntervention(
         throw new RuntimeException('Aucune intervention en cours trouvée pour cette demande');
     }
 }
+
+
+// Vérifie qu'une demande est bien affectée au technicien lié au compte donné
+function checkInterventionAppartientAuTechnicien(
+    PDO $connection,
+    int $demandeId,
+    int $utilisateurId
+): void
+{
+    $statement = $connection->prepare(
+        'SELECT a.id_affectation
+         FROM affectations AS a
+         INNER JOIN techniciens AS t
+             ON t.id_technicien = a.id_technicien
+         WHERE a.id_demande = :id_demande
+         AND t.id_utilisateur = :id_utilisateur
+         LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_demande' => $demandeId,
+        'id_utilisateur' => $utilisateurId,
+    ]);
+
+    if ($statement->fetch() === false) {
+        throw new InvalidArgumentException('Cette intervention ne vous est pas affectée');
+    }
+}
