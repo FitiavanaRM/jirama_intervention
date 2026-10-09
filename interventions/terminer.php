@@ -48,6 +48,19 @@ $errorMessage = '';
 // gestion d'erreur
 try {
     $connection = getDatabaseConnection();
+    // Un technicien ne peut agir que sur ses propres interventions
+    if (hasRole('Technicien')) {
+        try {
+            checkInterventionAppartientAuTechnicien(
+                $connection,
+                $demandeId,
+                $currentUser['id_utilisateur']
+            );
+        } catch (InvalidArgumentException $exception) {
+            denyAccess();
+        }
+    }
+
     if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         foreach ($formData as $field => $defaultValue) {
             $value = $_POST[$field] ?? '';
