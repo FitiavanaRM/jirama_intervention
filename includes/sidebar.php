@@ -57,7 +57,7 @@ if ($currentUser === null) {
                 hasRole('Administrateur')
             ): ?>
                 <li><a href="<?= $base ?>/techniciens/liste.php">Techniciens</a></li>
-            <?php endif; ?>y    
+            <?php endif; ?>
 
             <?php if (
                 hasPermission('equipe.consulter')

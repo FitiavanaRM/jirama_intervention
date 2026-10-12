@@ -1,0 +1,46 @@
+/* ===== Base de l'application (pages connectées) ===== */
+
+:root {
+    --fond: #0a1a33;
+    --fond-carte: #0f2547;
+    --fond-champ: #12294d;
+    --bordure: #27436e;
+    --texte: #ffffff;
+    --texte-doux: #9fb2cc;
+    --jaune: #f5b800;
+    --jaune-fonce: #d99f00;
+    --bleu-lien: #6cb2ff;
+    --vert: #2fb36d;
+    --rouge: #e24b4a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fond);
+    color: var(--texte);
+    line-height: 1.5;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 26px;
+    color: var(--texte);
+}
+
+h2 {
+    font-size: 20px;
+    color: var(--texte);
+}
+
+a {
+    color: var(--bleu-lien);
+}
+
+a:hover {
+    color: var(--jaune);
+}
