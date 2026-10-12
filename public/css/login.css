@@ -60,3 +60,31 @@ body.login-page {
     line-height: 1.5;
     color: #dbe6f5;
 }
+
+/* Panneau de droite */
+.login-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background-color: var(--login-panneau);
+}
+
+.login-box {
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-box h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+    color: var(--login-texte);
+}
+
+.login-intro {
+    margin: 0 0 24px;
+    font-size: 14px;
+    color: var(--login-texte-doux);
+}
