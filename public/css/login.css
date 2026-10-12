@@ -148,3 +148,14 @@ body.login-page {
 .login-button:hover {
     background-color: var(--login-jaune-fonce);
 }
+
+/* Message d'erreur */
+.login-error {
+    margin: 0 0 18px;
+    padding: 10px 12px;
+    background-color: rgba(226, 75, 74, 0.15);
+    border: 1px solid #e24b4a;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #ffb4b4;
+}
