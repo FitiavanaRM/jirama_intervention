@@ -47,8 +47,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion | JIRAMA Intervention</title>
+    <link rel="stylesheet" href="public/css/login.css">
 </head>
-<body>
+<body class="login-page">
+    <div class="login-layout">
+        <section class="login-brand">
+            <div class="login-brand-content">
+                <p class="login-brand-name">JIRAMA</p>
+                <p class="login-brand-subtitle">Intervention</p>
+                <p class="login-brand-slogan">Ensemble pour une énergie fiable et durable</p>
+            </div>
+        </section>
     <main>
         <h1>Connexion</h1>
         <p>Application de gestion des interventions et dépannages électriques</p>
