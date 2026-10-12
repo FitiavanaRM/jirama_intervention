@@ -133,5 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="login-footer">JIRAMA – Toliara</p>
         </main>
     </div>
+
+    <script src="public/js/login.js"></script>
 </body>
 </html>
