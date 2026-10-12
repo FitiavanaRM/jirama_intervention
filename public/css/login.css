@@ -26,3 +26,37 @@ body.login-page {
     display: flex;
     min-height: 100vh;
 }
+
+/* Panneau de gauche */
+.login-brand {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    background:
+        linear-gradient(rgba(10, 26, 51, 0.55), rgba(10, 26, 51, 0.85)),
+        url('../images/images\ \(1\).jfif') center / cover no-repeat,
+        linear-gradient(160deg, #1a4d8f, #0a1a33);
+}
+
+.login-brand-name {
+    margin: 0;
+    font-size: 56px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.login-brand-subtitle {
+    margin: 0 0 16px;
+    font-size: 24px;
+}
+
+.login-brand-slogan {
+    margin: 0;
+    max-width: 300px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #dbe6f5;
+}
