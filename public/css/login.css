@@ -88,3 +88,45 @@ body.login-page {
     font-size: 14px;
     color: var(--login-texte-doux);
 }
+
+/* Champs */
+.login-field {
+    margin-bottom: 18px;
+}
+
+.login-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--login-texte-doux);
+}
+
+.login-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    background-color: var(--login-champ);
+    border: 1px solid var(--login-bordure);
+    border-radius: 6px;
+    color: var(--login-texte-doux);
+}
+
+.login-input:focus-within {
+    border-color: var(--login-jaune);
+}
+
+.login-input input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    color: var(--login-texte);
+}
+
+.login-input input::placeholder {
+    color: #6f86a6;
+}
