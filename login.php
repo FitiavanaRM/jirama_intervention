@@ -60,13 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     
         <main class="login-panel">
-
             <div class="login-box">
-
                 <h1>Connexion</h1>
-                <p class="login-intro">
-                    Accédez à votre espace JIRAMA Intervention
-                </p>
+                <p class="login-intro">Accédez à votre espace JIRAMA Intervention</p>
 
                 <?php if ($loginError !== ''): ?>
                     <p class="login-error" role="alert">
@@ -118,11 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" class="login-button">Se connecter</button>
 
                 </form>
-
             </div>
 
             <p class="login-footer">JIRAMA – Toliara</p>
-
         </main>
     </div>
 </body>
