@@ -7,7 +7,6 @@ require_once __DIR__ . '/includes/auth.php';
 
 $email = '';
 $loginError = '';
-$loginValidated = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim((string) ($_POST['email'] ?? ''));
@@ -32,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user === false || !password_verify($password, $user['mot_de_passe'])) {
                 $loginError = 'Adresse e-mail ou mot de passe incorrect';
             } else {
-                registerAuthenticatedUser($user);
+                registerAuthenticatedUser($user);    
                 header('Location: dashboard.php');
                 exit;
             }
@@ -56,10 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if ($loginError !== ''): ?>
             <p role="alert"><?= htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8') ?></p>
-        <?php endif; ?>
-
-        <?php if ($loginValidated): ?>
-            <p>Vos identifiants ont été vérifiés avec succès</p>
         <?php endif; ?>
 
         <form action="login.php" method="post">
