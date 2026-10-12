@@ -159,3 +159,10 @@ body.login-page {
     font-size: 13px;
     color: #ffb4b4;
 }
+
+/* Pied de page */
+.login-footer {
+    margin: 40px 0 0;
+    font-size: 12px;
+    color: var(--login-texte-doux);
+}
