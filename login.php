@@ -108,6 +108,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 placeholder="Votre mot de passe"
                                 required
                             >
+                            <button
+                                type="button"
+                                id="toggle-mot-de-passe"
+                                class="login-toggle"
+                                aria-label="Afficher le mot de passe"
+                                aria-pressed="false"
+                            >
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                     stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <line class="login-eye-slash" x1="3" y1="3" x2="21" y2="21"></line>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
