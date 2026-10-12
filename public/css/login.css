@@ -130,3 +130,21 @@ body.login-page {
 .login-input input::placeholder {
     color: #6f86a6;
 }
+
+/* Bouton */
+.login-button {
+    width: 100%;
+    margin-top: 6px;
+    padding: 13px;
+    background-color: var(--login-jaune);
+    border: 0;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #1b1b1b;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: var(--login-jaune-fonce);
+}
