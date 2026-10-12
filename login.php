@@ -58,40 +58,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="login-brand-slogan">Ensemble pour une énergie fiable et durable</p>
             </div>
         </section>
-    <main>
-        <h1>Connexion</h1>
-        <p>Application de gestion des interventions et dépannages électriques</p>
+    
+        <main class="login-panel">
 
-        <?php if ($loginError !== ''): ?>
-            <p role="alert"><?= htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8') ?></p>
-        <?php endif; ?>
+            <div class="login-box">
 
-        <form action="login.php" method="post">
-            <div>
-                <label for="email">Adresse e-mail</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>"
-                    required
-                >
+                <h1>Connexion</h1>
+                <p class="login-intro">
+                    Accédez à votre espace JIRAMA Intervention
+                </p>
+
+                <?php if ($loginError !== ''): ?>
+                    <p class="login-error" role="alert">
+                        <?= htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+                <?php endif; ?>
+
+                <form action="login.php" method="post">
+
+                    <div class="login-field">
+                        <label for="email">Adresse e-mail</label>
+                        <div class="login-input">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                <path d="M3 7l9 6 9-6"></path>
+                            </svg>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                autocomplete="email"
+                                placeholder="nom@jirama.mg"
+                                value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="login-field">
+                        <label for="mot_de_passe">Mot de passe</label>
+                        <div class="login-input">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="5" y="11" width="14" height="9" rx="2"></rect>
+                                <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+                            </svg>
+                            <input
+                                id="mot_de_passe"
+                                name="mot_de_passe"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Votre mot de passe"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-button">Se connecter</button>
+
+                </form>
+
             </div>
 
-            <div>
-                <label for="mot_de_passe">Mot de passe</label>
-                <input
-                    id="mot_de_passe"
-                    name="mot_de_passe"
-                    type="password"
-                    autocomplete="current-password"
-                    required
-                >
-            </div>
+            <p class="login-footer">JIRAMA – Toliara</p>
 
-            <button type="submit">Se connecter</button>
-        </form>
-    </main>
+        </main>
+    </div>
 </body>
 </html>
