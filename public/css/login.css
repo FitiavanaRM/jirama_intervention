@@ -173,3 +173,28 @@ body.login-page {
         display: none;
     }
 }
+
+/* Bouton afficher et masquer le mot de passe */
+.login-toggle {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: transparent;
+    border: 0;
+    color: var(--login-texte-doux);
+    cursor: pointer;
+}
+
+.login-toggle:hover,
+.login-toggle:focus-visible {
+    color: var(--login-jaune);
+}
+
+/* Le trait barré n'apparaît que lorsque le mot de passe est visible*/
+.login-eye-slash {
+    display: none;
+}
+
+.login-toggle.is-visible .login-eye-slash {
+    display: block;
+}
