@@ -1,0 +1,28 @@
+/* Page de connexion */
+
+:root {
+    --login-fond: #0a1a33;
+    --login-panneau: #0d2142;
+    --login-champ: #12294d;
+    --login-bordure: #27436e;
+    --login-texte: #ffffff;
+    --login-texte-doux: #9fb2cc;
+    --login-jaune: #f5b800;
+    --login-jaune-fonce: #d99f00;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body.login-page {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--login-fond);
+    color: var(--login-texte);
+}
+
+.login-layout {
+    display: flex;
+    min-height: 100vh;
+}
