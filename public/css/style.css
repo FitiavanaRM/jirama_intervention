@@ -181,3 +181,15 @@ a:hover {
     background-color: rgba(226, 75, 74, 0.15);
     color: var(--rouge);
 }
+
+/* Lien de la page active dans le menu */
+.application > aside nav a.actif {
+    background-color: var(--jaune);
+    color: #1b1b1b;
+    font-weight: bold;
+}
+
+.application > aside nav a.actif:hover {
+    background-color: var(--jaune-fonce);
+    color: #1b1b1b;
+}
