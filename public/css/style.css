@@ -397,3 +397,48 @@ a:hover {
         border-bottom: 0;
     }
 }
+
+/* Pastilles de statut */
+.statut {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.statut-en-attente {
+    background-color: rgba(159, 178, 204, 0.18);
+    color: #c5d2e4;
+}
+
+.statut-affectee {
+    background-color: rgba(76, 154, 255, 0.2);
+    color: #7fb8ff;
+}
+
+.statut-en-cours {
+    background-color: rgba(245, 184, 0, 0.2);
+    color: var(--jaune);
+}
+
+.statut-resolue {
+    background-color: rgba(47, 179, 109, 0.2);
+    color: #5fd49a;
+}
+
+.statut-cloturee {
+    background-color: rgba(120, 130, 150, 0.25);
+    color: #aeb8c8;
+}
+
+.statut-annulee {
+    background-color: rgba(226, 75, 74, 0.2);
+    color: #ff8f8e;
+}
+
+.statut-inconnu {
+    background-color: rgba(159, 178, 204, 0.18);
+    color: var(--texte-doux);
+}
