@@ -366,13 +366,13 @@ a:hover {
     color: var(--texte);
 }
 
-/* La dernière ligne n'a pas de trait du bas. */
+/* La dernière ligne n'a pas de trait du bas */
 .application > main dt:nth-last-of-type(1),
 .application > main dd:nth-last-of-type(1) {
     border-bottom: 0;
 }
 
-/* Liens sous le contenu (retour, modifier) */
+/* Liens sous le contenu */
 .application > main > p > a {
     display: inline-block;
     padding: 8px 14px;

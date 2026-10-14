@@ -431,3 +431,23 @@ function updateDemande(
         throw new InvalidArgumentException('Cette demande ne peut plus être modifiée (elle n’est plus en attente)');
     }
 }
+
+
+// Retourne le HTML d'une pastille de statut
+function renderStatutBadge(string $statut): string
+{
+    $statuts = [
+        'EN_ATTENTE' => ['statut-en-attente', 'En attente'],
+        'AFFECTEE' => ['statut-affectee', 'Affectée'],
+        'EN_COURS' => ['statut-en-cours', 'En cours'],
+        'RESOLUE' => ['statut-resolue', 'Résolue'],
+        'CLOTUREE' => ['statut-cloturee', 'Clôturée'],
+        'ANNULEE' => ['statut-annulee', 'Annulée'],
+    ];
+
+    [$classe, $libelle] = $statuts[$statut] ?? ['statut-inconnu', $statut];
+
+    return '<span class="statut ' . $classe . '">'
+        . htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8')
+        . '</span>';
+}
