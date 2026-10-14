@@ -336,3 +336,64 @@ a:hover {
     border: 1px solid var(--rouge);
     color: #ffb4b4;
 }
+
+/* Page de détail (liste de définitions) */
+.application > main dl {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    max-width: 720px;
+    margin: 0 0 20px;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.application > main dt,
+.application > main dd {
+    margin: 0;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--bordure);
+}
+
+.application > main dt {
+    font-size: 13px;
+    color: var(--texte-doux);
+}
+
+.application > main dd {
+    font-size: 14px;
+    color: var(--texte);
+}
+
+/* La dernière ligne n'a pas de trait du bas. */
+.application > main dt:nth-last-of-type(1),
+.application > main dd:nth-last-of-type(1) {
+    border-bottom: 0;
+}
+
+/* Liens sous le contenu (retour, modifier) */
+.application > main > p > a {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.application > main > p > a:hover {
+    border-color: var(--jaune);
+}
+
+/* Petits écrans : libellé au-dessus de la valeur */
+@media (max-width: 800px) {
+    .application > main dl {
+        grid-template-columns: 1fr;
+    }
+
+    .application > main dt {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+}
