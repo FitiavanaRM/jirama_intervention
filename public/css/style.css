@@ -44,3 +44,36 @@ a {
 a:hover {
     color: var(--jaune);
 }
+
+/* Structure générale */
+.application {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "entete  entete"
+        "lateral contenu"
+        "pied    pied";
+    min-height: 100vh;
+}
+
+.application > header {
+    grid-area: entete;
+    padding: 14px 24px;
+    background-color: var(--fond-carte);
+    border-bottom: 1px solid var(--bordure);
+}
+
+.application > header p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.application > aside {
+    grid-area: lateral;
+    padding: 20px 16px;
+    background-color: var(--fond-carte);
+    border-right: 1px solid var(--bordure);
+}
