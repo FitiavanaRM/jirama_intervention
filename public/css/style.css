@@ -56,7 +56,7 @@ a:hover {
 .application > header {
     grid-column: 1 / -1;
     grid-row: 1;
-    padding: 14px 24px;
+    padding: 10px 24px;
     background-color: var(--fond-carte);
     border-bottom: 1px solid var(--bordure);
 }
@@ -94,11 +94,11 @@ a:hover {
 .application > footer {
     grid-column: 1 / -1;
     grid-row: 3;
-    padding: 14px 24px;
+    padding: 6px 24px;
     background-color: var(--fond-carte);
     border-top: 1px solid var(--bordure);
     text-align: center;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--texte-doux);
 }
 
@@ -128,4 +128,56 @@ a:hover {
     .application > footer {
         grid-row: 4;
     }
+}
+
+/* Menu latéral */
+.application > aside {
+    padding: 14px 10px;
+}
+
+.application > aside > p {
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+
+.application > aside nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.application > aside nav li {
+    margin-bottom: 2px;
+}
+
+.application > aside nav a {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: var(--texte-doux);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.application > aside nav a:hover {
+    background-color: var(--fond-champ);
+    color: var(--jaune);
+}
+
+/* Le dernier lien (Déconnexion) est séparé et en rouge. */
+.application > aside nav li:last-child {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--bordure);
+}
+
+.application > aside nav li:last-child a {
+    color: var(--rouge);
+}
+
+.application > aside nav li:last-child a:hover {
+    background-color: rgba(226, 75, 74, 0.15);
+    color: var(--rouge);
 }
