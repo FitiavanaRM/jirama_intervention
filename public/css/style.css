@@ -193,3 +193,40 @@ a:hover {
     background-color: var(--jaune-fonce);
     color: #1b1b1b;
 }
+
+/* Tableaux */
+.application > main table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 10px;
+}
+
+.application > main th {
+    padding: 10px 12px;
+    background-color: var(--fond-champ);
+    border-bottom: 1px solid var(--bordure);
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--texte-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.application > main td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--bordure);
+    vertical-align: middle;
+}
+
+.application > main tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.application > main tbody tr:hover {
+    background-color: var(--fond-champ);
+}
