@@ -230,3 +230,109 @@ a:hover {
 .application > main tbody tr:hover {
     background-color: var(--fond-champ);
 }
+
+/* Formulaires */
+.application > main form {
+    max-width: 560px;
+}
+
+/* Bouton dans un tableau */
+.application > main td form {
+    max-width: none;
+}
+
+.application > main form > div {
+    margin-bottom: 16px;
+}
+
+.application > main label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--texte-doux);
+}
+
+.application > main input[type="text"],
+.application > main input[type="tel"],
+.application > main input[type="email"],
+.application > main input[type="password"],
+.application > main select,
+.application > main textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: var(--fond-champ);
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--texte);
+}
+
+.application > main textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.application > main input:focus,
+.application > main select:focus,
+.application > main textarea:focus {
+    outline: none;
+    border-color: var(--jaune);
+}
+
+.application > main input::placeholder,
+.application > main textarea::placeholder {
+    color: #6f86a6;
+}
+
+/* Les listes déroulantes restent lisibles sur fond sombre */
+.application > main select option,
+.application > main select optgroup {
+    background-color: var(--fond-champ);
+    color: var(--texte);
+}
+
+/* Boutons */
+.application > main button {
+    padding: 10px 20px;
+    background-color: var(--jaune);
+    border: 0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1b1b1b;
+    cursor: pointer;
+}
+
+.application > main button:hover {
+    background-color: var(--jaune-fonce);
+}
+
+/* Boutons dans un tableau : plus petits. */
+.application > main td button {
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+/* Messages */
+.application > main [role="status"],
+.application > main [role="alert"] {
+    max-width: 560px;
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.application > main [role="status"] {
+    background-color: rgba(47, 179, 109, 0.15);
+    border: 1px solid var(--vert);
+    color: #8fe3b4;
+}
+
+.application > main [role="alert"] {
+    background-color: rgba(226, 75, 74, 0.15);
+    border: 1px solid var(--rouge);
+    color: #ffb4b4;
+}
