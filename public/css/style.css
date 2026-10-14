@@ -77,3 +77,32 @@ a:hover {
     background-color: var(--fond-carte);
     border-right: 1px solid var(--bordure);
 }
+
+/* Nom et rôle de l'utilisateur connecté, en haut de la barre latérale */
+.application > aside > p {
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--bordure);
+    font-size: 13px;
+    color: var(--texte-doux);
+}
+
+.application > main {
+    grid-area: contenu;
+    min-width: 0;
+    padding: 28px;
+}
+
+.application > footer {
+    grid-area: pied;
+    padding: 14px 24px;
+    background-color: var(--fond-carte);
+    border-top: 1px solid var(--bordure);
+    text-align: center;
+    font-size: 12px;
+    color: var(--texte-doux);
+}
+
+.application > footer p {
+    margin: 0;
+}
