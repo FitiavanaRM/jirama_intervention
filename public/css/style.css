@@ -48,17 +48,14 @@ a:hover {
 /* Structure générale */
 .application {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 240px minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-        "entete  entete"
-        "lateral contenu"
-        "pied    pied";
     min-height: 100vh;
 }
 
 .application > header {
-    grid-area: entete;
+    grid-column: 1 / -1;
+    grid-row: 1;
     padding: 14px 24px;
     background-color: var(--fond-carte);
     border-bottom: 1px solid var(--bordure);
@@ -72,13 +69,14 @@ a:hover {
 }
 
 .application > aside {
-    grid-area: lateral;
+    grid-column: 1;
+    grid-row: 2;
     padding: 20px 16px;
     background-color: var(--fond-carte);
     border-right: 1px solid var(--bordure);
 }
 
-/* Nom et rôle de l'utilisateur connecté, en haut de la barre latérale */
+/* Nom et rôle de l'utilisateur connecté, en haut de la barre latérale. */
 .application > aside > p {
     margin: 0 0 20px;
     padding-bottom: 16px;
@@ -88,13 +86,14 @@ a:hover {
 }
 
 .application > main {
-    grid-area: contenu;
-    min-width: 0;
+    grid-column: 2;
+    grid-row: 2;
     padding: 28px;
 }
 
 .application > footer {
-    grid-area: pied;
+    grid-column: 1 / -1;
+    grid-row: 3;
     padding: 14px 24px;
     background-color: var(--fond-carte);
     border-top: 1px solid var(--bordure);
@@ -105,4 +104,28 @@ a:hover {
 
 .application > footer p {
     margin: 0;
+}
+
+/* Petits écrans : une seule colonne */
+@media (max-width: 800px) {
+    .application {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr auto;
+    }
+
+    .application > aside {
+        grid-column: 1;
+        grid-row: 2;
+        border-right: 0;
+        border-bottom: 1px solid var(--bordure);
+    }
+
+    .application > main {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .application > footer {
+        grid-row: 4;
+    }
 }

@@ -12,9 +12,8 @@ $currentUser = getCurrentUser();
 if ($currentUser === null) {
     denyAccess();
 }
-// verifie si l utilisateur est connecté et si oui affiche son nom et son role dans la sidebar
-?>
 
+?>
 <aside>
     <p>
         <?= htmlspecialchars($currentUser['prenom'] . ' ' . $currentUser['nom'], ENT_QUOTES, 'UTF-8') ?>

@@ -22,5 +22,3 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
         <header>
             <p>JIRAMA Toliara — Gestion des interventions</p>
         </header>
-    </div>
-</body>
