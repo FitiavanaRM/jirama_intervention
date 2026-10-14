@@ -164,3 +164,32 @@ function getProjectBaseUrl(): string
 
     return substr($scriptName, 0, $projectPosition) . $projectDirectory;
 }
+
+// Retourne le chemin de la page affichée, relatif au projet
+function getCurrentPagePath(): string
+{
+    $scriptName =
+        str_replace(
+            '\\',
+            '/',
+            $_SERVER['SCRIPT_NAME'] ?? ''
+        );
+
+    $baseUrl = getProjectBaseUrl();
+    if (
+        $baseUrl !== ''
+        &&
+        str_starts_with($scriptName, $baseUrl)
+    ) {
+        return substr($scriptName, strlen($baseUrl));
+    }
+
+    return $scriptName;
+}
+
+
+// Indique si la page affichée correspond au chemin donné
+function isCurrentPage(string $path): bool
+{
+    return getCurrentPagePath() === $path;
+}
