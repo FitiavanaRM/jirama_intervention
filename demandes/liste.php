@@ -55,7 +55,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                         <td><?= htmlspecialchars((string) $demande['nom_client'], ENT_QUOTES, 'UTF-8') ?></td> 
                         <td><?= htmlspecialchars((string) $demande['type_demande'], ENT_QUOTES, 'UTF-8') ?></td> 
                         <td><?= htmlspecialchars((string) $demande['date_demande'], ENT_QUOTES, 'UTF-8') ?></td> 
-                        <td><?= htmlspecialchars((string) $demande['statut'], ENT_QUOTES, 'UTF-8') ?></td> 
+                        <td><?= renderStatutBadge((string) $demande['statut']) ?></td> 
                         <td> 
                             <?= htmlspecialchars( 
                                 (string) $demande['createur_prenom'] . ' ' . (string) $demande['createur_nom'], 
