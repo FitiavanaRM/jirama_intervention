@@ -16,6 +16,7 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/style.css">
+    <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/styleSuite.css">
 </head>
 <body>
     <div class="application">
