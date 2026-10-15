@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-// Retourne la connexion PDO unique utilisée par l'application.
-
+// Retourne la connexion PDO unique utilisée par l'application
 function getDatabaseConnection(): PDO
 {
     static $connection = null;
-
     if ($connection instanceof PDO) {
         return $connection;
     }
@@ -17,7 +15,6 @@ function getDatabaseConnection(): PDO
     $username = getenv('DB_USER') ?: 'root';
     $password = getenv('DB_PASSWORD') ?: '';
     $charset = 'utf8mb4';
-
     $dsn = "mysql:host={$host};dbname={$database};charset={$charset}";
 
     try {
@@ -27,11 +24,7 @@ function getDatabaseConnection(): PDO
             PDO::ATTR_EMULATE_PREPARES => false,
         ]);
     } catch (PDOException $exception) {
-        throw new RuntimeException(
-            'La connexion à la base de données a échoué.',
-            0,
-            $exception
-        );
+        throw new RuntimeException('La connexion à la base de données a échoué.', 0, $exception);
     }
 
     return $connection;

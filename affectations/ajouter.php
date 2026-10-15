@@ -19,20 +19,18 @@ $demandes = [];
 $equipes = [];
 $techniciensParEquipe = [];
 $errorMessage = '';
-
 try {
     $connection = getDatabaseConnection();
     $demandes = getDemandesEnAttente($connection);
     $equipes = getEquipes($connection);
 
     foreach ($equipes as $equipe) {
-    $equipeId = (int) $equipe['id_equipe'];
-    $techniciensParEquipe[$equipeId] = getTechniciensByEquipe($connection, $equipeId);
+        $equipeId = (int) $equipe['id_equipe'];
+        $techniciensParEquipe[$equipeId] = getTechniciensByEquipe($connection, $equipeId);
     }
 }
 catch (RuntimeException $exception) {
-    $errorMessage =
-        'Les données d’affectation ne peuvent pas être chargées pour le moment';
+    $errorMessage = 'Les données d’affectation ne peuvent pas être chargées pour le moment';
 }
 
 // traitement de POST
@@ -42,7 +40,6 @@ unset($_SESSION['affectation_success']);
 if ($errorMessage === '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     try {
         $validatedData = validateAffectationData($_POST);
-
         checkAffectationCoherence(
             $connection,
             $validatedData['id_demande'],
@@ -119,10 +116,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php else: ?>
 
     <form action="ajouter.php" method="post">
-
         <div>
             <label for="id_demande">Demande</label>
-
             <select id="id_demande" name="id_demande" required>
                 <option value="">Sélectionner une demande</option>
 
@@ -142,7 +137,6 @@ require_once __DIR__ . '/../includes/sidebar.php';
         </div>
         <div>
             <label for="id_equipe">Équipe</label>
-
             <select id="id_equipe" name="id_equipe" required>
                 <option value="">Sélectionner une équipe</option>
 

@@ -150,7 +150,6 @@ function getLoginUrl(): string
     return substr($scriptName, 0, $projectPosition) . $projectDirectory . '/login.php';
 }
 
-
 // Retourne le chemin de base du projet
 function getProjectBaseUrl(): string
 {
