@@ -141,9 +141,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
 		</dd>
 
 		<dt>Statut</dt>
-		<dd>
-			<?= htmlspecialchars((string) $demande['statut'], ENT_QUOTES, 'UTF-8') ?>
-		</dd>
+        <dd>
+            <?= renderStatutBadge((string) $demande['statut']) ?>
+        </dd>
 
 		<dt>Enregistrée par</dt>
 		<dd>
