@@ -46,7 +46,7 @@ require_once __DIR__ . '/includes/sidebar.php';
                 <?php foreach ($statistiques as $statut => $total): ?>
                     <tr>
                         <td>
-                            <?= htmlspecialchars($statut, ENT_QUOTES, 'UTF-8') ?>
+                            <?= renderStatutBadge($statut) ?>
                         </td>
                         <td>
                             <?= (int) $total ?>
