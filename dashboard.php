@@ -76,10 +76,31 @@ require_once __DIR__ . '/includes/sidebar.php';
         Bienvenue,
         <?= htmlspecialchars($currentUser['prenom'] . ' ' . $currentUser['nom'], ENT_QUOTES, 'UTF-8') ?>.
     </p>
-    <p>
-        <?= htmlspecialchars($roleMessage, ENT_QUOTES, 'UTF-8') ?>
-    </p>
-    <p>Les indicateurs chiffrés seront ajoutés au module Statistiques</p>
+    
+    <p><?= htmlspecialchars($roleMessage, ENT_QUOTES, 'UTF-8') ?></p>
+    <?php if ($statistiques !== []): ?>
+        <?php
+        $cartes = [
+            'EN_ATTENTE' => ['En attente', 'carte-en-attente'],
+            'AFFECTEE' => ['Affectées', 'carte-affectee'],
+            'EN_COURS' => ['En cours', 'carte-en-cours'],
+            'RESOLUE' => ['Résolues', 'carte-resolue'],
+        ];
+        ?>
+
+        <div class="cartes">
+            <?php foreach ($cartes as $statut => [$libelle, $classe]): ?>
+                <div class="carte <?= $classe ?>">
+                    <p class="carte-libelle">
+                        <?= htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+                    <p class="carte-valeur">
+                        <?= (int) ($statistiques[$statut] ?? 0) ?>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
     <?php if ($liens !== []): ?>
         <h2>Accès rapides</h2>
