@@ -67,22 +67,14 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
                         <td>
                             <?php if ($historique['ancien_statut'] !== null): ?>
-                                <?= htmlspecialchars(
-                                    (string) $historique['ancien_statut'],
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                ) ?>
+                                <?= renderStatutBadge((string) $historique['ancien_statut']) ?>
                             <?php else: ?>
                                 —
                             <?php endif; ?>
                         </td>
 
                         <td>
-                            <?= htmlspecialchars(
-                                (string) $historique['nouveau_statut'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
+                            <?= renderStatutBadge((string) $historique['nouveau_statut']) ?>
                         </td>
 
                         <td>
