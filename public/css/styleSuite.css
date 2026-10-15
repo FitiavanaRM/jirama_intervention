@@ -58,3 +58,31 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Accès rapides du tableau de bord */
+.acces-rapides {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.acces-rapides a {
+    display: block;
+    padding: 14px 16px;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-left: 4px solid var(--jaune);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--texte);
+    text-decoration: none;
+}
+
+.acces-rapides a:hover {
+    background-color: var(--fond-champ);
+    border-color: var(--jaune);
+    color: var(--jaune);
+}

@@ -104,7 +104,7 @@ require_once __DIR__ . '/includes/sidebar.php';
 
     <?php if ($liens !== []): ?>
         <h2>Accès rapides</h2>
-        <ul>
+        <ul class="acces-rapides">
             <?php foreach ($liens as $url => $libelle): ?>
                 <li>
                     <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>">
