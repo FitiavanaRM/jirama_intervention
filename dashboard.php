@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/demandes.php';
 
 $currentUser = requireLogin();
 
@@ -50,6 +52,18 @@ $roleLinks = [
 $pageTitle = 'Tableau de bord | JIRAMA Intervention';
 $roleMessage = $roleMessages[$currentUser['nom_role']] ?? 'Votre rôle ne possède pas encore de présentation dédiée.';
 $liens = $roleLinks[$currentUser['nom_role']] ?? [];
+
+
+$statistiques = [];
+
+if (hasPermission('statistique.consulter')) {
+    try {
+        $statistiques = getStatistiquesParStatut(getDatabaseConnection());
+    }
+    catch (RuntimeException $exception) {
+        $statistiques = [];
+    }
+}
 
 define('JIRAMA_LAYOUT', true);
 
