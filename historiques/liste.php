@@ -34,71 +34,73 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php elseif ($historiques === []): ?>
         <p>Aucun historique n’est enregistré.</p>
     <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Référence</th>
-                    <th>Client</th>
-                    <th>Ancien statut</th>
-                    <th>Nouveau statut</th>
-                    <th>Date</th>
-                    <th>Effectué par</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach ($historiques as $historique): ?>
+        <div class="tableau-defilant">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $historique['reference'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $historique['nom_client'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-
-                        <td>
-                            <?php if ($historique['ancien_statut'] !== null): ?>
-                                <?= renderStatutBadge((string) $historique['ancien_statut']) ?>
-                            <?php else: ?>
-                                —
-                            <?php endif; ?>
-                        </td>
-
-                        <td>
-                            <?= renderStatutBadge((string) $historique['nouveau_statut']) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $historique['date_action'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $historique['utilisateur_prenom'] .
-                                ' ' .
-                                (string) $historique['utilisateur_nom'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-
+                        <th>Référence</th>
+                        <th>Client</th>
+                        <th>Ancien statut</th>
+                        <th>Nouveau statut</th>
+                        <th>Date</th>
+                        <th>Effectué par</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    <?php foreach ($historiques as $historique): ?>
+                        <tr>
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $historique['reference'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $historique['nom_client'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+
+                            <td>
+                                <?php if ($historique['ancien_statut'] !== null): ?>
+                                    <?= renderStatutBadge((string) $historique['ancien_statut']) ?>
+                                <?php else: ?>
+                                    —
+                                <?php endif; ?>
+                            </td>
+
+                            <td>
+                                <?= renderStatutBadge((string) $historique['nouveau_statut']) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $historique['date_action'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $historique['utilisateur_prenom'] .
+                                    ' ' .
+                                    (string) $historique['utilisateur_nom'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     <?php endif; ?>
 </main>
 
