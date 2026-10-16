@@ -9,12 +9,15 @@ require_once __DIR__ . '/includes/affectations.php';
 
 requirePermission('statistique.consulter');
 $statistiques = [];
+$statistiquesEquipes = [];
+$indicateurs = [];
 $errorMessage = '';
 
 try {
     $connection = getDatabaseConnection();
     $statistiques = getStatistiquesParStatut($connection);
     $statistiquesEquipes = getStatistiquesParEquipe($connection);
+    $indicateurs = getIndicateursGeneraux($connection);
 }
 catch (RuntimeException $exception) {
     $errorMessage ='Les statistiques ne peuvent pas être chargées pour le moment';
@@ -33,30 +36,37 @@ require_once __DIR__ . '/includes/sidebar.php';
         <p role="alert">
             <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
         </p>
-    <?php else: ?>
+        <?php else: ?>
+
+        <div class="cartes">
+
+            <div class="carte carte-en-attente">
+                <p class="carte-libelle">Total des demandes</p>
+                <p class="carte-valeur"><?= (int) $indicateurs['total'] ?></p>
+            </div>
+
+            <div class="carte carte-en-cours">
+                <p class="carte-libelle">En cours</p>
+                <p class="carte-valeur"><?= (int) $indicateurs['en_cours'] ?></p>
+            </div>
+
+            <div class="carte carte-resolue">
+                <p class="carte-libelle">Taux de résolution</p>
+                <p class="carte-valeur"><?= (int) $indicateurs['taux_resolution'] ?> %</p>
+            </div>
+
+            <div class="carte carte-affectee">
+                <p class="carte-libelle">Délai moyen d’intervention</p>
+                <p class="carte-valeur">
+                    <?= htmlspecialchars(
+                        formatDuree($indicateurs['delai_moyen_minutes']),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </p>
+            </div>
+        </div>
         <table>
-            <thead>
-                <tr>
-                    <th>Statut</th>
-                    <th>Nombre de demandes</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach ($statistiques as $statut => $total): ?>
-                    <tr>
-                        <td>
-                            <?= renderStatutBadge($statut) ?>
-                        </td>
-                        <td>
-                            <?= (int) $total ?>
-                        </td>
-                    </tr>
-
-                <?php endforeach; ?>
-
-            </tbody>
-        </table>
 
         <h2>Afféctation par équipe</h2>
         <table>
