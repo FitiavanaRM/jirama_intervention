@@ -451,3 +451,29 @@ a:hover {
     letter-spacing: 1px;
     color: var(--texte-doux);
 }
+
+/* Page à hauteur de la fenêtre*/
+@media (min-width: 801px) {
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .application {
+        height: 100vh;
+        min-height: 0;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    .application > aside,
+    .application > main {
+        overflow-y: auto;
+    }
+}
+
+/* Barres de défilement discrètes, dans les couleurs de l'application */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--bordure) transparent;
+}
