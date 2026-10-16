@@ -41,76 +41,78 @@ require_once __DIR__ . '/../includes/sidebar.php';
         <p>Aucune affectation n’est enregistrée</p>
 
     <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Référence</th>
-                    <th>Client</th>
-                    <th>Équipe</th>
-                    <th>Technicien</th>
-                    <th>Date d’affectation</th>
-                    <th>Observation</th>
-                </tr>
-            </thead>
-            <tbody>
-                 <?php foreach ($affectations as $affectation): ?>
+        <div class="tableau-defilant">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $affectation['reference'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $affectation['nom_client'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $affectation['nom_equipe'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-
-                        <td>
-                            <?php if ($affectation['id_technicien'] !== null): ?>
+                        <th>Référence</th>
+                        <th>Client</th>
+                        <th>Équipe</th>
+                        <th>Technicien</th>
+                        <th>Date d’affectation</th>
+                        <th>Observation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <?php foreach ($affectations as $affectation): ?>
+                        <tr>
+                            <td>
                                 <?= htmlspecialchars(
-                                    (string) $affectation['technicien_prenom'] .
-                                    ' ' .
-                                    (string) $affectation['technicien_nom'],
+                                    (string) $affectation['reference'],
                                     ENT_QUOTES,
                                     'UTF-8'
                                 ) ?>
-                            <?php else: ?>
-                                —
-                            <?php endif; ?>
-                        </td>
+                            </td>
 
-                        <td>
-                            <?= htmlspecialchars(
-                                (string) $affectation['date_affectation'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-                         <td>
-                            <?= htmlspecialchars(
-                                (string) ($affectation['observation'] ?? ''),
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </td>
-                    </tr>
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $affectation['nom_client'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $affectation['nom_equipe'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
 
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                            <td>
+                                <?php if ($affectation['id_technicien'] !== null): ?>
+                                    <?= htmlspecialchars(
+                                        (string) $affectation['technicien_prenom'] .
+                                        ' ' .
+                                        (string) $affectation['technicien_nom'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) ?>
+                                <?php else: ?>
+                                    —
+                                <?php endif; ?>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) $affectation['date_affectation'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars(
+                                    (string) ($affectation['observation'] ?? ''),
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     <?php endif; ?>
 </main>
 
