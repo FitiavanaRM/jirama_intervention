@@ -39,58 +39,60 @@ require_once __DIR__ . '/../includes/sidebar.php';
         <p>Aucun technicien n’est enregistré.</p> 
  
     <?php else: ?> 
-        <table> 
-            <thead> 
-                <tr> 
-                    <th>Nom</th> 
-                    <th>Téléphone</th> 
-                    <th>Fonction</th> 
-                    <th>Équipe</th> 
-                    <th>Compte utilisateur</th> 
-                    <?php if (hasRole('Administrateur')): ?> 
-                        <th>Action</th> 
-                    <?php endif; ?> 
-                </tr> 
-            </thead> 
- 
-            <tbody> 
-                <?php foreach ($techniciens as $technicien): ?> 
+        <div class="tableau-defilant">
+            <table> 
+                <thead> 
                     <tr> 
-                        <td> 
-                            <?= htmlspecialchars( 
-                                (string) $technicien['prenom'] . ' ' . (string) $technicien['nom'], 
-                                ENT_QUOTES, 
-                                'UTF-8' 
-                            ) ?> 
-                        </td> 
-                        <td> 
-                            <?= htmlspecialchars((string) ($technicien['telephone'] ?? ''), ENT_QUOTES, 'UTF-8') ?> 
-                        </td> 
-                        <td> 
-                            <?= htmlspecialchars((string) ($technicien['fonction'] ?? ''), ENT_QUOTES, 'UTF-8') ?> 
-                        </td> 
-                        <td> 
-                            <?= htmlspecialchars((string) $technicien['nom_equipe'], ENT_QUOTES, 'UTF-8') ?> 
-                        </td> 
-                        <td> 
-                            <?php if ($technicien['utilisateur_email'] !== null): ?> 
-                                <?= htmlspecialchars((string) $technicien['utilisateur_email'], ENT_QUOTES, 'UTF-8') ?> 
-                            <?php else: ?> 
-                                — 
-                            <?php endif; ?> 
-                        </td> 
+                        <th>Nom</th> 
+                        <th>Téléphone</th> 
+                        <th>Fonction</th> 
+                        <th>Équipe</th> 
+                        <th>Compte utilisateur</th> 
                         <?php if (hasRole('Administrateur')): ?> 
-                            <td> 
-                                <a href="modifier.php?id_technicien=<?= (int) $technicien['id_technicien'] ?>"> 
-                                    Modifier 
-                                </a> 
-                            </td> 
+                            <th>Action</th> 
                         <?php endif; ?> 
                     </tr> 
+                </thead> 
+ 
+                <tbody> 
+                    <?php foreach ($techniciens as $technicien): ?> 
+                        <tr> 
+                            <td> 
+                                <?= htmlspecialchars( 
+                                    (string) $technicien['prenom'] . ' ' . (string) $technicien['nom'], 
+                                    ENT_QUOTES, 
+                                    'UTF-8' 
+                                ) ?> 
+                            </td> 
+                            <td> 
+                                <?= htmlspecialchars((string) ($technicien['telephone'] ?? ''), ENT_QUOTES, 'UTF-8') ?> 
+                            </td> 
+                            <td> 
+                                <?= htmlspecialchars((string) ($technicien['fonction'] ?? ''), ENT_QUOTES, 'UTF-8') ?> 
+                            </td> 
+                            <td> 
+                                <?= htmlspecialchars((string) $technicien['nom_equipe'], ENT_QUOTES, 'UTF-8') ?> 
+                            </td> 
+                            <td> 
+                                <?php if ($technicien['utilisateur_email'] !== null): ?> 
+                                <?= htmlspecialchars((string) $technicien['utilisateur_email'], ENT_QUOTES, 'UTF-8') ?> 
+                                <?php else: ?> 
+                                — 
+                                <?php endif; ?> 
+                            </td> 
+                            <?php if (hasRole('Administrateur')): ?> 
+                                <td> 
+                                    <a href="modifier.php?id_technicien=<?= (int) $technicien['id_technicien'] ?>"> 
+                                        Modifier 
+                                    </a> 
+                                </td> 
+                            <?php endif; ?> 
+                        </tr> 
 
-                <?php endforeach; ?> 
-            </tbody> 
-        </table> 
+                    <?php endforeach; ?> 
+                </tbody> 
+            </table> 
+        </div>
     <?php endif; ?> 
 </main> 
  

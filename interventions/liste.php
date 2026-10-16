@@ -112,45 +112,46 @@ require_once __DIR__ . '/../includes/sidebar.php';
         </p>
 
     <?php elseif (hasRole('Technicien')): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Référence</th>
-                    <th>Client</th>
-                    <th>Adresse</th>
-                    <th>Description du problème</th>
-                    <th>Début de l’intervention</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($interventionsTechnicien as $intervention): ?>
+        <div class="tableau-defilant">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <?= htmlspecialchars((string) $intervention['reference'], ENT_QUOTES, 'UTF-8') ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars((string) $intervention['nom_client'], ENT_QUOTES, 'UTF-8') ?>
-                        </td>
-                        <td>
-                            <?= nl2br(htmlspecialchars((string) $intervention['adresse_client'], ENT_QUOTES, 'UTF-8')) ?>
-                        </td>
-                        <td>
-                            <?= nl2br(htmlspecialchars((string) $intervention['description_probleme'], ENT_QUOTES, 'UTF-8')) ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars((string) $intervention['date_debut'], ENT_QUOTES, 'UTF-8') ?>
-                        </td>
-                        <td>
-                            <a href="terminer.php?id_demande=<?= (int) $intervention['id_demande'] ?>">
-                                Terminer
-                            </a>
-                        </td>
+                        <th>Référence</th>
+                        <th>Client</th>
+                        <th>Adresse</th>
+                        <th>Description du problème</th>
+                        <th>Début de l’intervention</th>
+                        <th>Action</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    <?php foreach ($interventionsTechnicien as $intervention): ?>
+                        <tr>
+                            <td>
+                                <?= htmlspecialchars((string) $intervention['reference'], ENT_QUOTES, 'UTF-8') ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars((string) $intervention['nom_client'], ENT_QUOTES, 'UTF-8') ?>
+                            </td>
+                            <td>
+                                <?= nl2br(htmlspecialchars((string) $intervention['adresse_client'], ENT_QUOTES, 'UTF-8')) ?>
+                            </td>
+                            <td>
+                                <?= nl2br(htmlspecialchars((string) $intervention['description_probleme'], ENT_QUOTES, 'UTF-8')) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars((string) $intervention['date_debut'], ENT_QUOTES, 'UTF-8') ?>
+                            </td>
+                            <td>
+                                <a href="terminer.php?id_demande=<?= (int) $intervention['id_demande'] ?>">
+                                    Terminer
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     <?php elseif ($demandes === []): ?>
         <p>Aucune demande affectée en attente d’organisation</p>
 
