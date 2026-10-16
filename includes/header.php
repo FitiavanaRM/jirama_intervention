@@ -25,7 +25,7 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
             <?php $utilisateurEntete = getCurrentUser(); ?>
 
             <?php if ($utilisateurEntete !== null): ?>
-                <span class="entete-utilisateur">
+                <span style="font-family:'Segoe Script','Brush Script MT','Lucida Handwriting',cursive; font-size:15px; font-style:italic; letter-spacing:0.5px; color:#f5b800; padding-bottom:2px; border-bottom:1px solid rgba(245,184,0,0.45);">
                     <?= htmlspecialchars(
                         $utilisateurEntete['prenom'] . ' ' . $utilisateurEntete['nom'],
                         ENT_QUOTES,
