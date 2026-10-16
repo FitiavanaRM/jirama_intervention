@@ -486,3 +486,19 @@ function getIndicateursGeneraux(PDO $connection): array
             : null,
     ];
 }
+
+// Affiche une durée en minutes
+function formatDuree(?int $minutes): string
+{
+    if ($minutes === null) {
+        return '—';
+    }
+
+    $heures = intdiv($minutes, 60);
+    $reste = $minutes % 60;
+    if ($heures === 0) {
+        return $reste . ' min';
+    }
+    
+    return $heures . ' h ' . str_pad((string) $reste, 2, '0', STR_PAD_LEFT);
+}
