@@ -451,3 +451,38 @@ function renderStatutBadge(string $statut): string
         . htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8')
         . '</span>';
 }
+
+
+// Retourne les indicateurs généraux affichés en haut de la page de statistiques
+function getIndicateursGeneraux(PDO $connection): array
+{
+    // On réutilise le comptage par statut déjà existant
+    $parStatut = getStatistiquesParStatut($connection);
+    $total = array_sum($parStatut);
+    $traitees = $parStatut['RESOLUE'] + $parStatut['CLOTUREE'];
+
+    // Les demandes annulées ne comptent pas dans le taux de résolution
+    $baseTaux = $total - $parStatut['ANNULEE'];
+
+    $taux = $baseTaux > 0
+        ? (int) round($traitees * 100 / $baseTaux)
+        : 0;
+
+    $statement = $connection->prepare(
+        'SELECT AVG(TIMESTAMPDIFF(MINUTE, date_debut, date_fin))
+         FROM interventions
+         WHERE date_debut IS NOT NULL
+         AND date_fin IS NOT NULL'
+    );
+
+    $statement->execute();
+    $moyenne = $statement->fetchColumn();
+    return [
+        'total' => $total,
+        'en_cours' => $parStatut['EN_COURS'],
+        'taux_resolution' => $taux,
+        'delai_moyen_minutes' => $moyenne !== null && $moyenne !== false
+            ? (int) round((float) $moyenne)
+            : null,
+    ];
+}
