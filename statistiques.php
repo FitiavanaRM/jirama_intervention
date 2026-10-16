@@ -36,10 +36,9 @@ require_once __DIR__ . '/includes/sidebar.php';
         <p role="alert">
             <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
         </p>
-        <?php else: ?>
 
+    <?php else: ?>
         <div class="cartes">
-
             <div class="carte carte-en-attente">
                 <p class="carte-libelle">Total des demandes</p>
                 <p class="carte-valeur"><?= (int) $indicateurs['total'] ?></p>
@@ -66,7 +65,25 @@ require_once __DIR__ . '/includes/sidebar.php';
                 </p>
             </div>
         </div>
-        <table>
+
+        <h2>Répartition par statut</h2>
+        <?php $maxStatut = max(1, ...array_values($statistiques)); ?>
+        <div class="barres">
+            <?php foreach ($statistiques as $statut => $total): ?>
+                <div class="barre-ligne">
+                    <span class="barre-libelle">
+                        <?= renderStatutBadge($statut) ?>
+                    </span>
+                    <div class="barre-fond">
+                        <div
+                            class="barre-remplie barre-<?= htmlspecialchars(strtolower(str_replace('_', '-', $statut)), ENT_QUOTES, 'UTF-8') ?>"
+                            style="width: <?= (int) round($total * 100 / $maxStatut) ?>%"
+                        ></div>
+                    </div>
+                    <span class="barre-valeur"><?= (int) $total ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
         <h2>Afféctation par équipe</h2>
         <table>

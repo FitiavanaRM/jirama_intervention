@@ -109,3 +109,65 @@
     z-index: 1;
     box-shadow: inset 0 -1px 0 var(--bordure);
 }
+
+/* ===== Barres horizontales (statistiques) ===== */
+
+.barres {
+    max-width: 720px;
+    margin: 0 0 24px;
+    padding: 14px 16px;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+}
+
+.barre-ligne {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) 40px;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.barre-ligne:last-child {
+    margin-bottom: 0;
+}
+
+.barre-fond {
+    height: 12px;
+    background-color: var(--fond-champ);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.barre-remplie {
+    height: 100%;
+    border-radius: 6px;
+    background-color: var(--texte-doux);
+}
+
+.barre-en-attente { 
+    background-color: #9fb2cc;
+}
+.barre-affectee { 
+    background-color: #4c9aff;
+}
+.barre-en-cours { 
+    background-color: var(--jaune);
+}
+.barre-resolue {
+    background-color: var(--vert);
+}
+.barre-cloturee { 
+    background-color: #78829a; 
+}
+.barre-annulee { 
+    background-color: var(--rouge);
+}
+
+.barre-valeur {
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--texte);
+}
