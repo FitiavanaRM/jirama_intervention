@@ -41,43 +41,44 @@ require_once __DIR__ . '/../includes/sidebar.php';
         <p>Aucune équipe n’est enregistrée</p>
 
     <?php else: ?>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Techniciens</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach ($equipes as $equipe): ?>
+        <div class="tableau-defilant">
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <?= htmlspecialchars((string) $equipe['nom_equipe'], ENT_QUOTES, 'UTF-8') ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars((string) ($equipe['type_equipe'] ?? ''), ENT_QUOTES, 'UTF-8') ?>
-                        </td>
-                        <td>
-                            <?= nl2br(htmlspecialchars((string) ($equipe['description'] ?? ''), ENT_QUOTES, 'UTF-8')) ?>
-                        </td>
-                        <td>
-                            <?= (int) $equipe['nombre_techniciens'] ?>
-                        </td>
-                        <td>
-                            <a href="modifier.php?id_equipe=<?= (int) $equipe['id_equipe'] ?>">
-                                Modifier
-                            </a>
-                        </td>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Techniciens</th>
+                        <th>Action</th>
                     </tr>
+                </thead>
 
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                <tbody>
+                    <?php foreach ($equipes as $equipe): ?>
+                        <tr>
+                            <td>
+                                <?= htmlspecialchars((string) $equipe['nom_equipe'], ENT_QUOTES, 'UTF-8') ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars((string) ($equipe['type_equipe'] ?? ''), ENT_QUOTES, 'UTF-8') ?>
+                            </td>
+                            <td>
+                                <?= nl2br(htmlspecialchars((string) ($equipe['description'] ?? ''), ENT_QUOTES, 'UTF-8')) ?>
+                            </td>
+                            <td>
+                                <?= (int) $equipe['nombre_techniciens'] ?>
+                            </td>
+                            <td>
+                                <a href="modifier.php?id_equipe=<?= (int) $equipe['id_equipe'] ?>">
+                                    Modifier
+                                </a>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     <?php endif; ?>
 </main>
 
