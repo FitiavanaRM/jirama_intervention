@@ -20,34 +20,18 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
 </head>
 <body>
     <div class="application">
-        <header>
+                <header>
             <p>JIRAMA Toliara — Gestion des interventions</p>
+
             <?php $utilisateurEntete = getCurrentUser(); ?>
 
             <?php if ($utilisateurEntete !== null): ?>
-                <div class="entete-utilisateur">
-                    <span class="entete-initiales" aria-hidden="true">
-                        <?= htmlspecialchars(
-                            mb_strtoupper(
-                                mb_substr($utilisateurEntete['prenom'], 0, 1)
-                                . mb_substr($utilisateurEntete['nom'], 0, 1)
-                            ),
-                            ENT_QUOTES,
-                            'UTF-8'
-                        ) ?>
-                    </span>
-                    <span class="entete-identite">
-                        <span class="entete-nom">
-                            <?= htmlspecialchars(
-                                $utilisateurEntete['prenom'] . ' ' . $utilisateurEntete['nom'],
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
-                        </span>
-                        <span class="entete-role">
-                            <?= htmlspecialchars($utilisateurEntete['nom_role'], ENT_QUOTES, 'UTF-8') ?>
-                        </span>
-                    </span>
-                </div>
+                <span class="entete-utilisateur">
+                    <?= htmlspecialchars(
+                        $utilisateurEntete['prenom'] . ' ' . $utilisateurEntete['nom'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </span>
             <?php endif; ?>
         </header>
