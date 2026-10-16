@@ -38,6 +38,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
         <p>Aucun utilisateur n’est enregistré.</p>
 
     <?php else: ?>
+        <div class="tableau-defilant">
         <table>
             <thead>
                 <tr>
@@ -78,6 +79,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
     <?php endif; ?>
 </main>
 
