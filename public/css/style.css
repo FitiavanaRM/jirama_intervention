@@ -441,3 +441,13 @@ a:hover {
     background-color: rgba(159, 178, 204, 0.18);
     color: var(--texte-doux);
 }
+
+/* Rôle de l'utilisateur en haut de la barre latérale */
+.application > aside > p.role-utilisateur {
+    font-size: 10px;
+    font-weight: bold;
+    font-family:'Times New Roman', Times, serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--texte-doux);
+}

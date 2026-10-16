@@ -15,9 +15,7 @@ if ($currentUser === null) {
 
 ?>
 <aside>
-    <p>
-        <?= htmlspecialchars($currentUser['prenom'] . ' ' . $currentUser['nom'], ENT_QUOTES, 'UTF-8') ?>
-        —
+    <p class="role-utilisateur">
         <?= htmlspecialchars($currentUser['nom_role'], ENT_QUOTES, 'UTF-8') ?>
     </p>
     <nav aria-label="Navigation principale">

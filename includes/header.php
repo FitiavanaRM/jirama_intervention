@@ -15,8 +15,8 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
-    <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/style.css">
-    <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/styleSuite.css">
+    <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/style.css?v=<?= (int) @filemtime(__DIR__ . '/../public/css/style.css') ?>">
+    <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/styleSuite.css?v=<?= (int) @filemtime(__DIR__ . '/../public/css/styleSuite.css') ?>">
 </head>
 <body>
     <div class="application">
