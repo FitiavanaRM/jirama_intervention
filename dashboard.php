@@ -77,7 +77,7 @@ require_once __DIR__ . '/includes/sidebar.php';
         <?= htmlspecialchars($currentUser['prenom'] . ' ' . $currentUser['nom'], ENT_QUOTES, 'UTF-8') ?>.
     </p>
     
-    <p><?= htmlspecialchars($roleMessage, ENT_QUOTES, 'UTF-8') ?></p>
+    <h6><?= htmlspecialchars($roleMessage, ENT_QUOTES, 'UTF-8') ?></h6>
     <?php if ($statistiques !== []): ?>
         <?php
         $cartes = [
