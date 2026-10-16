@@ -85,27 +85,37 @@ require_once __DIR__ . '/includes/sidebar.php';
             <?php endforeach; ?>
         </div>
 
-        <h2>Afféctation par équipe</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Equipe</th>
-                    <th>Nombre d'affectations</th>
-                </tr>
-            </thead>
-            <tbody>
+                <h2>Affectations par équipe</h2>
+
+        <?php if ($statistiquesEquipes === []): ?>
+
+            <p>Aucune équipe n’est enregistrée.</p>
+
+        <?php else: ?>
+
+            <?php
+            $maxEquipe = max(
+                [1, ...array_map('intval', array_column($statistiquesEquipes, 'total'))]
+            );
+            ?>
+
+            <div class="barres barres-equipes">
                 <?php foreach ($statistiquesEquipes as $equipe): ?>
-                    <tr>
-                        <td>
+                    <div class="barre-ligne">
+                        <span class="barre-libelle">
                             <?= htmlspecialchars((string) $equipe['nom_equipe'], ENT_QUOTES, 'UTF-8') ?>
-                        </td>
-                        <td>
-                            <?= (int) $equipe['total'] ?>
-                        </td>
-                    </tr>
+                        </span>
+                        <div class="barre-fond">
+                            <div
+                                class="barre-remplie barre-equipe"
+                                style="width: <?= (int) round((int) $equipe['total'] * 100 / $maxEquipe) ?>%"
+                            ></div>
+                        </div>
+                        <span class="barre-valeur"><?= (int) $equipe['total'] ?></span>
+                    </div>
                 <?php endforeach; ?>
-            </tbody>
-        </table>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 </main>
 

@@ -171,3 +171,17 @@
     font-weight: bold;
     color: var(--texte);
 }
+
+/* Barres des équipes : libellé plus large, barre jaune */
+.barres-equipes .barre-ligne {
+    grid-template-columns: 190px minmax(0, 1fr) 40px;
+}
+
+.barres-equipes .barre-libelle {
+    font-size: 13px;
+    color: var(--texte-doux);
+}
+
+.barre-equipe {
+    background-color: var(--jaune);
+}
