@@ -20,9 +20,8 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
 </head>
 <body>
     <div class="application">
-                <header>
+        <header style="display:flex; align-items:center; justify-content:space-between;">
             <p>JIRAMA Toliara — Gestion des interventions</p>
-
             <?php $utilisateurEntete = getCurrentUser(); ?>
 
             <?php if ($utilisateurEntete !== null): ?>
