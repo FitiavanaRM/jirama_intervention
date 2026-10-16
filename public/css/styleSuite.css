@@ -89,7 +89,7 @@
 
 /* Tableaux avec défilement interne */
 .application > main .tableau-defilant {
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 178px);
     overflow: auto;
     border: 1px solid var(--bordure);
     border-radius: 8px;
