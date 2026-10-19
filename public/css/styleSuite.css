@@ -185,3 +185,16 @@
 .barre-equipe {
     background-color: var(--jaune);
 }
+
+/* Messages d'accueil du tableau de bord */
+.application > main > p.accueil-titre {
+    margin: 0 0 2px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.application > main > p.accueil-role {
+    margin: 0 0 18px;
+    font-size: 12px;
+    color: var(--texte-doux);
+}
