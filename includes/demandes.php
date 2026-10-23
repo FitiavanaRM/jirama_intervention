@@ -646,3 +646,114 @@ function validateReclamationData(PDO $connection, array $data): array
         'description_probleme' => $description,
     ];
 }
+
+// Enregistre une réclamation
+function createReclamation(
+    PDO $connection,
+    array $data,
+    int $creatorId
+): array
+{
+    if ($creatorId < 1) {
+        throw new InvalidArgumentException('L’utilisateur créateur est invalide');
+    }
+
+    $maximumAttempts = 3;
+    for ($attempt = 1; $attempt <= $maximumAttempts; $attempt++) {
+        try {
+            $connection->beginTransaction();
+            $numeroDossier = generateNumeroDossier($connection);
+            $statement = $connection->prepare(
+                'INSERT INTO demandes (
+                    reference,
+                    nom_client,
+                    telephone_client,
+                    adresse_client,
+                    repere_adresse,
+                    type_demande,
+                    description_probleme,
+                    statut,
+                    id_utilisateur,
+                    id_client
+                ) VALUES (
+                    :reference,
+                    :nom_client,
+                    :telephone_client,
+                    :adresse_client,
+                    :repere_adresse,
+                    :type_demande,
+                    :description_probleme,
+                    :statut,
+                    :id_utilisateur,
+                    :id_client
+                )'
+            );
+
+            $statement->execute([
+                'reference' => $numeroDossier,
+                'nom_client' => $data['nom_client'],
+                'telephone_client' => $data['telephone_client'],
+                'adresse_client' => $data['adresse_client'],
+                'repere_adresse' => $data['repere_adresse'],
+                'type_demande' => $data['type_demande'],
+                'description_probleme' => $data['description_probleme'],
+                'statut' => 'EN_ATTENTE',
+                'id_utilisateur' => $creatorId,
+                'id_client' => $data['id_client'],
+            ]);
+
+            $demandeId = (int) $connection->lastInsertId();
+            // Le téléphone vérifié avec le client devient celui de sa fiche
+            $statement = $connection->prepare(
+                'UPDATE clients
+                 SET telephone_client = :telephone_client
+                 WHERE id_client = :id_client'
+            );
+
+            $statement->execute([
+                'telephone_client' => $data['telephone_client'],
+                'id_client' => $data['id_client'],
+            ]);
+
+            insertHistorique(
+                $connection,
+                $demandeId,
+                $creatorId,
+                null,
+                'EN_ATTENTE',
+                'Réclamation enregistrée'
+            );
+
+            $connection->commit();
+            return [
+                'id_demande' => $demandeId,
+                'reference' => $numeroDossier,
+            ];
+
+        } catch (PDOException $exception) {
+            if ($connection->inTransaction()) {
+                $connection->rollBack();
+            }
+
+            $isDuplicateReference =
+                $exception->getCode() === '23000'
+                &&
+                (int) ($exception->errorInfo[1] ?? 0) === 1062;
+
+            if ($isDuplicateReference && $attempt < $maximumAttempts) {
+                continue;
+            }
+            throw $exception;
+
+        }
+        catch (Throwable $exception) {
+            if ($connection->inTransaction()) {
+                $connection->rollBack();
+            }
+
+            throw $exception;
+        }
+    }
+
+    throw new RuntimeException('Impossible d’enregistrer la réclamation');
+}
