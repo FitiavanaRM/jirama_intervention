@@ -502,3 +502,45 @@ function formatDuree(?int $minutes): string
     
     return $heures . ' h ' . str_pad((string) $reste, 2, '0', STR_PAD_LEFT);
 }
+
+
+// Retourne la liste des problèmes proposés pour une réclamation
+function getTypesProbleme(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT id_type_probleme, libelle
+         FROM types_probleme
+         ORDER BY
+            (libelle = :autre) ASC,
+            libelle ASC'
+    );
+
+    $statement->execute([
+        'autre' => 'Autre'
+    ]);
+
+    return $statement->fetchAll();
+}
+
+
+// Retourne un problème précis, ou null s'il n'existe pas
+function getTypeProblemeById(PDO $connection, int $typeProblemeId): ?array
+{
+    if ($typeProblemeId < 1) {
+        return null;
+    }
+
+    $statement = $connection->prepare(
+        'SELECT id_type_probleme, libelle
+         FROM types_probleme
+         WHERE id_type_probleme = :id_type_probleme
+         LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_type_probleme' => $typeProblemeId
+    ]);
+
+    $typeProbleme = $statement->fetch();
+    return $typeProbleme === false ? null : $typeProbleme;
+}
