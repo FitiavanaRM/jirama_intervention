@@ -566,3 +566,83 @@ function generateNumeroDossier(PDO $connection): string
 
     return sprintf('%06d', $dernierNumero + 1);
 }
+
+// Valide les données d'une réclamation et retourne les valeurs à enregistrer
+function validateReclamationData(PDO $connection, array $data): array
+{
+    $idClient = filter_var($data['id_client'] ?? null, FILTER_VALIDATE_INT);
+
+    if ($idClient === false || $idClient < 1) {
+        throw new InvalidArgumentException('Le client est invalide');
+    }
+
+    $client = getClientById($connection, $idClient);
+
+    if ($client === null) {
+        throw new InvalidArgumentException('Ce client est introuvable');
+    }
+
+    $telephone = trim((string) ($data['telephone_client'] ?? ''));
+
+    if ($telephone === '') {
+        throw new InvalidArgumentException('Le téléphone du client est obligatoire');
+    }
+
+    if (strlen($telephone) > 20) {
+        throw new InvalidArgumentException('Le téléphone du client dépasse la longueur autorisée');
+    }
+
+    if (!preg_match('/^[0-9+().\s-]+$/', $telephone)) {
+        throw new InvalidArgumentException('Le téléphone du client est invalide');
+    }
+    $repere = trim((string) ($data['repere_adresse'] ?? ''));
+
+    if ($repere === '') {
+        throw new InvalidArgumentException('Le repère de l’adresse est obligatoire');
+    }
+
+    if (strlen($repere) > 255) {
+        throw new InvalidArgumentException('Le repère de l’adresse dépasse la longueur autorisée');
+    }
+
+    $idTypeProbleme = filter_var($data['id_type_probleme'] ?? null, FILTER_VALIDATE_INT);
+
+    if ($idTypeProbleme === false || $idTypeProbleme < 1) {
+        throw new InvalidArgumentException('Le problème signalé est obligatoire');
+    }
+
+    $typeProbleme = getTypeProblemeById($connection, $idTypeProbleme);
+
+    if ($typeProbleme === null) {
+        throw new InvalidArgumentException('Le problème sélectionné n’existe pas');
+    }
+
+    $libelle = (string) $typeProbleme['libelle'];
+    $precision = trim((string) ($data['precision_probleme'] ?? ''));
+
+    if (strlen($precision) > 1000) {
+        throw new InvalidArgumentException('La précision dépasse la longueur autorisée');
+    }
+
+    if ($libelle === 'Autre' && $precision === '') {
+        throw new InvalidArgumentException('Précisez le problème lorsque vous choisissez « Autre »');
+    }
+
+    if ($libelle === 'Autre') {
+        $description = $precision;
+    } elseif ($precision !== '') {
+        $description = $libelle . ' : ' . $precision;
+    } else {
+        $description = $libelle;
+    }
+
+    return [
+        'id_client' => (int) $client['id_client'],
+        'nom_client' => (string) $client['nom_client'],
+        'adresse_client' => (string) $client['adresse_client'],
+        'telephone_client' => $telephone,
+        'repere_adresse' => $repere,
+        'type_demande' => $libelle,
+        'description_probleme' => $description,
+    ];
+}
