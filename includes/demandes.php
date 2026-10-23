@@ -544,3 +544,25 @@ function getTypeProblemeById(PDO $connection, int $typeProblemeId): ?array
     $typeProbleme = $statement->fetch();
     return $typeProbleme === false ? null : $typeProbleme;
 }
+
+// Retourne le prochain numéro de dossier
+function generateNumeroDossier(PDO $connection): string
+{
+    $statement = $connection->prepare(
+        'SELECT MAX(CAST(reference AS UNSIGNED))
+         FROM demandes
+         WHERE reference REGEXP :modele'
+    );
+
+    $statement->execute([
+        'modele' => '^[0-9]{6}$'
+    ]);
+
+    $dernierNumero = (int) ($statement->fetchColumn() ?: 0);
+
+    if ($dernierNumero >= 999999) {
+        throw new RuntimeException('Le numéro de dossier maximum est atteint');
+    }
+
+    return sprintf('%06d', $dernierNumero + 1);
+}
