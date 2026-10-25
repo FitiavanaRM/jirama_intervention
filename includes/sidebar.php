@@ -27,11 +27,15 @@ if ($currentUser === null) {
             <li><a href="<?= $base ?>/dashboard.php"<?= isCurrentPage('/dashboard.php') ? $actif : '' ?>>Tableau de bord</a></li>
 
             <?php if (hasPermission('demande.consulter') || hasPermission('demande.creer')): ?>
-                <li><a href="<?= $base ?>/demandes/liste.php"<?= isCurrentPage('/demandes/liste.php') ? $actif : '' ?>>Demandes</a></li>
+                <li><a href="<?= $base ?>/demandes/liste.php"<?= isCurrentPage('/demandes/liste.php') ? $actif : '' ?>><?= hasRole("Agent d'accueil") ? 'Réclamations' : 'Demandes' ?></a></li>
             <?php endif; ?>
 
             <?php if (hasPermission('demande.creer')): ?>
-                <li><a href="<?= $base ?>/demandes/ajouter.php"<?= isCurrentPage('/demandes/ajouter.php') ? $actif : '' ?>>Nouvelle demande</a></li>
+                <?php if (hasRole("Agent d'accueil")): ?>
+                    <li><a href="<?= $base ?>/demandes/reclamation.php"<?= isCurrentPage('/demandes/reclamation.php') ? $actif : '' ?>>Nouvelle réclamation</a></li>
+                <?php else: ?>
+                    <li><a href="<?= $base ?>/demandes/ajouter.php"<?= isCurrentPage('/demandes/ajouter.php') ? $actif : '' ?>>Nouvelle demande</a></li>
+                <?php endif; ?>
             <?php endif; ?>
 
             <?php if (hasPermission('affectation.creer')): ?>

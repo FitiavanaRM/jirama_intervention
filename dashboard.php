@@ -9,12 +9,12 @@ require_once __DIR__ . '/includes/demandes.php';
 $currentUser = requireLogin();
 
 $roleMessages = [
-    'Administrateur' => 'Vous disposez d’un accès complet aux fonctionnalités de gestion.',
-    "Agent d'accueil" => 'Vous pouvez enregistrer, consulter et rechercher les demandes.',
-    "Agent d'écart" => 'Vous pouvez suivre les demandes et préparer leurs affectations.',
-    "Chef d'équipe" => 'Vous pouvez suivre les interventions confiées à votre équipe.',
-    'Technicien' => 'Vous pouvez consulter et renseigner vos interventions.',
-    'Chef de division' => 'Vous pouvez superviser l’activité et consulter les informations de suivi.',
+    'Administrateur' => 'Vous disposez d’un accès complet aux fonctionnalités de gestion',
+        "Agent d'accueil" => 'Vous pouvez enregistrer, consulter et rechercher les réclamations',
+    "Agent d'écart" => 'Vous pouvez suivre les demandes et préparer leurs affectations',
+    "Chef d'équipe" => 'Vous pouvez suivre les interventions confiées à votre équipe',
+    'Technicien' => 'Vous pouvez consulter et renseigner vos interventions',
+    'Chef de division' => 'Vous pouvez superviser l’activité et consulter les informations de suivi',
 ];
 
 $roleLinks = [
@@ -27,8 +27,8 @@ $roleLinks = [
         'techniciens/ajouter.php' => 'Ajouter un technicien',
     ],
     "Agent d'accueil" => [
-        'demandes/ajouter.php' => 'Nouvelle demande',
-        'demandes/liste.php' => 'Liste des demandes',
+        'demandes/reclamation.php' => 'Nouvelle réclamation',
+        'demandes/liste.php' => 'Liste des réclamations',
     ],
     "Agent d'écart" => [
         'affectations/ajouter.php' => 'Nouvelle affectation',
