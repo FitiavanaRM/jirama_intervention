@@ -8,36 +8,83 @@ require_once __DIR__ . '/../includes/clients.php';
 require_once __DIR__ . '/../includes/demandes.php';
 
 requirePermission('demande.creer');
+$currentUser = getCurrentUser();
+if ($currentUser === null) {
+    denyAccess();
+}
 
+$estPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
 $reference = '';
 $clients = [];
 $rechercheFaite = false;
 $client = null;
 $typesProbleme = [];
 $errorMessage = '';
-$idClient = filter_input(INPUT_GET, 'id_client', FILTER_VALIDATE_INT);
+$successMessage = (string) ($_SESSION['reclamation_success'] ?? '');
+unset($_SESSION['reclamation_success']);
+
+$formData = [
+    'telephone_client' => '',
+    'repere_adresse' => '',
+    'id_type_probleme' => '',
+    'precision_probleme' => '',
+];
+
+$idClient = filter_input(
+    $estPost ? INPUT_POST : INPUT_GET,
+    'id_client',
+    FILTER_VALIDATE_INT
+);
 
 try {
     $connection = getDatabaseConnection();
     if (is_int($idClient) && $idClient > 0) {
-        // Un client a été sélectionné
+        // Un client a été sélectionné on charge ses informations
         $client = getClientById($connection, $idClient);
+
         if ($client === null) {
-            $errorMessage = 'Ce client est introuvable.';
+            $errorMessage = 'Ce client est introuvable';
         } else {
             $typesProbleme = getTypesProbleme($connection);
+            $formData['telephone_client'] = (string) ($client['telephone_client'] ?? '');
+
+            // Envoi du formulaire on valide puis on enregistre
+            if ($estPost) {
+                foreach ($formData as $field => $defaultValue) {
+                    $value = $_POST[$field] ?? '';
+                    $formData[$field] = is_string($value) ? $value : '';
+                }
+
+                try {
+                    $validatedData = validateReclamationData($connection, $_POST);
+                    $reclamation = createReclamation(
+                        $connection,
+                        $validatedData,
+                        $currentUser['id_utilisateur']
+                    );
+
+                    $_SESSION['reclamation_success'] = 'Réclamation ' . $reclamation['reference'] . ' enregistrée avec succès';
+                    header('Location: reclamation.php');
+                    exit;
+
+                } catch (InvalidArgumentException $exception) {
+                    $errorMessage = $exception->getMessage();
+                } catch (RuntimeException $exception) {
+                    $errorMessage = 'La réclamation n’a pas pu être enregistrée';
+                }
+            }
         }
+
     } else {
-        // Sinon, on traite la recherche par référence de facture
+        // Aucun client sélectionné : on traite la recherche par référence de facture
         $valeur = $_GET['reference'] ?? '';
+
         if (is_string($valeur) && trim($valeur) !== '') {
             $reference = trim($valeur);
             $rechercheFaite = true;
-
             $clients = searchClientsByReference($connection, $reference);
         }
     }
-
 } catch (InvalidArgumentException $exception) {
     $errorMessage = $exception->getMessage();
 } catch (RuntimeException $exception) {
@@ -54,6 +101,12 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
 <main>
     <h1>Nouvelle réclamation</h1>
+    <?php if ($successMessage !== ''): ?>
+        <p role="status">
+            <?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8') ?>
+        </p>    
+    <?php endif; ?>
+
     <?php if ($errorMessage !== ''): ?>
         <p role="alert">
             <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
@@ -84,7 +137,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     name="telephone_client"
                     type="tel"
                     maxlength="20"
-                    value="<?= htmlspecialchars((string) ($client['telephone_client'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                    value="<?= htmlspecialchars($formData['telephone_client'], ENT_QUOTES, 'UTF-8') ?>"
                     required
                 >
             </div>
@@ -96,6 +149,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     name="repere_adresse"
                     type="text"
                     maxlength="255"
+                    value="<?= htmlspecialchars($formData['repere_adresse'], ENT_QUOTES, 'UTF-8') ?>"
                     required
                 >
             </div>
@@ -105,7 +159,9 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 <select id="id_type_probleme" name="id_type_probleme" required>
                     <option value="">Sélectionner un problème</option>
                     <?php foreach ($typesProbleme as $typeProbleme): ?>
-                        <option value="<?= (int) $typeProbleme['id_type_probleme'] ?>">
+                        <option value="<?= (int) $typeProbleme['id_type_probleme'] ?>"
+                                <?= ((string) $typeProbleme['id_type_probleme'] === $formData['id_type_probleme']) ? 'selected' : '' ?>
+                        >
                             <?= htmlspecialchars((string) $typeProbleme['libelle'], ENT_QUOTES, 'UTF-8') ?>
                         </option>
                     <?php endforeach; ?>
@@ -117,7 +173,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 <textarea
                     id="precision_probleme"
                     name="precision_probleme"
-                ></textarea>
+                ><?= htmlspecialchars($formData['precision_probleme'], ENT_QUOTES, 'UTF-8') ?></textarea>
             </div>
 
             <button type="submit">Enregistrer la réclamation</button>
