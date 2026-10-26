@@ -777,3 +777,79 @@ function extractPrecisionProbleme(string $libelle, string $description): string
 
     return '';
 }
+
+
+// Modifie une réclamation encore en attente
+function updateReclamation(
+    PDO $connection,
+    int $demandeId,
+    array $data
+): void
+{
+    try {
+        $connection->beginTransaction();
+        // On verrouille la ligne pour relire son état au moment exact de la modification
+        $statement = $connection->prepare(
+            'SELECT statut, id_client
+             FROM demandes
+             WHERE id_demande = :id_demande
+             FOR UPDATE'
+        );
+
+        $statement->execute([
+            'id_demande' => $demandeId
+        ]);
+
+        $demande = $statement->fetch();
+        if ($demande === false) {
+            throw new InvalidArgumentException('La réclamation sélectionnée n’existe pas');
+        }
+
+        if ($demande['statut'] !== 'EN_ATTENTE') {
+            throw new InvalidArgumentException('Cette réclamation ne peut plus être modifiée (elle n’est plus en attente)');
+        }
+
+        if ($demande['id_client'] === null) {
+            throw new InvalidArgumentException('Cette demande n’est pas liée à un client et ne peut pas être modifiée ici');
+        }
+
+        $statement = $connection->prepare(
+            'UPDATE demandes
+             SET
+                telephone_client = :telephone_client,
+                repere_adresse = :repere_adresse,
+                type_demande = :type_demande,
+                description_probleme = :description_probleme
+             WHERE id_demande = :id_demande'
+        );
+
+        $statement->execute([
+            'telephone_client' => $data['telephone_client'],
+            'repere_adresse' => $data['repere_adresse'],
+            'type_demande' => $data['type_demande'],
+            'description_probleme' => $data['description_probleme'],
+            'id_demande' => $demandeId,
+        ]);
+
+        // Le téléphone corrigé devient celui de la fiche du client enregistré dans la demande
+        $statement = $connection->prepare(
+            'UPDATE clients
+             SET telephone_client = :telephone_client
+             WHERE id_client = :id_client'
+        );
+
+        $statement->execute([
+            'telephone_client' => $data['telephone_client'],
+            'id_client' => (int) $demande['id_client'],
+        ]);
+
+        $connection->commit();
+    }
+    catch (Throwable $exception) {
+        if ($connection->inTransaction()) {
+            $connection->rollBack();
+        }
+
+        throw $exception;
+    }
+}
