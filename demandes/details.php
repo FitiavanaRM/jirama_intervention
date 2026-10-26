@@ -126,6 +126,17 @@ require_once __DIR__ . '/../includes/sidebar.php';
 			<?= nl2br(htmlspecialchars((string) $demande['adresse_client'], ENT_QUOTES, 'UTF-8')) ?>
 		</dd>
 
+        <?php if (!empty($demande['repere_adresse'])): ?>
+            <dt>Repère de l’adresse</dt>
+            <dd>
+                <?= htmlspecialchars(
+                    (string) $demande['repere_adresse'],
+                    ENT_QUOTES,
+                    'UTF-8'
+                ) ?>
+            </dd>
+        <?php endif; ?>
+
 		<dt>Type de demande</dt>
 		<dd>
 			<?= htmlspecialchars((string) $demande['type_demande'], ENT_QUOTES, 'UTF-8') ?>
