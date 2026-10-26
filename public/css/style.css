@@ -1,5 +1,6 @@
-/* Base de l'apk */
+/* Variables*/
 :root {
+    color-scheme: dark;
     --fond: #0a1a33;
     --fond-carte: #0f2547;
     --fond-champ: #12294d;
@@ -11,10 +12,31 @@
     --bleu-lien: #6cb2ff;
     --vert: #2fb36d;
     --rouge: #e24b4a;
+    --accent-texte: #f5b800;
+    --accent-bordure: rgba(245, 184, 0, 0.45);
 }
 
+/* Variables : thème claire */
+html[data-theme="light"] {
+    color-scheme: light;
+    --fond: #f4f6f9;
+    --fond-carte: #ffffff;
+    --fond-champ: #eef2f7;
+    --bordure: #d5dae1;
+    --texte: #1b2433;
+    --texte-doux: #5a6b82;
+    --bleu-lien: #1a5fb4;
+    --vert: #1f8f55;
+    --rouge: #c0392b;
+    --accent-texte: #8a6200;
+    --accent-bordure: rgba(138, 98, 0, 0.45);
+}
+
+/* Base */
 * {
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bordure) transparent;
 }
 
 body {
@@ -41,10 +63,10 @@ a {
 }
 
 a:hover {
-    color: var(--jaune);
+    color: var(--accent-texte);
 }
 
-/* Structure générale */
+/* ===== Structure générale ===== */
 .application {
     display: grid;
     grid-template-columns: 240px minmax(0, 1fr);
@@ -55,6 +77,10 @@ a:hover {
 .application > header {
     grid-column: 1 / -1;
     grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
     padding: 10px 24px;
     background-color: var(--fond-carte);
     border-bottom: 1px solid var(--bordure);
@@ -67,20 +93,40 @@ a:hover {
     letter-spacing: 0.5px;
 }
 
+/* Nom de l'utilisateur connecté, à droite de l'en-tête */
+.entete-utilisateur {
+    font-family: "Segoe Script", "Brush Script MT", "Lucida Handwriting", cursive;
+    font-size: 20px;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    color: var(--accent-texte);
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--accent-bordure);
+}
+
 .application > aside {
     grid-column: 1;
     grid-row: 2;
-    padding: 20px 16px;
+    padding: 14px 10px;
     background-color: var(--fond-carte);
     border-right: 1px solid var(--bordure);
 }
 
-/* Nom et rôle de l'utilisateur connecté, en haut de la barre latérale. */
 .application > aside > p {
-    margin: 0 0 20px;
-    padding-bottom: 16px;
+    margin: 0 0 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--bordure);
-    font-size: 13px;
+    font-size: 12px;
+    color: var(--texte-doux);
+}
+
+/* Rôle de l'utilisateur en haut de la barre latérale */
+.application > aside > p.role-utilisateur {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     color: var(--texte-doux);
 }
 
@@ -129,17 +175,27 @@ a:hover {
     }
 }
 
-/* Menu latéral */
-.application > aside {
-    padding: 14px 10px;
+/* Page à hauteur de la fenêtre (sans défilement de la page) */
+@media (min-width: 801px) {
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .application {
+        height: 100vh;
+        min-height: 0;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    .application > aside,
+    .application > main {
+        overflow-y: auto;
+    }
 }
 
-.application > aside > p {
-    margin: 0 0 12px;
-    padding-bottom: 10px;
-    font-size: 12px;
-}
-
+/* ===== Menu latéral ===== */
 .application > aside nav ul {
     margin: 0;
     padding: 0;
@@ -162,10 +218,10 @@ a:hover {
 
 .application > aside nav a:hover {
     background-color: var(--fond-champ);
-    color: var(--jaune);
+    color: var(--accent-texte);
 }
 
-/* Le dernier lien (Déconnexion) est séparé et en rouge. */
+/* Le dernier lien (Déconnexion) est séparé et en rouge */
 .application > aside nav li:last-child {
     margin-top: 10px;
     padding-top: 10px;
@@ -181,7 +237,7 @@ a:hover {
     color: var(--rouge);
 }
 
-/* Lien de la page active dans le menu */
+/* Lien de la page active */
 .application > aside nav a.actif {
     background-color: var(--jaune);
     color: #1b1b1b;
@@ -193,7 +249,7 @@ a:hover {
     color: #1b1b1b;
 }
 
-/* Tableaux */
+/* ===== Tableaux ===== */
 .application > main table {
     width: 100%;
     border-collapse: collapse;
@@ -230,12 +286,34 @@ a:hover {
     background-color: var(--fond-champ);
 }
 
-/* Formulaires */
+/* Tableaux avec défilement interne */
+.application > main .tableau-defilant {
+    max-height: calc(100vh - 178px);
+    overflow: auto;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+}
+
+.application > main .tableau-defilant table {
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+}
+
+/* L'en-tête reste visible pendant le défilement */
+.application > main .tableau-defilant thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: inset 0 -1px 0 var(--bordure);
+}
+
+/* ===== Formulaires ===== */
 .application > main form {
     max-width: 560px;
 }
 
-/* Bouton dans un tableau */
+/* Un formulaire dans un tableau (ex. bouton « Démarrer ») */
 .application > main td form {
     max-width: none;
 }
@@ -284,14 +362,14 @@ a:hover {
     color: #6f86a6;
 }
 
-/* Les listes déroulantes restent lisibles sur fond sombre */
+/* Les listes déroulantes restent lisibles */
 .application > main select option,
 .application > main select optgroup {
     background-color: var(--fond-champ);
     color: var(--texte);
 }
 
-/* Boutons */
+/* ===== Boutons ===== */
 .application > main button {
     padding: 10px 20px;
     background-color: var(--jaune);
@@ -308,13 +386,13 @@ a:hover {
     background-color: var(--jaune-fonce);
 }
 
-/* Boutons dans un tableau : plus petits. */
+/* Boutons dans un tableau : plus petits */
 .application > main td button {
     padding: 5px 12px;
     font-size: 12px;
 }
 
-/* Messages */
+/* ===== Messages ===== */
 .application > main [role="status"],
 .application > main [role="alert"] {
     max-width: 560px;
@@ -336,7 +414,15 @@ a:hover {
     color: #ffb4b4;
 }
 
-/* Page de détail (liste de définitions) */
+html[data-theme="light"] .application > main [role="status"] {
+    color: #17683f;
+}
+
+html[data-theme="light"] .application > main [role="alert"] {
+    color: #a02a1e;
+}
+
+/* ===== Page de détail (liste de définitions) ===== */
 .application > main dl {
     display: grid;
     grid-template-columns: 200px minmax(0, 1fr);
@@ -371,7 +457,7 @@ a:hover {
     border-bottom: 0;
 }
 
-/* Liens sous le contenu */
+/* Liens sous le contenu (retour, modifier) */
 .application > main > p > a {
     display: inline-block;
     padding: 8px 14px;
@@ -385,7 +471,6 @@ a:hover {
     border-color: var(--jaune);
 }
 
-/* Petits écrans : libellé au-dessus de la valeur */
 @media (max-width: 800px) {
     .application > main dl {
         grid-template-columns: 1fr;
@@ -397,7 +482,7 @@ a:hover {
     }
 }
 
-/* Pastilles de statut */
+/* ===== Pastilles de statut ===== */
 .statut {
     display: inline-block;
     padding: 3px 10px;
@@ -442,38 +527,202 @@ a:hover {
     color: var(--texte-doux);
 }
 
-/* Rôle de l'utilisateur en haut de la barre latérale */
-.application > aside > p.role-utilisateur {
-    font-size: 10px;
+/* Pastilles en mode clair */
+html[data-theme="light"] .statut-en-attente {
+    background-color: rgba(90, 107, 130, 0.15);
+    color: #44546a;
+}
+
+html[data-theme="light"] .statut-affectee {
+    background-color: rgba(26, 95, 180, 0.15);
+    color: #1a5fb4;
+}
+
+html[data-theme="light"] .statut-en-cours {
+    background-color: rgba(245, 184, 0, 0.25);
+    color: #7a5500;
+}
+
+html[data-theme="light"] .statut-resolue {
+    background-color: rgba(31, 143, 85, 0.15);
+    color: #17683f;
+}
+
+html[data-theme="light"] .statut-cloturee {
+    background-color: rgba(90, 100, 120, 0.18);
+    color: #4a5568;
+}
+
+html[data-theme="light"] .statut-annulee {
+    background-color: rgba(192, 57, 43, 0.15);
+    color: #a02a1e;
+}
+
+html[data-theme="light"] .statut-inconnu {
+    background-color: rgba(90, 107, 130, 0.15);
+    color: #44546a;
+}
+
+/* ===== Tableau de bord : messages d'accueil ===== */
+.application > main > p.accueil-titre {
+    margin: 0 0 2px;
+    font-size: 16px;
     font-weight: bold;
-    font-family:'Times New Roman', Times, serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+}
+
+.application > main > p.accueil-role {
+    margin: 0 0 18px;
+    font-size: 12px;
     color: var(--texte-doux);
 }
 
-/* Page à hauteur de la fenêtre*/
-@media (min-width: 801px) {
-    html,
-    body {
-        height: 100%;
-        overflow: hidden;
-    }
+/* ===== Cartes de chiffres ===== */
+.cartes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin: 20px 0 24px;
+}
 
-    .application {
-        height: 100vh;
-        min-height: 0;
-        grid-template-rows: auto minmax(0, 1fr) auto;
-    }
+.carte {
+    padding: 14px 16px;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-top: 4px solid var(--texte-doux);
+    border-radius: 8px;
+}
 
-    .application > aside,
-    .application > main {
-        overflow-y: auto;
+.carte p {
+    margin: 0;
+}
+
+.carte-libelle {
+    font-size: 13px;
+    color: var(--texte-doux);
+}
+
+.carte-valeur {
+    margin-top: 4px;
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--texte);
+}
+
+.carte-en-attente {
+    border-top-color: #9fb2cc;
+}
+
+.carte-affectee {
+    border-top-color: #4c9aff;
+}
+
+.carte-en-cours {
+    border-top-color: var(--jaune);
+}
+
+.carte-resolue {
+    border-top-color: var(--vert);
+}
+
+@media (max-width: 900px) {
+    .cartes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* Barres de défilement discrètes, dans les couleurs de l'application */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--bordure) transparent;
+@media (max-width: 480px) {
+    .cartes {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Accès rapides du tableau de bord ===== */
+.acces-rapides {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.acces-rapides a {
+    display: block;
+    padding: 14px 16px;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-left: 4px solid var(--jaune);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--texte);
+    text-decoration: none;
+}
+
+.acces-rapides a:hover {
+    background-color: var(--fond-champ);
+    border-color: var(--jaune);
+    color: var(--accent-texte);
+}
+
+/* ===== Barres horizontales (statistiques) ===== */
+.barres {
+    max-width: 720px;
+    margin: 0 0 24px;
+    padding: 14px 16px;
+    background-color: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+}
+
+.barre-ligne {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) 40px;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.barre-ligne:last-child {
+    margin-bottom: 0;
+}
+
+.barre-fond {
+    height: 12px;
+    background-color: var(--fond-champ);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.barre-remplie {
+    height: 100%;
+    border-radius: 6px;
+    background-color: var(--texte-doux);
+}
+
+.barre-en-attente { background-color: #9fb2cc; }
+.barre-affectee   { background-color: #4c9aff; }
+.barre-en-cours   { background-color: var(--jaune); }
+.barre-resolue    { background-color: var(--vert); }
+.barre-cloturee   { background-color: #78829a; }
+.barre-annulee    { background-color: var(--rouge); }
+
+.barre-valeur {
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--texte);
+}
+
+/* Barres des équipes : libellé plus large, barre jaune */
+.barres-equipes .barre-ligne {
+    grid-template-columns: 190px minmax(0, 1fr) 40px;
+}
+
+.barres-equipes .barre-libelle {
+    font-size: 13px;
+    color: var(--texte-doux);
+}
+
+.barre-equipe {
+    background-color: var(--jaune);
 }

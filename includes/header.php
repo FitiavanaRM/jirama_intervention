@@ -16,16 +16,15 @@ $pageTitle = $pageTitle ?? 'JIRAMA Intervention';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/style.css?v=<?= (int) @filemtime(__DIR__ . '/../public/css/style.css') ?>">
-    <link rel="stylesheet" href="<?= getProjectBaseUrl() ?>/public/css/styleSuite.css?v=<?= (int) @filemtime(__DIR__ . '/../public/css/styleSuite.css') ?>">
 </head>
 <body>
     <div class="application">
-        <header style="display:flex; align-items:center; justify-content:space-between;">
+        <header>
             <p>JIRAMA Toliara — Gestion des interventions</p>
             <?php $utilisateurEntete = getCurrentUser(); ?>
 
             <?php if ($utilisateurEntete !== null): ?>
-                <span style="font-family:'Segoe Script','Brush Script MT','Lucida Handwriting',cursive; font-size:15px; font-style:italic; letter-spacing:0.5px; color:#f5b800; padding-bottom:2px; border-bottom:1px solid rgba(245,184,0,0.45);">
+                <span class="entete-utilisateur">
                     <?= htmlspecialchars(
                         $utilisateurEntete['prenom'] . ' ' . $utilisateurEntete['nom'],
                         ENT_QUOTES,
