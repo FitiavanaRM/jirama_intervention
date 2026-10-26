@@ -157,21 +157,21 @@ function getDemandes(PDO $connection): array
             d.description_probleme,
             d.date_demande,
             d.statut,
-            d.id_client,
-            d.repere_adresse,
             u.nom AS createur_nom,
             u.prenom AS createur_prenom
         FROM demandes AS d
         INNER JOIN utilisateurs AS u
             ON u.id_utilisateur = d.id_utilisateur
-        WHERE d.id_demande = :id_demande'
+        ORDER BY
+            d.date_demande DESC,
+            d.id_demande DESC'
     );
+    
     $statement->execute();
-
     return $statement->fetchAll();
 }
 
-// Retourne une demande précise avec lez informations de son créateur.
+// Retourne une demande précise avec les informations de son créateur.
 function getDemandeById(PDO $connection, int $demandeId): ?array
 {
     if ($demandeId < 1) {
@@ -189,6 +189,8 @@ function getDemandeById(PDO $connection, int $demandeId): ?array
             d.description_probleme,
             d.date_demande,
             d.statut,
+            d.id_client,
+            d.repere_adresse,
             u.nom AS createur_nom,
             u.prenom AS createur_prenom
         FROM demandes AS d
@@ -196,10 +198,9 @@ function getDemandeById(PDO $connection, int $demandeId): ?array
         WHERE d.id_demande = :id_demande
         LIMIT 1'
     );
+
     $statement->execute(['id_demande' => $demandeId]);
-
     $demande = $statement->fetch();
-
     return $demande === false ? null : $demande;
 }
 
