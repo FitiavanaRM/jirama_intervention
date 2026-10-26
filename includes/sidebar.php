@@ -81,6 +81,7 @@ if ($currentUser === null) {
                 <li><a href="<?= $base ?>/statistiques.php"<?= isCurrentPage('/statistiques.php') ? $actif : '' ?>>Statistiques</a></li>
             <?php endif; ?>
 
+            <li><a href="<?= $base ?>/parametres.php"<?= isCurrentPage('/parametres.php') ? $actif : '' ?>>Paramètres</a></li>
             <li><a href="<?= $base ?>/logout.php">Déconnexion</a></li>
         </ul>
     </nav>
