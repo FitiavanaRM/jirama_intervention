@@ -10,7 +10,7 @@ $currentUser = requireLogin();
 
 $roleMessages = [
     'Administrateur' => 'Vous disposez d’un accès complet aux fonctionnalités de gestion',
-        "Agent d'accueil" => 'Vous pouvez enregistrer, consulter et rechercher les réclamations',
+    "Agent d'accueil" => 'Vous pouvez enregistrer, consulter et rechercher les réclamations',
     "Agent d'écart" => 'Vous pouvez suivre les demandes et préparer leurs affectations',
     "Chef d'équipe" => 'Vous pouvez suivre les interventions confiées à votre équipe',
     'Technicien' => 'Vous pouvez consulter et renseigner vos interventions',

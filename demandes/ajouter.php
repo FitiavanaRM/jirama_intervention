@@ -6,7 +6,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../includes/demandes.php';
 
-requirePermission('demande.creer');
+requireRole(['Administrateur']);
 
 $currentUser = getCurrentUser();
 

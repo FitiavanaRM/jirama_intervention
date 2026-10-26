@@ -13,6 +13,7 @@ requireRole([
 	'Chef de division',
 ]);
 
+$estAccueil = hasRole("Agent d'accueil");
 $currentUser = getCurrentUser();
 if ($currentUser == null) {
 	denyAccess();
@@ -76,7 +77,7 @@ if ($demande === null) {
 	exit('Demande introuvable');
 }
 
-$pageTitle = 'Détail de la demande | JIRAMA Intervention';
+$pageTitle = ($estAccueil ? 'Détail de la réclamation' : 'Détail de la demande') . ' | JIRAMA Intervention';
 define('JIRAMA_LAYOUT', true);
 
 require_once __DIR__ . '/../includes/header.php';
@@ -96,7 +97,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php endif; ?>
 
     <h1>
-        Détail de la demande
+        <?= $estAccueil ? 'Détail de la réclamation' : 'Détail de la demande' ?>
         <?= htmlspecialchars(
             (string) $demande['reference'],
             ENT_QUOTES,
@@ -158,7 +159,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
 	<?php if ($demande['statut'] === 'EN_ATTENTE' && hasPermission('demande.modifier')): ?>
         <p>
             <a href="modifier.php?id_demande=<?= (int) $demande['id_demande'] ?>">
-                Modifier la demande
+                <?= $estAccueil ? 'Modifier la réclamation' : 'Modifier la demande' ?>
             </a>
         </p>
     <?php endif; ?>
@@ -170,6 +171,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
         </form>
     <?php endif; ?>
 
-	<p><a href="liste.php">Retour à la liste des demandes</a></p>
+	<p><a href="liste.php">
+        <?= $estAccueil ? 'Retour à la liste des réclamations' : 'Retour à la liste des demandes' ?>
+    </a></p>
 </main>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
