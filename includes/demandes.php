@@ -213,6 +213,7 @@ function updateDemandeStatut(
 {
     $statutsValides = [
         'EN_ATTENTE',
+        'ACTIVE',
         'AFFECTEE',
         'EN_COURS',
         'RESOLUE',
@@ -373,7 +374,7 @@ function getHistoriques(PDO $connection) : array
 
     $statement->execute();
     return $statement->fetchAll();
-}
+}w
 
 // statistique
 function getStatistiquesParStatut(PDO $connection): array
