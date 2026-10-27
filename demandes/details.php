@@ -152,10 +152,17 @@ require_once __DIR__ . '/../includes/sidebar.php';
 			<?= htmlspecialchars((string) $demande['date_demande'], ENT_QUOTES, 'UTF-8') ?>
 		</dd>
 
-		<dt>Statut</dt>
+	    <dt>Statut</dt>
         <dd>
             <?= renderStatutBadge((string) $demande['statut']) ?>
         </dd>
+
+        <?php if (($demande['code_intervention'] ?? null) !== null): ?>
+            <dt>Intervention</dt>
+            <dd>
+                <?= renderCodeInterventionBadge((string) $demande['code_intervention']) ?>
+            </dd>
+        <?php endif; ?>
 
 		<dt>Enregistrée par</dt>
 		<dd>
