@@ -438,27 +438,31 @@ function updateDemande(
     }
 }
 
-
 // Retourne le HTML d'une pastille de statut
 function renderStatutBadge(string $statut): string
 {
+    // classe CSS, libellé, code JIRAMA
     $statuts = [
-        'EN_ATTENTE' => ['statut-en-attente', 'En attente'],
-        'ACTIVE' => ['statut-active', 'Active'],
-        'AFFECTEE' => ['statut-affectee', 'Affectée'],
-        'EN_COURS' => ['statut-en-cours', 'En cours'],
-        'RESOLUE' => ['statut-resolue', 'Résolue'],
-        'CLOTUREE' => ['statut-cloturee', 'Clôturée'],
-        'ANNULEE' => ['statut-annulee', 'Annulée'],
+        'EN_ATTENTE' => ['statut-en-attente', 'En attente', '100'],
+        'ACTIVE' => ['statut-active', 'Active', '110'],
+        'AFFECTEE' => ['statut-affectee', 'Affectée', null],
+        'EN_COURS' => ['statut-en-cours', 'En cours', null],
+        'RESOLUE' => ['statut-resolue', 'Résolue', null],
+        'CLOTUREE' => ['statut-cloturee', 'Clôturée', '999'],
+        'ANNULEE' => ['statut-annulee', 'Annulée', null],
     ];
 
-    [$classe, $libelle] = $statuts[$statut] ?? ['statut-inconnu', $statut];
+    [$classe, $libelle, $code] = $statuts[$statut] ?? ['statut-inconnu', $statut, null];
+    $html = '<span class="statut ' . $classe . '">';
+    if ($code !== null) {
+        $html .= '<span class="statut-code">'
+            . htmlspecialchars($code, ENT_QUOTES, 'UTF-8')
+            . '</span> ';
+    }
 
-    return '<span class="statut ' . $classe . '">'
-        . htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8')
-        . '</span>';
+    $html .= htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8') . '</span>';
+    return $html;
 }
-
 
 // Retourne les indicateurs généraux affichés en haut de la page de statistiques
 function getIndicateursGeneraux(PDO $connection): array
