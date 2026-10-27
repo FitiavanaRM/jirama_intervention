@@ -444,6 +444,7 @@ function renderStatutBadge(string $statut): string
 {
     $statuts = [
         'EN_ATTENTE' => ['statut-en-attente', 'En attente'],
+        'ACTIVE' => ['statut-active', 'Active'],
         'AFFECTEE' => ['statut-affectee', 'Affectée'],
         'EN_COURS' => ['statut-en-cours', 'En cours'],
         'RESOLUE' => ['statut-resolue', 'Résolue'],
