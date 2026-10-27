@@ -1081,3 +1081,34 @@ html[data-theme="light"] .statut-active {
     font-variant-numeric: tabular-nums;
     opacity: 0.85;
 }
+
+/* ===== Codes d'intervention (C1, C2, C5) ===== */
+.code-c1 {
+    background-color: rgba(34, 184, 207, 0.2);
+    color: #5fd4e0;
+}
+
+.code-c2 {
+    background-color: rgba(245, 184, 0, 0.2);
+    color: var(--jaune);
+}
+
+.code-c5 {
+    background-color: rgba(47, 179, 109, 0.2);
+    color: #5fd49a;
+}
+
+html[data-theme="light"] .code-c1 {
+    background-color: rgba(14, 116, 144, 0.15);
+    color: #0e7490;
+}
+
+html[data-theme="light"] .code-c2 {
+    background-color: rgba(245, 184, 0, 0.25);
+    color: #7a5500;
+}
+
+html[data-theme="light"] .code-c5 {
+    background-color: rgba(31, 143, 85, 0.15);
+    color: #17683f;
+}

@@ -140,7 +140,7 @@ function createDemande(PDO $connection, array $data, int $creatorId): array
         }
     }
 
-    throw new RuntimeException('Impossible de créer la demande.');
+    throw new RuntimeException('Impossible de créer la demande');
 }
 
 // Retourne les demandes avec les informations utiles à leur consultation
@@ -191,6 +191,7 @@ function getDemandeById(PDO $connection, int $demandeId): ?array
             d.statut,
             d.id_client,
             d.repere_adresse,
+            d.code_intervention,
             u.nom AS createur_nom,
             u.prenom AS createur_prenom
         FROM demandes AS d
@@ -204,7 +205,7 @@ function getDemandeById(PDO $connection, int $demandeId): ?array
     return $demande === false ? null : $demande;
 }
 
-// Mise a jour du statut du demande
+// Mise à jour du statut du demande
 function updateDemandeStatut(
     PDO $connection,
     int $demandeId,
