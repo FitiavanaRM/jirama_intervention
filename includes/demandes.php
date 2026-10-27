@@ -389,6 +389,7 @@ function getStatistiquesParStatut(PDO $connection): array
     $resultats = $statement->fetchAll();
     $statutsPossibles = [
         'EN_ATTENTE' => 0,
+        'ACTIVE' => 0,
         'AFFECTEE' => 0,
         'EN_COURS' => 0,
         'RESOLUE' => 0,
