@@ -374,7 +374,7 @@ function getHistoriques(PDO $connection) : array
 
     $statement->execute();
     return $statement->fetchAll();
-}w
+}
 
 // statistique
 function getStatistiquesParStatut(PDO $connection): array

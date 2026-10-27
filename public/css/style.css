@@ -1057,3 +1057,18 @@ html[data-theme="light"] .acces-rapides a,
 html[data-theme="light"] .application > main table {
     box-shadow: 0 1px 3px rgba(18, 35, 63, 0.08);
 }
+
+/* Statut 110*/
+.statut-active {
+    background-color: rgba(34, 184, 207, 0.2);
+    color: #5fd4e0;
+}
+
+.barre-active {
+    background-color: #22b8cf;
+}
+
+html[data-theme="light"] .statut-active {
+    background-color: rgba(14, 116, 144, 0.15);
+    color: #0e7490;
+}
