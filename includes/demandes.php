@@ -860,3 +860,23 @@ function updateReclamation(
         throw $exception;
     }
 }
+
+// Retourne le HTML d'une pastille de code d'intervention
+function renderCodeInterventionBadge(?string $code): string
+{
+    $codes = [
+        'C1' => ['code-c1', 'Transmise'],
+        'C2' => ['code-c2', 'Planifiée'],
+        'C5' => ['code-c5', 'Terminée'],
+    ];
+
+    if ($code === null || !isset($codes[$code])) {
+        return '';
+    }
+
+    [$classe, $libelle] = $codes[$code];
+    return '<span class="statut ' . $classe . '">'
+        . '<span class="statut-code">' . htmlspecialchars($code, ENT_QUOTES, 'UTF-8') . '</span> '
+        . htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8')
+        . '</span>';
+}
