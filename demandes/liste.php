@@ -44,7 +44,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     <th>Client</th> 
                     <th>Type</th> 
                     <th>Date</th> 
-                    <th>Statut</th> 
+                    <th>Statut</th>
+                    <th>Intervention</th>
                     <th>Enregistrée par</th>
                     <th>Action</th>
                 </tr> 
@@ -56,7 +57,14 @@ require_once __DIR__ . '/../includes/sidebar.php';
                         <td><?= htmlspecialchars((string) $demande['nom_client'], ENT_QUOTES, 'UTF-8') ?></td> 
                         <td><?= htmlspecialchars((string) $demande['type_demande'], ENT_QUOTES, 'UTF-8') ?></td> 
                         <td><?= htmlspecialchars((string) $demande['date_demande'], ENT_QUOTES, 'UTF-8') ?></td> 
-                        <td><?= renderStatutBadge((string) $demande['statut']) ?></td> 
+                        <td><?= renderStatutBadge((string) $demande['statut']) ?></td>
+                        <td>
+                            <?php if (($demande['code_intervention'] ?? null) !== null): ?>
+                                <?= renderCodeInterventionBadge((string) $demande['code_intervention']) ?>
+                            <?php else: ?>
+                            —
+                            <?php endif; ?>
+                        </td>
                         <td> 
                             <?= htmlspecialchars( 
                                 (string) $demande['createur_prenom'] . ' ' . (string) $demande['createur_nom'], 
