@@ -987,3 +987,82 @@ function getDemandesActives(PDO $connection): array
 
     return $statement->fetchAll();
 }
+
+// Marque une demande active comme planifiée (code C1 vers C2), avec historique
+function planifierDemande(
+    PDO $connection,
+    int $demandeId,
+    int $utilisateurId
+): void
+{
+    if ($utilisateurId < 1) {
+        throw new InvalidArgumentException('L’utilisateur est invalide');
+    }
+
+    // Contrôle lisible pour l'utilisateur (existence, statut et code)
+    $statement = $connection->prepare(
+        'SELECT statut, code_intervention
+         FROM demandes
+         WHERE id_demande = :id_demande
+         LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_demande' => $demandeId
+    ]);
+
+    $demande = $statement->fetch();
+
+    if ($demande === false) {
+        throw new InvalidArgumentException('La demande sélectionnée n’existe pas');
+    }
+
+    if ($demande['statut'] !== 'ACTIVE') {
+        throw new InvalidArgumentException('Cette demande n’est pas active (110) : elle ne peut pas être planifiée');
+    }
+
+    if ($demande['code_intervention'] !== 'C1') {
+        throw new InvalidArgumentException('Cette demande est déjà planifiée ou terminée');
+    }
+
+    try {
+        $connection->beginTransaction();
+        $statement = $connection->prepare(
+            'UPDATE demandes
+             SET code_intervention = :nouveau_code
+             WHERE id_demande = :id_demande
+             AND statut = :statut
+             AND code_intervention = :ancien_code'
+        );
+
+        $statement->execute([
+            'nouveau_code' => 'C2',
+            'id_demande' => $demandeId,
+            'statut' => 'ACTIVE',
+            'ancien_code' => 'C1',
+        ]);
+
+        if ($statement->rowCount() !== 1) {
+            throw new InvalidArgumentException('Cette demande a déjà été traitée par un autre utilisateur');
+        }
+
+        // Le statut reste ACTIVE (110) : seul le code d'intervention change.
+        insertHistorique(
+            $connection,
+            $demandeId,
+            $utilisateurId,
+            'ACTIVE',
+            'ACTIVE',
+            'Intervention planifiée (C1 vers C2)'
+        );
+
+        $connection->commit();
+    }
+    catch (Throwable $exception) {
+        if ($connection->inTransaction()) {
+            $connection->rollBack();
+        }
+
+        throw $exception;
+    }
+}
