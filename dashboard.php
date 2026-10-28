@@ -53,7 +53,7 @@ $roleLinks = [
 ];
 
 $pageTitle = 'Tableau de bord | JIRAMA Intervention';
-$roleMessage = $roleMessages[$currentUser['nom_role']] ?? 'Votre rôle ne possède pas encore de présentation dédiée.';
+$roleMessage = $roleMessages[$currentUser['nom_role']] ?? 'Votre rôle ne possède pas encore de présentation dédiée';
 $liens = $roleLinks[$currentUser['nom_role']] ?? [];
 
 

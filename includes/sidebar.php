@@ -24,31 +24,31 @@ if ($currentUser === null) {
             $actif = ' class="actif" aria-current="page"';
         ?>
         <ul>
-            <li><a href="<?= $base ?>/dashboard.php"<?= isCurrentPage('/dashboard.php') ? $actif : '' ?>>Tableau de bord</a></li>
+            <li><a href="<?= $base ?>/dashboard.php"<?= isCurrentPage('/dashboard.php') ? $actif : '' ?>><span aria-hidden="true">📊</span> Tableau de bord</a></li>
 
             <?php if (hasPermission('demande.consulter') || hasPermission('demande.creer')): ?>
-                <li><a href="<?= $base ?>/demandes/liste.php"<?= isCurrentPage('/demandes/liste.php') ? $actif : '' ?>><?= hasRole("Agent d'accueil") ? 'Réclamations' : 'Demandes' ?></a></li>
+                <li><a href="<?= $base ?>/demandes/liste.php"<?= isCurrentPage('/demandes/liste.php') ? $actif : '' ?>><span aria-hidden="true">📄</span> <?= hasRole("Agent d'accueil") ? 'Réclamations' : 'Demandes' ?></a></li>
             <?php endif; ?>
 
             <?php if (hasPermission('demande.creer')): ?>
                 <?php if (hasRole("Agent d'accueil")): ?>
-                    <li><a href="<?= $base ?>/demandes/reclamation.php"<?= isCurrentPage('/demandes/reclamation.php') ? $actif : '' ?>>Nouvelle réclamation</a></li>
+                    <li><a href="<?= $base ?>/demandes/reclamation.php"<?= isCurrentPage('/demandes/reclamation.php') ? $actif : '' ?>><span aria-hidden="true">✍️</span> Nouvelle réclamation</a></li>
                 <?php else: ?>
-                    <li><a href="<?= $base ?>/demandes/ajouter.php"<?= isCurrentPage('/demandes/ajouter.php') ? $actif : '' ?>>Nouvelle demande</a></li>
+                    <li><a href="<?= $base ?>/demandes/ajouter.php"<?= isCurrentPage('/demandes/ajouter.php') ? $actif : '' ?>><span aria-hidden="true">✍️</span> Nouvelle réclamation</a></li>
                 <?php endif; ?>
             <?php endif; ?>
 
             <?php if (hasPermission('demande.activer')): ?>
-                <li><a href="<?= $base ?>/demandes/recues.php"<?= isCurrentPage('/demandes/recues.php') ? $actif : '' ?>>Demandes reçues</a></li>
+                <li><a href="<?= $base ?>/demandes/recues.php"<?= isCurrentPage('/demandes/recues.php') ? $actif : '' ?>><span aria-hidden="true">📥</span> Demandes reçues</a></li>
             <?php endif; ?>
 
             <?php if (hasPermission('demande.active.consulter')): ?>
-                <li><a href="<?= $base ?>/demandes/actives.php"<?= isCurrentPage('/demandes/actives.php') ? $actif : '' ?>>Demandes actives</a></li>
+                <li><a href="<?= $base ?>/demandes/actives.php"<?= isCurrentPage('/demandes/actives.php') ? $actif : '' ?>><span aria-hidden="true">🔄</span> Demandes actives</a></li>
             <?php endif; ?>
             
             <?php if (hasPermission('affectation.creer')): ?>
-                <li><a href="<?= $base ?>/affectations/ajouter.php"<?= isCurrentPage('/affectations/ajouter.php') ? $actif : '' ?>>Nouvelle affectation</a></li>
-                <li><a href="<?= $base ?>/affectations/liste.php"<?= isCurrentPage('/affectations/liste.php') ? $actif : '' ?>>Affectations</a></li>
+                <li><a href="<?= $base ?>/affectations/ajouter.php"<?= isCurrentPage('/affectations/ajouter.php') ? $actif : '' ?>><span aria-hidden="true">🧭</span> Nouvelle affectation</a></li>
+                <li><a href="<?= $base ?>/affectations/liste.php"<?= isCurrentPage('/affectations/liste.php') ? $actif : '' ?>><span aria-hidden="true">📋</span> Affectations</a></li>
             <?php endif; ?>
 
             <?php if (
@@ -56,7 +56,7 @@ if ($currentUser === null) {
                 ||
                 hasPermission('intervention.personnelle.consulter')
             ): ?>
-                <li><a href="<?= $base ?>/interventions/liste.php"<?= isCurrentPage('/interventions/liste.php') ? $actif : '' ?>>Interventions</a></li>
+                <li><a href="<?= $base ?>/interventions/liste.php"<?= isCurrentPage('/interventions/liste.php') ? $actif : '' ?>><span aria-hidden="true">🛠️</span> Interventions</a></li>
             <?php endif; ?>
 
             <?php if (
@@ -66,7 +66,7 @@ if ($currentUser === null) {
                 ||
                 hasRole('Administrateur')
             ): ?>
-                <li><a href="<?= $base ?>/techniciens/liste.php"<?= isCurrentPage('/techniciens/liste.php') ? $actif : '' ?>>Techniciens</a></li>
+                <li><a href="<?= $base ?>/techniciens/liste.php"<?= isCurrentPage('/techniciens/liste.php') ? $actif : '' ?>><span aria-hidden="true">🧑‍🔧</span> Techniciens</a></li>
             <?php endif; ?>
 
             <?php if (
@@ -74,23 +74,23 @@ if ($currentUser === null) {
                 ||
                 hasRole('Administrateur')
             ): ?>
-                <li><a href="<?= $base ?>/equipes/liste.php"<?= isCurrentPage('/equipes/liste.php') ? $actif : '' ?>>Équipes</a></li>
+                <li><a href="<?= $base ?>/equipes/liste.php"<?= isCurrentPage('/equipes/liste.php') ? $actif : '' ?>><span aria-hidden="true">👥</span> Équipes</a></li>
             <?php endif; ?>
 
             <?php if (hasRole('Administrateur')): ?>
-                <li><a href="<?= $base ?>/utilisateurs/liste.php"<?= isCurrentPage('/utilisateurs/liste.php') ? $actif : '' ?>>Utilisateurs</a></li>
+                <li><a href="<?= $base ?>/utilisateurs/liste.php"<?= isCurrentPage('/utilisateurs/liste.php') ? $actif : '' ?>><span aria-hidden="true">👤</span> Utilisateurs</a></li>
             <?php endif; ?>
 
             <?php if (hasPermission('historique.consulter')): ?>
-                <li><a href="<?= $base ?>/historiques/liste.php"<?= isCurrentPage('/historiques/liste.php') ? $actif : '' ?>>Historique</a></li>
+                <li><a href="<?= $base ?>/historiques/liste.php"<?= isCurrentPage('/historiques/liste.php') ? $actif : '' ?>><span aria-hidden="true">🕘</span> Historique</a></li>
             <?php endif; ?>
 
             <?php if (hasPermission('statistique.consulter')): ?>
-                <li><a href="<?= $base ?>/statistiques.php"<?= isCurrentPage('/statistiques.php') ? $actif : '' ?>>Statistiques</a></li>
+                <li><a href="<?= $base ?>/statistiques.php"<?= isCurrentPage('/statistiques.php') ? $actif : '' ?>><span aria-hidden="true">📈</span> Statistiques</a></li>
             <?php endif; ?>
 
-            <li><a href="<?= $base ?>/parametres.php"<?= isCurrentPage('/parametres.php') ? $actif : '' ?>>Paramètres</a></li>
-            <li><a href="<?= $base ?>/logout.php">Déconnexion</a></li>
+            <li><a href="<?= $base ?>/parametres.php"<?= isCurrentPage('/parametres.php') ? $actif : '' ?>><span aria-hidden="true">⚙️</span> Paramètres</a></li>
+            <li><a href="<?= $base ?>/logout.php"><span aria-hidden="true">🚪</span> Déconnexion</a></li>
         </ul>
     </nav>
 </aside>

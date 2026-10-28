@@ -193,7 +193,6 @@ function getCurrentPagePath(): string
     return $scriptName;
 }
 
-
 // Indique si la page affichée correspond au chemin donné
 function isCurrentPage(string $path): bool
 {
