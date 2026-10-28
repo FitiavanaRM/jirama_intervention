@@ -20,7 +20,7 @@ $errorMessage = '';
 try { 
     $demandes = getDemandes(getDatabaseConnection()); 
 } catch (RuntimeException $exception) { 
-    $errorMessage = 'Les demandes ne peuvent pas être chargées pour le moment.'; 
+    $errorMessage = 'Les demandes ne peuvent pas être chargées pour le moment'; 
 } 
  
 $pageTitle = ($estAccueil ? 'Réclamations' : 'Demandes') . ' | JIRAMA Intervention';

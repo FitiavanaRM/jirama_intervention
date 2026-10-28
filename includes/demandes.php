@@ -157,8 +157,8 @@ function getDemandes(PDO $connection): array
             d.description_probleme,
             d.date_demande,
             d.statut,
+            d.code_intervention,
             u.nom AS createur_nom,
-            u.prenom AS createur_prenom
         FROM demandes AS d
         INNER JOIN utilisateurs AS u
             ON u.id_utilisateur = d.id_utilisateur
@@ -880,4 +880,29 @@ function renderCodeInterventionBadge(?string $code): string
         . '<span class="statut-code">' . htmlspecialchars($code, ENT_QUOTES, 'UTF-8') . '</span> '
         . htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8')
         . '</span>';
+}
+
+// Vérifie qu'une demande existe et qu'elle est reçue (100) avant de l'activer (110)
+function checkActivationCoherence(
+    PDO $connection,
+    int $demandeId
+): void
+{
+    $statement = $connection->prepare(
+        'SELECT statut FROM demandes WHERE id_demande = :id_demande LIMIT 1'
+    );
+
+    $statement->execute([
+        'id_demande' => $demandeId
+    ]);
+
+    $demande = $statement->fetch();
+
+    if ($demande === false) {
+        throw new InvalidArgumentException('La demande sélectionnée n’existe pas');
+    }
+
+    if ($demande['statut'] !== 'EN_ATTENTE') {
+        throw new InvalidArgumentException('Cette demande n’est pas à l’état reçu (100) : elle ne peut pas être activée');
+    }
 }
