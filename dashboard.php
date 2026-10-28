@@ -13,7 +13,7 @@ $roleMessages = [
     "Agent d'accueil" => 'Vous pouvez enregistrer, consulter et rechercher les réclamations',
     "Agent d'écart" => 'Vous pouvez suivre les demandes et préparer leurs affectations',
     "Chef d'équipe" => 'Vous pouvez suivre les interventions confiées à votre équipe',
-    'Technicien' => 'Vous pouvez consulter et renseigner vos interventions',
+    'Dépanneur' => 'Vous pouvez consulter les demandes activées qui vous sont transmises.',
     'Chef de division' => 'Vous pouvez superviser l’activité et consulter les informations de suivi',
 ];
 
@@ -42,8 +42,8 @@ $roleLinks = [
         'interventions/liste.php' => 'Demandes affectées à organiser',
         'techniciens/ajouter.php' => 'Ajouter un technicien',
     ],
-    'Technicien' => [
-        'interventions/liste.php' => 'Mes interventions en cours',
+    'Dépanneur' => [
+        'demandes/actives.php' => 'Demandes actives',
     ],
     'Chef de division' => [
         'historiques/liste.php' => 'Historiques',
