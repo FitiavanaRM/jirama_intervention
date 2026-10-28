@@ -961,3 +961,29 @@ function activerDemande(
         throw $exception;
     }
 }
+
+// Retourne les demandes activées (110), transmises au dépanneur
+function getDemandesActives(PDO $connection): array
+{
+    $statement = $connection->prepare(
+        'SELECT
+            d.id_demande,
+            d.reference,
+            d.nom_client,
+            d.telephone_client,
+            d.adresse_client,
+            d.repere_adresse,
+            d.description_probleme,
+            d.date_demande,
+            d.code_intervention
+        FROM demandes AS d
+        WHERE d.statut = :statut
+        ORDER BY d.date_demande ASC, d.id_demande ASC'
+    );
+
+    $statement->execute([
+        'statut' => 'ACTIVE'
+    ]);
+
+    return $statement->fetchAll();
+}
