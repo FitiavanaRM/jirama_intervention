@@ -44,6 +44,7 @@ require_once __DIR__ . '/../includes/sidebar.php';
                         <th>Nouveau statut</th>
                         <th>Date</th>
                         <th>Effectué par</th>
+                        <th>Commentaire</th>
                     </tr>
                 </thead>
 
@@ -95,6 +96,15 @@ require_once __DIR__ . '/../includes/sidebar.php';
                                     'UTF-8'
                                 ) ?>
                             </td>
+
+                            <td>
+                                <?php if (($historique['commentaire'] ?? '') !== ''): ?>
+                                    <?= htmlspecialchars((string) $historique['commentaire'], ENT_QUOTES, 'UTF-8') ?>
+                                <?php else: ?>
+                                    —
+                                <?php endif; ?>
+                            </td>
+                        </tr>
 
                         </tr>
                     <?php endforeach; ?>
