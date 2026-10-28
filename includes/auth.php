@@ -85,7 +85,14 @@ function hasPermission(string $permission): bool
     $permissionsByRole = [
         'Administrateur' => ['*'],
         "Agent d'accueil" => ['demande.creer', 'demande.consulter', 'demande.rechercher', 'demande.modifier'],
-        "Agent d'écart" => ['demande.consulter', 'demande.suivre', 'affectation.creer', 'equipe.consulter', 'technicien.consulter'],
+        "Agent d'écart" => [
+            'demande.consulter',
+            'demande.suivre',
+            'demande.activer',
+            'affectation.creer',
+            'equipe.consulter',
+            'technicien.consulter'
+        ],
         "Chef d'équipe" => ['demande.affectee.consulter', 'intervention.consulter', 'intervention.organiser', 'technicien.superviser', 'intervention.suivre'],
         'Technicien' => ['intervention.personnelle.consulter', 'intervention.demarrer', 'intervention.terminer', 'intervention.renseigner'],
         'Chef de division' => ['demande.consulter', 'intervention.consulter', 'historique.consulter', 'statistique.consulter', 'activite.superviser', 'demande.cloturer'],
