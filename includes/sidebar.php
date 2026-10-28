@@ -38,6 +38,10 @@ if ($currentUser === null) {
                 <?php endif; ?>
             <?php endif; ?>
 
+            <?php if (hasPermission('demande.activer')): ?>
+                <li><a href="<?= $base ?>/demandes/recues.php"<?= isCurrentPage('/demandes/recues.php') ? $actif : '' ?>>Demandes reçues</a></li>
+            <?php endif; ?>
+            
             <?php if (hasPermission('affectation.creer')): ?>
                 <li><a href="<?= $base ?>/affectations/ajouter.php"<?= isCurrentPage('/affectations/ajouter.php') ? $actif : '' ?>>Nouvelle affectation</a></li>
                 <li><a href="<?= $base ?>/affectations/liste.php"<?= isCurrentPage('/affectations/liste.php') ? $actif : '' ?>>Affectations</a></li>

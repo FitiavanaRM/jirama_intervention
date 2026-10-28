@@ -20,6 +20,7 @@ $roleMessages = [
 $roleLinks = [
     'Administrateur' => [
         'demandes/liste.php' => 'Liste des demandes',
+        'demandes/recues.php' => 'Demandes reçues',
         'affectations/liste.php' => 'Liste des affectations',
         'interventions/liste.php' => 'Interventions',
         'historiques/liste.php' => 'Historiques',
@@ -32,6 +33,7 @@ $roleLinks = [
         'demandes/liste.php' => 'Liste des réclamations',
     ],
     "Agent d'écart" => [
+        'demandes/recues.php' => 'Demandes reçues',
         'affectations/ajouter.php' => 'Nouvelle affectation',
         'demandes/liste.php' => 'Liste des demandes',
         'affectations/liste.php' => 'Liste des affectations',
