@@ -906,3 +906,58 @@ function checkActivationCoherence(
         throw new InvalidArgumentException('Cette demande n’est pas à l’état reçu (100) : elle ne peut pas être activée');
     }
 }
+
+// Active une demande reçue (100 vers 110) : statut, code C1 et historique, en une transaction
+function activerDemande(
+    PDO $connection,
+    int $demandeId,
+    int $utilisateurId
+): void
+{
+    if ($utilisateurId < 1) {
+        throw new InvalidArgumentException('L’utilisateur est invalide');
+    }
+
+    // Contrôle lisible pour l'utilisateur (existence et statut)
+    checkActivationCoherence($connection, $demandeId);
+    try {
+        $connection->beginTransaction();
+        // Le WHERE sur le statut garantit qu'une demande déjà activée.
+        $statement = $connection->prepare(
+            'UPDATE demandes
+             SET statut = :nouveau_statut,
+                 code_intervention = :code
+             WHERE id_demande = :id_demande
+             AND statut = :ancien_statut'
+        );
+
+        $statement->execute([
+            'nouveau_statut' => 'ACTIVE',
+            'code' => 'C1',
+            'id_demande' => $demandeId,
+            'ancien_statut' => 'EN_ATTENTE',
+        ]);
+
+        if ($statement->rowCount() !== 1) {
+            throw new InvalidArgumentException('Cette demande a déjà été traitée par un autre utilisateur');
+        }
+
+        insertHistorique(
+            $connection,
+            $demandeId,
+            $utilisateurId,
+            'EN_ATTENTE',
+            'ACTIVE',
+            'Demande activée (C1)'
+        );
+
+        $connection->commit();
+
+    } catch (Throwable $exception) {
+        if ($connection->inTransaction()) {
+            $connection->rollBack();
+        }
+
+        throw $exception;
+    }
+}
